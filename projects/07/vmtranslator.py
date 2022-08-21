@@ -17,11 +17,19 @@ def main():
     my_parser = parser.Parser(sys.argv[1])
 
     # Instantiate codewriter
-    segment_list = ["sp","local","argument", "this", "that", "static", "constant", "pointer", "temp"]
+    my_codewriter = codewriter.CodeWriter(sys.argv[1])
 
-    #
+    out_file_name = sys.argv[1][:-2] + "asm"
+    print(out_file_name)
 
-
+    # Translate and write .asm file
+    with open(out_file_name, "w") as out:
+        while my_parser.advance():
+            out.write(my_codewriter.translate(my_parser.op, my_parser.arg1, my_parser.arg2))
+            #print(my_parser.parsed_line)
+            print(my_codewriter.translate(my_parser.op, my_parser.arg1, my_parser.arg2), end="")
+        out.write(my_codewriter.finalize())
+        print(my_codewriter.finalize(), end="")
 
 if __name__ == '__main__':
     main()
