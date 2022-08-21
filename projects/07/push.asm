@@ -1,9 +1,16 @@
-// this pushes the value at RAM[10] to the location of SP - set to RAM[20] for this example.
-// set RAM[10] to non zero value
+// this pushes the value at a segment + index to the location where SP is pointing.
+// 
+// 
 
-@10
+// get index value into D
+@20
+D=A
+// get pointer of segment and add index
+@LCL
+A=D+A
 D=M
-@0
+// put onto stack and increment SP
+@SP
 M=M+1
 A=M-1
 M=D

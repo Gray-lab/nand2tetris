@@ -17,7 +17,7 @@ def main():
     my_parser = parser.Parser(sys.argv[1])
 
     # Instantiate codewriter
-    my_codewriter = codewriter.CodeWriter(sys.argv[1])
+    my_codewriter = codewriter.CodeWriter(sys.argv[1], verbose_flag=True)
 
     out_file_name = sys.argv[1][:-2] + "asm"
     print(out_file_name)

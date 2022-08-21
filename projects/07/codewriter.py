@@ -19,7 +19,6 @@ class CodeWriter:
             "that":"THAT"
         }
 
-
     def next_label(self, op:str) -> int:
         """
         returns and increments self.label_index for the op parameter
@@ -103,33 +102,45 @@ class CodeWriter:
             else:
                 raise ValueError("Pointer segment fault. Pointer segment can only have index of 0 or 1")
         elif seg == "temp":
-            if idx > 7:
+            if int(idx) > 7:
                 raise ValueError("Temp segment fault. Index must be <= 7.")
-            return f"@R{5+idx}\n"
+            return f"@R{str(5+int(idx))}\n"
         elif seg in self.seg_dict:
             code = (f"@{idx}\n"
                     "D=A\n"
-                    f"@{self.seg_dict.get(seg)}\n"
-                    "A=D+A\n")
+                    f"@{self.seg_dict.get(seg)}\n")
             return code
         else:
             raise ValueError("Invalid operation passed to map_segment")
-
 
     def pop(self, seg:str, idx:str) -> str:
         """
         returns hack assembly string that pops top item of stack to RAM segment[index]
         """
+        # This could be optimized by only storing the pointer address in R13 if
+        # the segment is either lcl, arg, this, or that. The other segments don't require
+        # adding the segment base address to the index
+
         code : str = ""
         if self.verbose:
-            code += f"//pop {seg} {idx}"
+            code += f"//pop {seg} {idx}\n"
+
+        if seg == "temp":
+            reg = "D=A"
+        else:
+            reg = "D=D+M"
 
         seg_map = self.map_segment(seg, idx)
-        code += (f"@SP\n"
-                "M=M+1\n"
-                "D=M\n"
-                f"{seg_map}"
-                "M=D\n")
+        code += (f"{seg_map}"
+                 f"{reg}\n"
+                  "@R13\n"
+                  "M=D\n"
+                 f"@SP\n"
+                  "AM=M-1\n"
+                  "D=M\n"
+                  "@R13\n"
+                  "A=M\n"
+                  "M=D\n")
         return code
 
     def push(self, seg:str, idx:str) -> str:
@@ -138,25 +149,30 @@ class CodeWriter:
         """
         code : str = ""
         if self.verbose:
-            code += f"//push {seg} {idx}"
+            code += f"//push {seg} {idx}\n"
 
         # to push a constant, we want to access the value directly from A
         # all other operations read from M
         if seg == "constant":
-            reg = "A"
+            reg2 = "A"
         else:
-            reg = "M"
+            reg2 = "M"
+
+        if seg in ["local", "argument", "this", "that"]:
+            reg1 = "A=D+M\n"
+        else:
+            reg1= ""
 
         seg_map = self.map_segment(seg, idx)
         code += (f"{seg_map}"
-                f"D={reg}\n"
+                 f"{reg1}"
+                f"D={reg2}\n"
                 "@SP\n"
                 "M=M+1\n"
                 "A=M-1\n"
                 "M=D\n")
 
         return code
-
 
     def add(self) -> str:
         code = self.pop_2()
