@@ -1,20 +1,24 @@
+//push constant 17
 @17
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 17
 @17
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//eq
 D=M-D
 M=-1
 @eqTrue0
@@ -23,23 +27,27 @@ D;JEQ
 A=M-1
 M=0
 (eqTrue0)
+//push constant 17
 @17
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 16
 @16
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//eq
 D=M-D
 M=-1
 @eqTrue2
@@ -48,23 +56,27 @@ D;JEQ
 A=M-1
 M=0
 (eqTrue2)
+//push constant 16
 @16
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 17
 @17
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//eq
 D=M-D
 M=-1
 @eqTrue4
@@ -73,23 +85,27 @@ D;JEQ
 A=M-1
 M=0
 (eqTrue4)
+//push constant 892
 @892
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 891
 @891
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//lt
 D=M-D
 M=-1
 @ltTrue0
@@ -98,23 +114,27 @@ D;JLT
 A=M-1
 M=0
 (ltTrue0)
+//push constant 891
 @891
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 892
 @892
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//lt
 D=M-D
 M=-1
 @ltTrue2
@@ -123,23 +143,27 @@ D;JLT
 A=M-1
 M=0
 (ltTrue2)
+//push constant 891
 @891
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 891
 @891
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//lt
 D=M-D
 M=-1
 @ltTrue4
@@ -148,23 +172,27 @@ D;JLT
 A=M-1
 M=0
 (ltTrue4)
+//push constant 32767
 @32767
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 32766
 @32766
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//gt
 D=M-D
 M=-1
 @gtTrue0
@@ -173,23 +201,27 @@ D;JGT
 A=M-1
 M=0
 (gtTrue0)
+//push constant 32766
 @32766
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 32767
 @32767
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//gt
 D=M-D
 M=-1
 @gtTrue2
@@ -198,23 +230,27 @@ D;JGT
 A=M-1
 M=0
 (gtTrue2)
+//push constant 32766
 @32766
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 32766
 @32766
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//gt
 D=M-D
 M=-1
 @gtTrue4
@@ -223,65 +259,82 @@ D;JGT
 A=M-1
 M=0
 (gtTrue4)
+//push constant 57
 @57
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 31
 @31
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//push constant 53
 @53
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//add
 M=D+M
+//push constant 112
 @112
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//sub
 M=M-D
+//pop_1
 @SP
 A=M-1
+//neg
 M=-M
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//and
 M=D&M
+//push constant 82
 @82
 D=A
 @SP
 M=M+1
 A=M-1
 M=D
+//pop_2
 @SP
 AM=M-1
 D=M
 @SP
 A=M-1
+//or
 M=D|M
+//pop_1
 @SP
 A=M-1
+//not
 M=!M
 (END)
 @END

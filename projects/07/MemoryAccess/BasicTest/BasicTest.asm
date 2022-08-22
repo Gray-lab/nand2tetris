@@ -17,8 +17,7 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D
-//push constant 21
+M=D//push constant 21
 @21
 D=A
 @SP
@@ -44,8 +43,7 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D
-//pop argument 1
+M=D//pop argument 1
 @1
 D=A
 @ARG
@@ -57,8 +55,7 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D
-//push constant 36
+M=D//push constant 36
 @36
 D=A
 @SP
@@ -77,8 +74,7 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D
-//push constant 42
+M=D//push constant 42
 @42
 D=A
 @SP
@@ -104,8 +100,7 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D
-//pop that 2
+M=D//pop that 2
 @2
 D=A
 @THAT
@@ -117,8 +112,7 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D
-//push constant 510
+M=D//push constant 510
 @510
 D=A
 @SP
@@ -126,17 +120,11 @@ M=M+1
 A=M-1
 M=D
 //pop temp 6
-@R11
-D=A
-@R13
-M=D
 @SP
 AM=M-1
 D=M
-@R13
-A=M
-M=D
-//push local 0
+@R11
+M=D//push local 0
 @0
 D=A
 @LCL
