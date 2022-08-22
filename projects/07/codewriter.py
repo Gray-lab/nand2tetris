@@ -128,10 +128,10 @@ class CodeWriter:
         else:
             raise ValueError("Invalid operation passed to map_segment")
 
-    def map_segment_pop(self, seg:str, idx:str) -> str:
+    def map_direct_seg(self, seg:str, idx:str) -> str:
         """
-        maps segment and index onto the correct symbolic variable or memory location
-        LCL, ARG, THIS, THAT, foo.i, for pop operation
+        Returns address call for direct segments
+        static, pointer, and temp
         """
         if seg == "static":
             # get correct symbolic variable from the table
@@ -149,6 +149,14 @@ class CodeWriter:
             if int(idx) > 7:
                 raise ValueError("Temp segment fault. Index must be <= 7.")
             return f"@R{str(5+int(idx))}\n"
+
+    def map_segment_pop(self, seg:str, idx:str) -> str:
+        """
+        maps segment and index onto the correct symbolic variable or memory location
+        LCL, ARG, THIS, THAT, foo.i, for pop operation
+        """
+        if seg in ["static", "pointer", "temp"]:
+            return self.map_direct_seg(seg, idx)
         elif seg in self.seg_dict:
             # calculated pointer was previously stored in temp register
             code = (f"@{self.pop_pointer_temp_reg}\n"
@@ -164,9 +172,7 @@ class CodeWriter:
         code : str = ""
         if self.verbose:
             code += f"//pop {seg} {idx}\n"
-
         seg_map = self.map_segment_pop(seg, idx)
-
         # if the segment uses a base pointer, this calculates the resulting
         # address and stores it in a temporary register (R13 by default)
         if seg in ["local", "argument", "this", "that"]:
@@ -178,7 +184,6 @@ class CodeWriter:
                              "M=D\n")
         else:
             calc_pointer = ""
-
         code += (
                  f"{calc_pointer}"
                   "@SP\n"
@@ -186,7 +191,6 @@ class CodeWriter:
                   "D=M\n"
                   f"{seg_map}"
                   "M=D")
-
         return code
 
     def push(self, seg:str, idx:str) -> str:
