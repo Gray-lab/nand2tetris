@@ -1,5 +1,7 @@
 from typing import Dict
 
+#TODO: add function for setting up new functin and filename 
+
 class CodeWriter:
     """
     Once initialized, the codewriter is used by calling the translate function with the parsed tokens.
@@ -12,6 +14,8 @@ class CodeWriter:
         self.lt_label : int = 0
         self.static_label : int = 0
         self.filename :str = filename[0:filename.index(".")]
+        # need to initialize function name to something sensible
+        self.function : str = ""
         self.verbose : bool = verbose_flag
         self.pop_pointer_temp_reg : str = pop_pointer_temp_reg
         self.seg_dict : Dict[str, str]= {
@@ -20,7 +24,6 @@ class CodeWriter:
             "this":"THIS",
             "that":"THAT"
         }
-        self.static_var_tb : Dict[str, str] = {}
 
     def next_label(self, op:str) -> str:
         """
@@ -35,9 +38,6 @@ class CodeWriter:
         elif op == "lt":
             label = self.lt_label
             self.lt_label += 1
-        else:
-            label = self.static_label
-            self.static_label += 1
         return str(label)
 
     def close(self):
@@ -92,7 +92,7 @@ class CodeWriter:
         """
         code : str = ""
         if self.verbose:
-            code += f"//jump to ({label}) if top stack item is true\n"
+            code += f"//jump to ({label})\n"
         code += (f"@{label}\n"
                  "0;JMP\n")
         return code
@@ -105,26 +105,13 @@ class CodeWriter:
         """
         code :str = ""
         if self.verbose:
-            code += f"//jump to ({label}) if top stack item is true\n"
+            code += f"//jump to ({label}) if top stack item is not false (0)\n"
         code += ("@SP\n"
                 "AM=M-1\n"
                 "D=M\n"
                 f"@{label}\n"
                 "D;JNE\n")
         return code
-
-    def get_symb_static_var(self, idx:str) -> str:
-        """
-        Gets symbolic variable for static idx from static_var_tb.
-        If no variable exists, adds new entry to static_var_tb and returns
-        the new variable.
-        """
-        if idx in self.static_var_tb:
-            return self.static_var_tb.get(idx)
-        else:
-            new_var : str = self.filename + "." + self.next_label('static')
-            self.static_var_tb[idx] = new_var
-            return new_var
 
     def map_direct_seg(self, seg:str, idx:str) -> str:
         """
@@ -133,7 +120,7 @@ class CodeWriter:
         """
         if seg == "static":
             # get correct symbolic variable from the table
-            return f"@{self.get_symb_static_var(idx)}\n"
+            return f"@{self.filename}.{idx}\n"
         elif seg == "pointer":
             # pointer 0 maps to THIS, pointer 1 maps to THAT
             if idx == "0":
@@ -170,19 +157,8 @@ class CodeWriter:
         """
         if seg == "constant":
             return f"@{idx}\n"
-        elif seg == "static":
-            return f"@{self.get_symb_static_var(idx)}\n"
-        elif seg == "pointer":
-            if idx == "0":
-                return f"@THIS\n"
-            elif idx == "1":
-                return f"@THAT\n"
-            else:
-                raise ValueError("Pointer segment fault. Pointer segment can only have index of 0 or 1")
-        elif seg == "temp":
-            if int(idx) > 7:
-                raise ValueError("Temp segment fault. Index must be <= 7.")
-            return f"@R{str(5+int(idx))}\n"
+        elif seg in ["static", "pointer", "temp"]:
+            return self.map_direct_seg(seg, idx)
         elif seg in self.seg_dict:
             code = (f"@{idx}\n"
                     "D=A\n"
