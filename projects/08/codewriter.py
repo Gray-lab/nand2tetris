@@ -1,6 +1,6 @@
 from typing import Dict
 
-#TODO: add function for setting up new functin and filename 
+#TODO: add function for setting up new functin and filename
 
 class CodeWriter:
     """
@@ -8,14 +8,15 @@ class CodeWriter:
     The translate function returns a string of hack assembly commands which are the translation of the
     vm stack machine tokens.
     """
-    def __init__(self, filename:str, verbose_flag:bool=False, pop_pointer_temp_reg:str="R13") -> None:
+    def __init__(self, filename:str = "", verbose_flag:bool=False, pop_pointer_temp_reg:str="R13") -> None:
         self.eq_label : int = 0
         self.gt_label : int = 0
         self.lt_label : int = 0
         self.static_label : int = 0
-        self.filename :str = filename[0:filename.index(".")]
-        # need to initialize function name to something sensible
-        self.function : str = ""
+        # filename gets initialized before translation begins
+        self.filename :str = ""
+        # function name gets initialized when a function is definined
+        self.function_name : str = ""
         self.verbose : bool = verbose_flag
         self.pop_pointer_temp_reg : str = pop_pointer_temp_reg
         self.seg_dict : Dict[str, str]= {
@@ -24,6 +25,12 @@ class CodeWriter:
             "this":"THIS",
             "that":"THAT"
         }
+
+    def new_file(self, filename:str) -> None:
+        """
+        Updates filename when starting a new file for writing
+        """
+        self.filename = filename
 
     def next_label(self, op:str) -> str:
         """
@@ -47,6 +54,20 @@ class CodeWriter:
         return ("(END)\n"
                 "@END\n"
                 "0;JMP\n")
+
+    def bootstrap(self):
+        """
+        Returns assembly string which bootstraps execution of the compiled code
+        """
+        # Set SP <- 256
+        # Call Sys.init
+        code = ("@256\n"
+                "D=A\n"
+                "@SP\n"
+                "M=D\n"
+                "@Sys.init\n"
+                "0;JMP\n")
+        return code
 
     def translate(self, op:str, arg1:str = "", arg2:str = "") -> str:
         """
@@ -79,12 +100,46 @@ class CodeWriter:
         else:
             raise ValueError("Operation not found.")
 
+
+    def write_function_call(self, function:str, n_args:str) -> str:
+        """
+        Translates a VM function call into Hack assembly code
+        """
+        raise NotImplementedError
+
+    def write_function_def(self, function:str, n_vars:str) -> str:
+        """
+        Translates a VM function definition into Hack assembly code
+        """
+        # Inject function entry label
+        # repeat n_vars times:
+        #   push 0
+        raise NotImplementedError
+
+    def write_return(self) -> str:
+        """
+        Translates a VM function return into Hack assembly code
+        """
+        raise NotImplementedError
+
+
+    def get_function_name(self) -> str:
+        """
+        returns "filename.function_name" if both self.filename and self.function_name are not empty
+        if either is empty, return empty string
+        """
+        if len(self.filename) == 0 or len(self.function_name) == 0:
+            return ""
+        else:
+            return f"{self.filename}.{self.function_name}"
+
     def write_label(self, label:str) -> str:
         """
-        Writes assembly code jump label. Labels are provided by the vm code and do not need to
-        be generated
+        Writes assembly code jump label. Labels need to follow the symbol specification
+        as definited in the vm translator spec.
         """
-        return f"({label})\n"
+        # TODO: implement labeling per specification
+        return f"({self.get_function_name()}${label})\n"
 
     def write_goto(self, label:str) -> str:
         """
@@ -92,8 +147,8 @@ class CodeWriter:
         """
         code : str = ""
         if self.verbose:
-            code += f"//jump to ({label})\n"
-        code += (f"@{label}\n"
+            code += f"//jump to ({self.get_function_name()}${label})\n"
+        code += (f"@{self.get_function_name()}${label}\n"
                  "0;JMP\n")
         return code
 
@@ -105,11 +160,11 @@ class CodeWriter:
         """
         code :str = ""
         if self.verbose:
-            code += f"//jump to ({label}) if top stack item is not false (0)\n"
+            code += f"//jump to ({self.get_function_name()}${label}) if top stack item is not false (0)\n"
         code += ("@SP\n"
                 "AM=M-1\n"
                 "D=M\n"
-                f"@{label}\n"
+                f"@{self.get_function_name()}${label}\n"
                 "D;JNE\n")
         return code
 
