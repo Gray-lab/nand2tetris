@@ -115,7 +115,7 @@ class CodeWriter:
         """
         code = ""
         if self.verbose:
-            code += f"\\ push {adr}\n"
+            code += f"// push {adr}\n"
         code += (f"@{adr}\n"
                  "D=M\n"
                  "@SP\n"
@@ -143,7 +143,12 @@ class CodeWriter:
             code += f"// call function {function} with {n_args} args\n"
 
         #push return address // generate label and push it to stack
-        code += self.push(return_address)
+        code += (f"@{return_address}\n"
+                 "D=A\n"
+                 "@SP\n"
+                 "M=M+1\n"
+                 "A=M-1\n"
+                 "M=D\n")
         #push LCL
         code += self.push("LCL")
         #push ARG
@@ -158,7 +163,7 @@ class CodeWriter:
                 f"@{str(n_args)}\n"
                  "D=D+A\n"
                  "@SP\n"
-                 "D=M-S\n"
+                 "D=M-D\n"
                  "@ARG\n"
                  "M=D\n")
         #LCL = SP //reposition LCL
