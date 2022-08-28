@@ -92,7 +92,7 @@ D=M
 @R13
 A=M
 M=D
-($MAIN_LOOP_START)
+(None$MAIN_LOOP_START)
 //push argument 0
 @0
 D=A
@@ -103,16 +103,16 @@ D=M
 M=M+1
 A=M-1
 M=D
-//jump to ($COMPUTE_ELEMENT) if top stack item is not false (0)
+//jump to (None$COMPUTE_ELEMENT) if top stack item is not false (0)
 @SP
 AM=M-1
 D=M
-@$COMPUTE_ELEMENT
+@None$COMPUTE_ELEMENT
 D;JNE
-//jump to ($END_PROGRAM)
-@$END_PROGRAM
+//jump to (None$END_PROGRAM)
+@None$END_PROGRAM
 0;JMP
-($COMPUTE_ELEMENT)
+(None$COMPUTE_ELEMENT)
 //push that 0
 @0
 D=A
@@ -220,10 +220,10 @@ D=M
 @R13
 A=M
 M=D
-//jump to ($MAIN_LOOP_START)
-@$MAIN_LOOP_START
+//jump to (None$MAIN_LOOP_START)
+@None$MAIN_LOOP_START
 0;JMP
-($END_PROGRAM)
+(None$END_PROGRAM)
 (END)
 @END
 0;JMP

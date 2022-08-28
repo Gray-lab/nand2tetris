@@ -173,31 +173,32 @@ class CodeWriter:
         code += f"({return_address})\n"
         return code
 
-
     def write_function_def(self, function:str, n_vars:str) -> str:
         """
         Translates a VM function definition into Hack assembly code
         """
         # Set this function as active
         self.current_function = function
-
         # Reset call count for return labels
         self.return_label_id = 0
 
         code = ""
         if self.verbose:
-            code += f"// Define fuction {function} with {n_vars} variables\n"
+            code += f"// Define function {function} with {n_vars} variables\n"
 
         # Inject function entry label
         code += f"({function})\n"
-        for n in range(0,n_vars):
+        # If n_vars is blank, that means there are no variables
+        if n_vars == "":
+            n_vars = "0"
+        for n in range(0, int(n_vars)):
             # Push 0 to stack for each var in n_vars
             # This could be done with a loop in assembly, but most functions will
             # have few variables, so just directly coding it should actually be
             # faster due to not having to update the counter variable
             code += ("@SP\n"
                      "M=M+1\n"
-                     "A=A-1n\n"
+                     "A=M-1\n"
                      "M=0\n")
         return code
 
@@ -211,17 +212,18 @@ class CodeWriter:
         # frame = LCL // Frame is a temporary variable, say R14
         code += ("@LCL\n"
                  "D=M\n"
-                 "@R15\n"
+                 "@R14\n"
                  "M=D\n")
         # retAdr = *(frame-5) // Puts retAdr in temp variable, say R15
         code += ("@5\n"
                  "A=D-A\n"
                  "D=M\n"
-                 "@R14\n"
+                 "@R15\n"
                  "M=D\n")
         # *ARG = pop() // Repositions return value for caller
         code += ("@SP\n"
-                 "AD=M\n"
+                 "AM=M-1\n"
+                 "D=M\n"
                  "@ARG\n"
                  "A=M\n"
                  "M=D\n")
@@ -236,7 +238,8 @@ class CodeWriter:
         # LCL = *(frame-4) // Restores LCL
         for adr in ["THAT", "THIS", "ARG", "LCL"]:
             code += ("@R14\n"
-                     "AMD=M-1\n"
+                     "AM=M-1\n"
+                     "D=M\n"
                     f"@{adr}\n"
                      "M=D\n")
         # goto retAdr // jump to return adr, which is stored in R15

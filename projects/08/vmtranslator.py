@@ -54,9 +54,9 @@ def main():
             my_codewriter.new_file(file)
             while my_parser.advance():
                 out.write(my_codewriter.translate(my_parser.op, my_parser.arg1, my_parser.arg2))
-                #print(my_codewriter.translate(my_parser.op, my_parser.arg1, my_parser.arg2), end="")
+                print(my_codewriter.translate(my_parser.op, my_parser.arg1, my_parser.arg2), end="")
         out.write(my_codewriter.close())
-        #print(my_codewriter.close(), end="")
+        print(my_codewriter.close(), end="")
 
 if __name__ == '__main__':
     main()

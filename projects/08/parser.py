@@ -67,7 +67,7 @@ class Parser:
         tokens = line.split()
         self.parsed_line = tokens
         self.op = tokens[0]
-        if self.op in ["push", "pop"]:
+        if self.op in ["push", "pop", "call", "function"]:
             # push or pop have explicit arguments
             self.arg1 = tokens[1]
             self.arg2 = tokens[2]
