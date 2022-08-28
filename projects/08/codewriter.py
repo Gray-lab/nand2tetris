@@ -1,7 +1,5 @@
 from typing import Dict
 
-#TODO: add function for setting up new functin and filename
-
 class CodeWriter:
     """
     Once initialized, the codewriter is used by calling the translate function with the parsed tokens.
@@ -133,7 +131,7 @@ class CodeWriter:
         """
         Writes HACK assembly to push value at adr onto current stack at SP and increment SP
         """
-        code = ""
+        code :str = ""
         if self.verbose:
             code += f"// push {adr}\n"
         code += (f"@{adr}\n"
@@ -148,7 +146,7 @@ class CodeWriter:
         """
         Returns and increments self.return_label_id
         """
-        return_id = str(self.return_label_id)
+        return_id :str = str(self.return_label_id)
         self.return_label_id += 1
         return return_id
 
@@ -158,7 +156,7 @@ class CodeWriter:
         """
         return_address : str = f"{self.current_function}$ret.{self.get_return_id()}"
 
-        code = ""
+        code : str = ""
         if self.verbose:
             code += f"// call function {function} with {n_args} args\n"
 
@@ -207,7 +205,7 @@ class CodeWriter:
         # Reset call count for return labels
         self.return_label_id = 0
 
-        code = ""
+        code :str = ""
         if self.verbose:
             code += f"// Define function {function} with {n_vars} variables\n"
 
@@ -231,7 +229,7 @@ class CodeWriter:
         """
         Translates a VM function return into Hack assembly code
         """
-        code = ""
+        code : str = ""
         if self.verbose:
             code += "// return from function\n"
         # frame = LCL // Frame is a temporary variable, say R14
