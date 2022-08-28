@@ -1,3 +1,25 @@
+@256
+D=A
+@SP
+M=D
+@1
+D=-A
+@LCL
+M=D
+@2
+D=-A
+@ARG
+M=D
+@3
+D=-A
+@THIS
+M=D
+@4
+D=-A
+@THIS
+M=D
+@Sys.init
+0;JMP
 // Define function Sys.init with 0 variables
 (Sys.init)
 //push constant 4000

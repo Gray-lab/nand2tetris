@@ -62,11 +62,31 @@ class CodeWriter:
         """
         Returns assembly string which bootstraps execution of the compiled code
         """
-        # Set SP <- 256
+        # SP <- 256
+        # LCL <- 300
+        # ARG <- 400
+        # THIS <- 3000
+        # THAT <- 4000
         # Call Sys.init
         code = ("@256\n"
                 "D=A\n"
                 "@SP\n"
+                "M=D\n"
+                "@1\n"
+                "D=-A\n"
+                "@LCL\n"
+                "M=D\n"
+                "@2\n"
+                "D=-A\n"
+                "@ARG\n"
+                "M=D\n"
+                "@3\n"
+                "D=-A\n"
+                "@THIS\n"
+                "M=D\n"
+                "@4\n"
+                "D=-A\n"
+                "@THAT\n"
                 "M=D\n"
                 "@Sys.init\n"
                 "0;JMP\n")
@@ -157,7 +177,7 @@ class CodeWriter:
         code += self.push("THIS")
         #push THAT
         code += self.push("THAT")
-        #ARG = SP - 5- nArgs //reposition args
+        #ARG = SP - 5 - nArgs //reposition args
         code += ("@5\n"
                  "D=A\n"
                 f"@{str(n_args)}\n"

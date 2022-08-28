@@ -43,8 +43,8 @@ def main():
     # Translate and write into a .asm file
     with open(out_file_name, "w") as out:
         # TODO: Add bootstrap code (not yet implemented)
-        # out.write(my_codewriter.bootstrap())
-        # gor each new file instantiate a new parser and set the codewriter to the new filename
+        out.write(my_codewriter.bootstrap())
+        # For each new file instantiate a new parser and set the codewriter to the new filename
         for file in files:
             if is_dir:
                 in_file = os.path.join(sys.argv[1], file + ".vm")
