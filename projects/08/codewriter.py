@@ -9,14 +9,17 @@ class CodeWriter:
     vm stack machine tokens.
     """
     def __init__(self, filename:str = "", verbose_flag:bool=False, pop_pointer_temp_reg:str="R13") -> None:
+        # Logical jump labels are not reset
+        # (TODO: but we could make them reset by including filename in the label)
         self.eq_label : int = 0
         self.gt_label : int = 0
         self.lt_label : int = 0
-        self.static_label : int = 0
+        # Initialized when a function is defined
+        self.return_label_id : int = None
         # filename gets initialized before translation begins
-        self.filename :str = ""
+        self.filename :str = None
         # function name gets initialized when a function is definined
-        self.function_name : str = ""
+        self.current_function = None
         self.verbose : bool = verbose_flag
         self.pop_pointer_temp_reg : str = pop_pointer_temp_reg
         self.seg_dict : Dict[str, str]= {
@@ -97,41 +100,161 @@ class CodeWriter:
             return self.write_goto(arg1)
         elif op == "if-goto":
             return self.write_if_goto(arg1)
+        elif op == "call":
+            return self.write_function_call(arg1, arg2)
+        elif op == "function":
+            return self.write_function_def(arg1, arg2)
+        elif op == "return":
+            return self.write_return()
         else:
             raise ValueError("Operation not found.")
 
+    def push(self, adr:str) -> str:
+        """
+        Writes HACK assembly to push value at adr onto current stack at SP and increment SP
+        """
+        code = ""
+        if self.verbose:
+            code += f"\\ push {adr}\n"
+        code += (f"@{adr}\n"
+                 "D=M\n"
+                 "@SP\n"
+                 "M=M+1\n"
+                 "A=M-1\n"
+                 "M=D\n")
+        return code
+
+    def get_return_id(self) -> str:
+        """
+        Returns and increments self.return_label_id
+        """
+        return_id = str(self.return_label_id)
+        self.return_label_id += 1
+        return return_id
 
     def write_function_call(self, function:str, n_args:str) -> str:
         """
         Translates a VM function call into Hack assembly code
         """
-        raise NotImplementedError
+        return_address : str = f"{self.current_function}$ret.{self.get_return_id()}"
+
+        code = ""
+        if self.verbose:
+            code += f"// call function {function} with {n_args} args\n"
+
+        #push return address // generate label and push it to stack
+        code += self.push(return_address)
+        #push LCL
+        code += self.push("LCL")
+        #push ARG
+        code += self.push("ARG")
+        #push THIS
+        code += self.push("THIS")
+        #push THAT
+        code += self.push("THAT")
+        #ARG = SP - 5- nArgs //reposition args
+        code += ("@5\n"
+                 "D=A\n"
+                f"@{str(n_args)}\n"
+                 "D=D+A\n"
+                 "@SP\n"
+                 "D=M-S\n"
+                 "@ARG\n"
+                 "M=D\n")
+        #LCL = SP //reposition LCL
+        code += ("@SP\n"
+                 "D=M\n"
+                 "@LCL\n"
+                 "M=D\n")
+        #goto function //transfer control to {function}
+        code += (f"@{function}\n"
+                  "0;JMP\n")
+        #(return_adr) //inject return label
+        code += f"({return_address})\n"
+        return code
+
 
     def write_function_def(self, function:str, n_vars:str) -> str:
         """
         Translates a VM function definition into Hack assembly code
         """
+        # Set this function as active
+        self.current_function = function
+
+        # Reset call count for return labels
+        self.return_label_id = 0
+
+        code = ""
+        if self.verbose:
+            code += f"// Define fuction {function} with {n_vars} variables\n"
+
         # Inject function entry label
-        # repeat n_vars times:
-        #   push 0
-        raise NotImplementedError
+        code += f"({function})\n"
+        for n in range(0,n_vars):
+            # Push 0 to stack for each var in n_vars
+            # This could be done with a loop in assembly, but most functions will
+            # have few variables, so just directly coding it should actually be
+            # faster due to not having to update the counter variable
+            code += ("@SP\n"
+                     "M=M+1\n"
+                     "A=A-1n\n"
+                     "M=0\n")
+        return code
 
     def write_return(self) -> str:
         """
         Translates a VM function return into Hack assembly code
         """
-        raise NotImplementedError
-
+        code = ""
+        if self.verbose:
+            code += "// return from function\n"
+        # frame = LCL // Frame is a temporary variable, say R14
+        code += ("@LCL\n"
+                 "D=M\n"
+                 "@R15\n"
+                 "M=D\n")
+        # retAdr = *(frame-5) // Puts retAdr in temp variable, say R15
+        code += ("@5\n"
+                 "A=D-A\n"
+                 "D=M\n"
+                 "@R14\n"
+                 "M=D\n")
+        # *ARG = pop() // Repositions return value for caller
+        code += ("@SP\n"
+                 "AD=M\n"
+                 "@ARG\n"
+                 "A=M\n"
+                 "M=D\n")
+        # SP = ARG + 1 // Repositions SP for the caller
+        code +=("@ARG\n"
+                "D=M+1\n"
+                "@SP\n"
+                "M=D\n")
+        # THAT = *(frame-1) // Restores THAT
+        # THIS = *(frame-2) // Restores THIS
+        # ARG = *(frame-3) // Restores ARG
+        # LCL = *(frame-4) // Restores LCL
+        for adr in ["THAT", "THIS", "ARG", "LCL"]:
+            code += ("@R14\n"
+                     "AMD=M-1\n"
+                    f"@{adr}\n"
+                     "M=D\n")
+        # goto retAdr // jump to return adr, which is stored in R15
+        code += ("@R15\n"
+                 "A=M\n"
+                 "0;JMP\n")
+        return code
 
     def get_function_name(self) -> str:
         """
         returns "filename.function_name" if both self.filename and self.function_name are not empty
         if either is empty, return empty string
         """
-        if len(self.filename) == 0 or len(self.function_name) == 0:
+        if self.filename == None or self.current_function == None:
+            print("WARNING: File name or function name are None when calling get_function_name()")
             return ""
         else:
-            return f"{self.filename}.{self.function_name}"
+            return f"{self.filename}.{self.current_function()}"
 
     def write_label(self, label:str) -> str:
         """
@@ -139,7 +262,7 @@ class CodeWriter:
         as definited in the vm translator spec.
         """
         # TODO: implement labeling per specification
-        return f"({self.get_function_name()}${label})\n"
+        return f"({self.current_function}${label})\n"
 
     def write_goto(self, label:str) -> str:
         """
@@ -147,8 +270,8 @@ class CodeWriter:
         """
         code : str = ""
         if self.verbose:
-            code += f"//jump to ({self.get_function_name()}${label})\n"
-        code += (f"@{self.get_function_name()}${label}\n"
+            code += f"//jump to ({self.current_function}${label})\n"
+        code += (f"@{self.current_function}${label}\n"
                  "0;JMP\n")
         return code
 
@@ -160,11 +283,11 @@ class CodeWriter:
         """
         code :str = ""
         if self.verbose:
-            code += f"//jump to ({self.get_function_name()}${label}) if top stack item is not false (0)\n"
+            code += f"//jump to ({self.current_function}${label}) if top stack item is not false (0)\n"
         code += ("@SP\n"
                 "AM=M-1\n"
                 "D=M\n"
-                f"@{self.get_function_name()}${label}\n"
+                f"@{self.current_function}${label}\n"
                 "D;JNE\n")
         return code
 
@@ -175,6 +298,8 @@ class CodeWriter:
         """
         if seg == "static":
             # get correct symbolic variable from the table
+            if len(self.filename) == 0:
+                raise ValueError("Filename is empty when adding a static symbol")
             return f"@{self.filename}.{idx}\n"
         elif seg == "pointer":
             # pointer 0 maps to THIS, pointer 1 maps to THAT
