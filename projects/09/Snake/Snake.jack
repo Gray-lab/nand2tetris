@@ -25,7 +25,7 @@ class Snake {
     let gridSize = gameGridSize;
     let head = new Segment(Lx, Ly);
     let tail = new Segment(Lx - gridSize, Ly);
-    do tail.setNext(head);
+    do tail.setPrev(head);
     do draw();
     return this;
   }
@@ -39,23 +39,24 @@ class Snake {
     if (direction = 2) { let newSeg = new Segment(head.getX() + gameGridSize, head.geyY()); }
     if (direction = 3) { let newSeg = new Segment(head.getX(), head.geyY() - gameGridSize); }
     if (direction = 4) { let newSeg = new Segment(head.getX() - gameGridSize, head.geyY()); }
-    do head.setNext(newSeg);
+    do head.setPrev(newSeg);
     let head = newSeg;
     do draw(head);   
     // 2. if not growing, delete the segment at the back and remove it
     if (~grow) {
       do erase(tail);
       var Segment temp;
-      let temp = tail.getNext();
+      let temp = tail.getPrev();
       do tail.dispose();
       let tail = temp;
     }
     return;
   }
 
+  /** dispose recursively starting with tail */
   method void dispose() {
-    if (~(next = null)) {
-      do next.dispose();
+    if (~(tail.getPrev() = null)) {
+      do tail.getPrev().dispose();
     do Memory.deAlloc(this);
     return;
   }

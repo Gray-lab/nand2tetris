@@ -1,29 +1,28 @@
-// The pieces of the snake, implemented as a doubly linked list
+// The pieces of the snake, implemented as a reverse singly-linked listt
+// (liked from tail to head) 
+// New segments get added at the head and removed at the tail
 
 Class Segment {
   field int x, y;
-  field Segment next, prev;
+  field Segment prev;
 
   constructor Segment new(int Lx, int Ly) {
     let x = Lx;
     let y = Ly;
-    let next = null;
+    let prev = null;
     return this;
   }
 
   /** getters */
   method int getX() { return x; }
   method int getY() { return y; }
-  method Segment getNext() { return next; }
-  method void setNext(Segment nextSeg) {
-    next = nextSeg; 
+  method Segment getPrev() { return prev; }
+  method void setPrev(Segment prevSeg) {
+    next = prevSeg; 
     return;
   }
 
   method void dispose() {
-    if (~(next = null)) {
-      do next.dispose();
-    }
     do Memory.deAlloc(this);
     return;
   }
