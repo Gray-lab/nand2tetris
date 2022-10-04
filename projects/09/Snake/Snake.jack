@@ -1,0 +1,85 @@
+// Represents the user-controlled snake object
+// Needs to have a direction and a length
+// Also controls the rendering of the snake and intersection behaviour
+
+/** Implements a snake for the game snake
+The snake has 4 movement directions
+Can cross across the borders of the screen
+It is able to grow
+And it dies if it intersects itself
+
+An interesting problem is setting this up so that the time at each step
+stays the same even as the snake gets longer! We need to set up the snake so that 
+as many operations as possible are constant time, otherwise the game will slow down
+as the snake gets longer. This is relatively easy to do
+when drawing the snake, but is harder when checking for intersection.
+To make intersection checks constant time, a hash table would have to be used.
+*/
+class Snake {
+  field int head; // head of the snake, poiting to null
+  field int tail; // tail of the snake, pointing to a Segment towards the head
+  field int gridSize; // size of a block of the snake
+  
+  /** Constructs a new snake */
+  constructor Snake new(int Lx, int Ly, int gameGridSize) {
+    let gridSize = gameGridSize;
+    let head = new Segment(Lx, Ly);
+    let tail = new Segment(Lx - gridSize, Ly);
+    do tail.setNext(head);
+    do draw();
+    return this;
+  }
+
+  method void step(int direction, boolean grow) {}
+    // every time we step, we want to 
+    // 1. add a new segment to the front and draw it
+    var Segment newSeg;
+    var Segment next;
+    if (direction = 1) { let newSeg = new Segment(head.getX(), head.geyY() + gameGridSize); }
+    if (direction = 2) { let newSeg = new Segment(head.getX() + gameGridSize, head.geyY()); }
+    if (direction = 3) { let newSeg = new Segment(head.getX(), head.geyY() - gameGridSize); }
+    if (direction = 4) { let newSeg = new Segment(head.getX() - gameGridSize, head.geyY()); }
+    do head.setNext(newSeg);
+    let head = newSeg;
+    do draw(head);   
+    // 2. if not growing, delete the segment at the back and remove it
+    if (~grow) {
+      do erase(tail);
+      var Segment temp;
+      let temp = tail.getNext();
+      do tail.dispose();
+      let tail = temp;
+    }
+    return;
+  }
+
+  method void dispose() {
+    if (~(next = null)) {
+      do next.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
+
+  /** draws the snake on the screen. We need to keep track of past positions
+  so that the elements of the snake follow the head */
+  function void draw(Segment segment) {
+    var int x;
+    var int y;
+    let x = segment.getX();
+    let y = segment.getY();
+    do Screen.setColor(true);
+    do Screen.drawRectangle(x, y, x + gridSize, y + gridSize);
+    return;
+  }
+
+  function void erase(Segment segment) {
+    var int x;
+    var int y;
+    let x = segment.getX();
+    let y = segment.getY();
+    do Screen.setColor(false);
+    do Screen.drawRectangle(x, y, x + gridSize, y + gridSize);
+    return;
+  }
+
+  

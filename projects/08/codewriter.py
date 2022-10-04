@@ -6,7 +6,7 @@ class CodeWriter:
     The translate function returns a string of hack assembly commands which are the translation of the
     vm stack machine tokens.
     """
-    def __init__(self, filename:str = "", verbose_flag:bool=False, pop_pointer_temp_reg:str="R13") -> None:
+    def __init__(self, verbose_flag:bool=False, stack_index:int=256) -> None:
         # Logical jump labels are not reset
         # (TODO: but we could make them reset by including filename in the label)
         self.eq_label : int = 0
@@ -19,19 +19,21 @@ class CodeWriter:
         # function name gets initialized when a function is definined
         self.current_function = None
         self.verbose : bool = verbose_flag
-        self.pop_pointer_temp_reg : str = pop_pointer_temp_reg
         self.seg_dict : Dict[str, str]= {
             "local":"LCL",
             "argument":"ARG",
             "this":"THIS",
             "that":"THAT"
         }
+        self.stack_index : int = stack_index
+
 
     def new_file(self, filename:str) -> None:
         """
         Updates filename when starting a new file for writing
         """
         self.filename = filename
+
 
     def next_label(self, op:str) -> str:
         """
@@ -48,6 +50,7 @@ class CodeWriter:
             self.lt_label += 1
         return str(label)
 
+
     def close(self):
         """
         Returns assembly string to end the code with an infinite loop
@@ -55,6 +58,7 @@ class CodeWriter:
         return ("(END)\n"
                 "@END\n"
                 "0;JMP\n")
+
 
     def bootstrap(self):
         """
@@ -89,6 +93,7 @@ class CodeWriter:
                 "@Sys.init\n"
                 "0;JMP\n")
         return code
+
 
     def translate(self, op:str, arg1:str = "", arg2:str = "") -> str:
         """
@@ -127,6 +132,7 @@ class CodeWriter:
         else:
             raise ValueError("Operation not found.")
 
+
     def push(self, adr:str) -> str:
         """
         Writes HACK assembly to push value at adr onto current stack at SP and increment SP
@@ -142,6 +148,7 @@ class CodeWriter:
                  "M=D\n")
         return code
 
+
     def get_return_id(self) -> str:
         """
         Returns and increments self.return_label_id
@@ -149,6 +156,7 @@ class CodeWriter:
         return_id :str = str(self.return_label_id)
         self.return_label_id += 1
         return return_id
+
 
     def write_function_call(self, function:str, n_args:str) -> str:
         """
@@ -196,6 +204,7 @@ class CodeWriter:
         code += f"({return_address})\n"
         return code
 
+
     def write_function_def(self, function:str, n_vars:str) -> str:
         """
         Translates a VM function definition into Hack assembly code
@@ -224,6 +233,7 @@ class CodeWriter:
                      "A=M-1\n"
                      "M=0\n")
         return code
+
 
     def write_return(self) -> str:
         """
@@ -271,6 +281,7 @@ class CodeWriter:
                  "0;JMP\n")
         return code
 
+
     def get_function_name(self) -> str:
         """
         returns "filename.function_name" if both self.filename and self.function_name are not empty
@@ -282,6 +293,7 @@ class CodeWriter:
         else:
             return f"{self.filename}.{self.current_function()}"
 
+
     def write_label(self, label:str) -> str:
         """
         Writes assembly code jump label. Labels need to follow the symbol specification
@@ -289,6 +301,7 @@ class CodeWriter:
         """
         # TODO: implement labeling per specification
         return f"({self.current_function}${label})\n"
+
 
     def write_goto(self, label:str) -> str:
         """
@@ -300,6 +313,7 @@ class CodeWriter:
         code += (f"@{self.current_function}${label}\n"
                  "0;JMP\n")
         return code
+
 
     def write_if_goto(self, label:str) -> str:
         """
@@ -316,6 +330,7 @@ class CodeWriter:
                 f"@{self.current_function}${label}\n"
                 "D;JNE\n")
         return code
+
 
     def map_direct_seg(self, seg:str, idx:str) -> str:
         """
@@ -341,6 +356,7 @@ class CodeWriter:
                 raise ValueError("Temp segment fault. Index must be <= 7.")
             return f"@R{str(5+int(idx))}\n"
 
+
     def map_segment_pop(self, seg:str, idx:str) -> str:
         """
         maps segment and index onto the correct symbolic variable or memory location
@@ -355,6 +371,7 @@ class CodeWriter:
             return code
         else:
             raise ValueError("Invalid operation passed to map_segment")
+
 
     def map_segment_push(self, seg:str, idx:str) -> str:
         """
@@ -374,6 +391,7 @@ class CodeWriter:
         else:
             raise ValueError("Invalid operation passed to map_segment")
 
+
     def write_pop(self, seg:str, idx:str) -> str:
         """
         returns hack assembly string that pops top item of stack to RAM segment[index]
@@ -389,7 +407,7 @@ class CodeWriter:
                              "D=A\n"
                             f"@{self.seg_dict.get(seg)}\n"
                              "D=D+M\n"
-                            f"@{self.pop_pointer_temp_reg}\n"
+                            f"@R13\n"
                              "M=D\n")
         else:
             calc_pointer = ""
@@ -401,6 +419,7 @@ class CodeWriter:
                   f"{seg_map}"
                   "M=D\n")
         return code
+
 
     def write_push(self, seg:str, idx:str) -> str:
         """
@@ -426,8 +445,13 @@ class CodeWriter:
                 "M=D\n")
         return code
 
-    def write_arithmetic_logical(self, op:str) -> str:
 
+    def write_arithmetic_logical(self, op:str) -> str:
+        """
+        Writes HACK assembly translation for the arithmetic-logical operation
+        that is passed in as the op parameter, including poping the required
+        arguments from the stack before the operation
+        """
         if op == "add":
             code = self.pop_2()
             if self.verbose:
@@ -500,6 +524,7 @@ class CodeWriter:
 
         return code
 
+
     def pop_2(self) -> str:
         """
         returns assembly code string that pops top two items on stack into D and A registers
@@ -514,6 +539,7 @@ class CodeWriter:
                 "@SP\n"
                 "A=M-1\n")
         return code
+
 
     def pop_1(self) -> str:
         """

@@ -1,0 +1,28 @@
+class ArraysandInput {
+  function void main() {
+    do nested(); 
+    return;
+  }
+
+  function void nested() {
+    // define an array
+    var Array a;
+    var int length;
+    var int i, sum;
+    let i = 0;
+    let sum = 0;
+    // read input to prompt
+    let length = Keyboard.readInt("How many numbers?");
+    // construct array
+    let a = Array.new(length);
+    while (i < length) {
+      let a[i] = Keyboard.readInt("Enter a number: ");
+      let sum = sum = a[i];
+      let i = i + 1;
+    }
+    do Output.printString("The average is: ");
+    do Output.printInt(sum / length);
+    do Output.println();
+    return;
+  }
+}

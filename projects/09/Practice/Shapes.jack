@@ -1,0 +1,13 @@
+class Shapes {
+  function void main() {
+    var int x, y, z;
+
+    let x = 100;
+    let y = 100;
+    let r = 40;
+    car
+    do Screen.drawCircle(x, y, r);
+
+    return;
+  }
+}

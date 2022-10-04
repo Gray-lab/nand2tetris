@@ -58,7 +58,6 @@ class Parser:
                 self.line = ""
                 return False
 
-
     def parse_line(self, line:str) -> List[str]:
         """
         Parses a valid line and returns a list of tokens

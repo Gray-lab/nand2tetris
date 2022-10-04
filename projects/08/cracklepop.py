@@ -1,9 +1,9 @@
-def crackle_pop(num : str) -> None:
+def crackle_pop(num : int) -> None:
     """
-    Prints numbers from 1 to num, inclusive, replacing a number with:
-    Crackle if it is divisible by 3
-    Pop if it is divisible by 5
-    CracklePop if it is divisible by 3 and 5
+    Prints numbers from 1 to num, inclusive, replacing a number with: \n
+    "Crackle" if it is divisible by 3 \n
+    "Pop" if it is divisible by 5 \n
+    "CracklePop" if it is divisible by 3 and 5 \n
     """
     for n in range(1, num + 1):
         # Set default values

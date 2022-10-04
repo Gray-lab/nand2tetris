@@ -1,10 +1,9 @@
 import parser
 import codewriter
-import os
 
+import os
 import sys
-STATIC_INDEX : int = 16
-STACK_INDEX : int = 256
+
 EXIT_MESSAGE : str = "Usage: python vmtranslator.py <file.vm or directory>"
 # TODO: add error checking to catch overflow of memory segments
 
@@ -17,7 +16,7 @@ def main():
         sys.exit(EXIT_MESSAGE)
 
     basename : str = os.path.splitext(os.path.basename(sys.argv[1]))[0]
-    is_dir = False
+    is_dir : bool = False
     if os.path.isfile(sys.argv[1]):
         # Make a list of filenames to drive the translation loop
         files = [basename]
@@ -42,21 +41,26 @@ def main():
 
     # Translate and write into a .asm file
     with open(out_file_name, "w") as out:
-        # TODO: Add bootstrap code (not yet implemented)
+        # Write bootstrap code
         out.write(my_codewriter.bootstrap())
-        # For each new file instantiate a new parser and set the codewriter to the new filename
+       
         for file in files:
             if is_dir:
                 in_file = os.path.join(sys.argv[1], file + ".vm")
             else:
                 in_file = os.path.join(os.path.dirname(sys.argv[1]), file + ".vm")
+
+            # For each new file instantiate a new parser and set the codewriter to the new filename
             my_parser = parser.Parser(in_file)
             my_codewriter.new_file(file)
+
             while my_parser.advance():
                 out.write(my_codewriter.translate(my_parser.op, my_parser.arg1, my_parser.arg2))
-                print(my_codewriter.translate(my_parser.op, my_parser.arg1, my_parser.arg2), end="")
+                #print(my_codewriter.translate(my_parser.op, my_parser.arg1, my_parser.arg2), end="")
+        
+        # Write closing code
         out.write(my_codewriter.close())
-        print(my_codewriter.close(), end="")
+        #print(my_codewriter.close(), end="")
 
 if __name__ == '__main__':
     main()

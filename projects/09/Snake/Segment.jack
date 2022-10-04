@@ -1,0 +1,30 @@
+// The pieces of the snake, implemented as a doubly linked list
+
+Class Segment {
+  field int x, y;
+  field Segment next, prev;
+
+  constructor Segment new(int Lx, int Ly) {
+    let x = Lx;
+    let y = Ly;
+    let next = null;
+    return this;
+  }
+
+  /** getters */
+  method int getX() { return x; }
+  method int getY() { return y; }
+  method Segment getNext() { return next; }
+  method void setNext(Segment nextSeg) {
+    next = nextSeg; 
+    return;
+  }
+
+  method void dispose() {
+    if (~(next = null)) {
+      do next.dispose();
+    }
+    do Memory.deAlloc(this);
+    return;
+  }
+}

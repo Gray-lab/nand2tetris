@@ -1,0 +1,59 @@
+class SnakeGame {
+  field Snake snake;
+  field int direction;
+  field int gridSize;
+  field int height;
+  field int width;
+  field int score;
+
+  constructor SnakeGame new() {
+    let height = 320;
+    let width = 640;
+    let gridSize = 40;
+    let direction = 2;
+    let score = 0;
+    let snake = Snake.new(height / 2, width / 2, gridSize);
+    return this;
+  }
+
+  method void dispose() {
+    do snake.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
+
+  method void run() {
+    // to implement:
+    // score
+    // eating apples
+    // growing
+    // moving
+    var char key;
+    var boolean exit;
+    var boolean grow;
+    let exit = false;
+    let grow = false;
+
+    while (!exit) {
+      // while waiting for key to be pressed, continue growing in direction
+      while (key = 0) {
+        let key = Keyboard.keyPressed();
+        do snake.step(direction, grow);
+      }
+
+      if (key = 81) { let exit = true; } // quit on key q
+      if (key = 131) { let direction = 1; } // up arrow
+      if (key = 132) { let direction = 2; } // right arrow
+      if (key = 133) { let direction = 3; } // down arrow
+      if (key = 130) { let direction = 4; } // left arrow
+
+      // while waiting for key to be released, continue growing in (new) direction
+      while (~(key=0)) {
+        let key = Keyboard.keyPressed();
+        do snake.step(direction, grow);
+      }
+    }
+    return;
+  }
+}
+      
