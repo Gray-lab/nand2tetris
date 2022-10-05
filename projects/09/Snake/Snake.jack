@@ -16,64 +16,78 @@ when drawing the snake, but is harder when checking for intersection.
 To make intersection checks constant time, a hash table would have to be used.
 */
 class Snake {
-  field int head; // head of the snake, poiting to null
-  field int tail; // tail of the snake, pointing to a Segment towards the head
+  field Segment head; // head of the snake, poiting to null
+  field Segment tail; // tail of the snake, pointing to a Segment towards the head
   field int gridSize; // size of a block of the snake
   
   /** Constructs a new snake */
   constructor Snake new(int Lx, int Ly, int gameGridSize) {
     let gridSize = gameGridSize;
-    let head = new Segment(Lx, Ly);
-    let tail = new Segment(Lx - gridSize, Ly);
+    let head = Segment.new(Lx, Ly);
+    let tail = Segment.new(Lx - gridSize, Ly);
+    // set prev pointer from tail to head
     do tail.setPrev(head);
-    do draw();
+    // draw both segments
+    do draw(head);
+    do draw(tail);
     return this;
   }
 
-  method void step(int direction, boolean grow) {}
+  method void step(int direction, boolean grow) {
     // every time we step, we want to 
     // 1. add a new segment to the front and draw it
     var Segment newSeg;
+    var Segment tempSeg;
     var Segment next;
-    if (direction = 1) { let newSeg = new Segment(head.getX(), head.geyY() + gameGridSize); }
-    if (direction = 2) { let newSeg = new Segment(head.getX() + gameGridSize, head.geyY()); }
-    if (direction = 3) { let newSeg = new Segment(head.getX(), head.geyY() - gameGridSize); }
-    if (direction = 4) { let newSeg = new Segment(head.getX() - gameGridSize, head.geyY()); }
+    if (direction = 1) { let newSeg = Segment.new(head.getX(), head.getY() - gridSize); }
+    if (direction = 2) { let newSeg = Segment.new(head.getX() + gridSize, head.getY()); }
+    if (direction = 3) { let newSeg = Segment.new(head.getX(), head.getY() + gridSize); }
+    if (direction = 4) { let newSeg = Segment.new(head.getX() - gridSize, head.getY()); }
     do head.setPrev(newSeg);
     let head = newSeg;
     do draw(head);   
     // 2. if not growing, delete the segment at the back and remove it
     if (~grow) {
       do erase(tail);
-      var Segment temp;
-      let temp = tail.getPrev();
+      let tempSeg = tail.getPrev();
       do tail.dispose();
-      let tail = temp;
+      let tail = tempSeg;
     }
+    do Sys.wait(100);
     return;
   }
 
   /** dispose recursively starting with tail */
   method void dispose() {
+    var Segment prevTail;
     if (~(tail.getPrev() = null)) {
-      do tail.getPrev().dispose();
+      let prevTail = tail.getPrev();
+      do prevTail.dispose();
+    }
     do Memory.deAlloc(this);
     return;
   }
 
   /** draws the snake on the screen. We need to keep track of past positions
   so that the elements of the snake follow the head */
-  function void draw(Segment segment) {
+  method void draw(Segment segment) {
     var int x;
     var int y;
     let x = segment.getX();
     let y = segment.getY();
     do Screen.setColor(true);
+    //do Output.printInt(x);
+    //do Output.println();
+    //do Output.printInt(y);
+    //do Output.println();
+    //do Output.printInt(gridSize);
+    //do Output.println();
+    
     do Screen.drawRectangle(x, y, x + gridSize, y + gridSize);
     return;
   }
 
-  function void erase(Segment segment) {
+  method void erase(Segment segment) {
     var int x;
     var int y;
     let x = segment.getX();
@@ -82,5 +96,5 @@ class Snake {
     do Screen.drawRectangle(x, y, x + gridSize, y + gridSize);
     return;
   }
-
+}
   

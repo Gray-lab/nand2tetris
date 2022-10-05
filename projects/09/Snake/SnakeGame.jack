@@ -7,9 +7,9 @@ class SnakeGame {
   field int score;
 
   constructor SnakeGame new() {
-    let height = 320;
-    let width = 640;
-    let gridSize = 40;
+    let height = 160;
+    let width = 320;
+    let gridSize = 10;
     let direction = 2;
     let score = 0;
     let snake = Snake.new(height / 2, width / 2, gridSize);
@@ -33,9 +33,11 @@ class SnakeGame {
     let exit = false;
     let grow = false;
 
-    while (!exit) {
+    while (~exit) {
       // while waiting for key to be pressed, continue growing in direction
       while (key = 0) {
+        // This doesn't work perfectly - really need an input buffer so that
+        // rapid keystrokes are not missed
         let key = Keyboard.keyPressed();
         do snake.step(direction, grow);
       }
@@ -45,6 +47,8 @@ class SnakeGame {
       if (key = 132) { let direction = 2; } // right arrow
       if (key = 133) { let direction = 3; } // down arrow
       if (key = 130) { let direction = 4; } // left arrow
+      do Output.printInt(key);
+
 
       // while waiting for key to be released, continue growing in (new) direction
       while (~(key=0)) {
