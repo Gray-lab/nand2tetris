@@ -1,0 +1,24 @@
+class Main {
+  function void main() {
+    var Random rand;
+    var int i;
+    var int j;
+    var int cursor_col;
+    let rand = Random.new(17);
+    let i = 0;
+    let j = 0;
+    let cursor_col = 5;
+    while (i < 200) {
+      do Output.moveCursor(j, cursor_col);
+      do Output.printInt(rand.random());
+      do Sys.wait(50);
+      let i = i + 1;
+      let j = j + 1;
+      if (j = 23) {
+        let cursor_col = cursor_col + 5;
+        let j = 0;
+      }
+    }
+    return;
+  }
+}

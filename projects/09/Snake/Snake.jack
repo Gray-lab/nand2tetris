@@ -21,7 +21,7 @@ class Snake {
   field int gridSize; // size of a block of the snake
   
   /** Constructs a new snake */
-  constructor Snake new(int Lx, int Ly, int gameGridSize) {
+  constructor Snake new(int Ly, int Lx, int gameGridSize) {
     let gridSize = gameGridSize;
     let head = Segment.new(Lx, Ly);
     let tail = Segment.new(Lx - gridSize, Ly);
@@ -77,13 +77,13 @@ class Snake {
     let y = segment.getY();
     do Screen.setColor(true);
     //do Output.printInt(x);
-    //do Output.println();
+    //do Output.printString(",");
     //do Output.printInt(y);
-    //do Output.println();
+    //do Output.printString(",");
     //do Output.printInt(gridSize);
     //do Output.println();
-    
-    do Screen.drawRectangle(x, y, x + gridSize, y + gridSize);
+    //do Output.printString("About to draw rectangle");
+    do Screen.drawRectangle(x+1, y+1, x + gridSize-1, y + gridSize-1);
     return;
   }
 
@@ -93,7 +93,7 @@ class Snake {
     let x = segment.getX();
     let y = segment.getY();
     do Screen.setColor(false);
-    do Screen.drawRectangle(x, y, x + gridSize, y + gridSize);
+    do Screen.drawRectangle(x+1, y+1, x + gridSize-1, y + gridSize-1);
     return;
   }
 }

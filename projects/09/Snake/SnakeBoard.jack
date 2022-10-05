@@ -1,0 +1,40 @@
+class SnakeBoard {
+  field Array board;
+  field int cellsWidth, cellsHeight;
+  field int arraySize;
+  field int gridSize;
+
+  constructor SnakeBoard new(int gridSizeIn, int heightIn, int widthIn) {
+
+    // Build an array to hold the cells of the gameboard
+    let cellsWidth = widthIn / gridSizeIn;
+    do Output.printInt(cellsWidth);
+    let cellsHeight = heightIn / gridSizeIn;
+    do Output.printInt(cellsHeight);
+    let arraySize = cellsWidth * cellsHeight;
+    let board = Array.new(arraySize);
+    let gridSize = gridSizeIn;
+    do Output.printInt(arraySize);
+    return this;
+  }
+
+  method void drawDots() {
+    var int i, x, y;
+    let i = 0;
+    do Screen.setColor(true);
+    while (i < arraySize) {
+      // Knowing the number of cells in the width, we can computer x,y coordinates
+      // for each cell
+      let y = i / cellsWidth;
+      let x = i - (cellsWidth * y);
+      //do Output.println();
+      //do Output.printInt(x);
+      //do Output.printString(",");
+      //do Output.printInt(y);
+      //do Sys.wait(10);
+      do Screen.drawPixel(x * gridSize , y * gridSize);
+      let i = i + 1;
+    }
+    return;
+  }
+}

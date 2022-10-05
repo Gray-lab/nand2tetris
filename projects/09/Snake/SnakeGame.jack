@@ -1,3 +1,4 @@
+
 class SnakeGame {
   field Snake snake;
   field int direction;
@@ -5,14 +6,27 @@ class SnakeGame {
   field int height;
   field int width;
   field int score;
+  field SnakeBoard board;
+  field int score_row, score_column;
 
   constructor SnakeGame new() {
-    let height = 160;
-    let width = 320;
-    let gridSize = 10;
+    let height = 256;
+    let width = 512;
+    let gridSize = 8;
     let direction = 2;
     let score = 0;
+    // Score location is based on the character grid of 
+    // 23 rows of 64 columns
+    let score_column = 50;
+    let score_row = 20;
+
+    // Snake is spawned in the center of the screen
     let snake = Snake.new(height / 2, width / 2, gridSize);
+    let board = SnakeBoard.new(gridSize, height, width);
+
+    // Populate board with dots (makes it look pretty!)
+    do board.drawDots();
+    do drawScore();
     return this;
   }
 
@@ -21,6 +35,18 @@ class SnakeGame {
     do Memory.deAlloc(this);
     return;
   }
+
+  method void drawScore() {
+    do Output.moveCursor(score_row, score_column);
+    do Output.printString("Score:");
+    do Output.printInt(score);
+    return;
+  }
+
+  /** Use a random number generator to return value between 0 and max */
+  method int randomInt(int max) {
+    return 0;
+    }
 
   method void run() {
     // to implement:
@@ -47,7 +73,7 @@ class SnakeGame {
       if (key = 132) { let direction = 2; } // right arrow
       if (key = 133) { let direction = 3; } // down arrow
       if (key = 130) { let direction = 4; } // left arrow
-      do Output.printInt(key);
+      // do Output.printInt(key);
 
 
       // while waiting for key to be released, continue growing in (new) direction

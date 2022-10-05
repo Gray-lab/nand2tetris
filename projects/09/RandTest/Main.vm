@@ -1,0 +1,52 @@
+function Main.main 4
+push constant 17
+call Random.new 1
+pop local 0
+push constant 0
+pop local 1
+push constant 0
+pop local 2
+push constant 5
+pop local 3
+label WHILE_EXP0
+push local 1
+push constant 200
+lt
+not
+if-goto WHILE_END0
+push local 2
+push local 3
+call Output.moveCursor 2
+pop temp 0
+push local 0
+call Random.random 1
+call Output.printInt 1
+pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+push local 2
+push constant 1
+add
+pop local 2
+push local 2
+push constant 23
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 3
+push constant 5
+add
+pop local 3
+push constant 0
+pop local 2
+label IF_FALSE0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return

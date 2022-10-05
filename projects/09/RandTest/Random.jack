@@ -1,0 +1,32 @@
+class Random {
+  field int m;
+  field int a;
+  field int seed;
+
+  // implement as a Lehmer RNG
+  // this requires that the seed be coprime to m
+  // take m = 251
+  // a = 13
+
+  constructor Random new(int newSeed) {
+    let seed = newSeed;
+    let m = 251;
+    let a = 43;
+    return this;
+  }
+
+  method int random() {
+    let seed = Random.mod(a * seed, m);
+    return seed;
+  }
+
+  function int mod(int a, int b) {
+    // for a/b, (a/b)*b + a%b = a
+    var int result;
+    let result = a - ((a / b ) * b);
+    return result;
+  }
+}
+
+
+
