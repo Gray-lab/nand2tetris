@@ -1,34 +1,53 @@
 function Snake.new 0
-push constant 3
+push constant 4
 call Memory.alloc 1
 pop pointer 0
-push argument 2
-pop this 2
-push argument 1
+push argument 4
+pop this 3
+push this 3
 push argument 0
+push argument 1
+push argument 2
+push argument 3
+call SnakeBoard.new 5
+pop this 2
+push this 2
+call SnakeBoard.setBoard 1
+pop temp 0
+push this 2
+push constant 594
+call SnakeBoard.getX 2
+push this 2
+push constant 594
+call SnakeBoard.getY 2
 call Segment.new 2
 pop this 0
-push argument 1
 push this 2
-sub
-push argument 0
+push constant 593
+call SnakeBoard.getX 2
+push this 2
+push constant 593
+call SnakeBoard.getY 2
 call Segment.new 2
 pop this 1
 push this 1
 push this 0
 call Segment.setPrev 2
 pop temp 0
-push pointer 0
 push this 0
-call Snake.draw 2
+push this 3
+call Segment.draw 2
 pop temp 0
-push pointer 0
 push this 1
-call Snake.draw 2
+push this 3
+call Segment.draw 2
+pop temp 0
+push this 2
+call SnakeBoard.makeApple 1
 pop temp 0
 push pointer 0
 return
-function Snake.step 3
+function Snake.step 5
 push argument 0
 pop pointer 0
 push argument 1
@@ -39,12 +58,12 @@ goto IF_FALSE0
 label IF_TRUE0
 push this 0
 call Segment.getX 1
+pop local 0
 push this 0
 call Segment.getY 1
-push this 2
+push this 3
 sub
-call Segment.new 2
-pop local 0
+pop local 1
 label IF_FALSE0
 push argument 1
 push constant 2
@@ -54,12 +73,12 @@ goto IF_FALSE1
 label IF_TRUE1
 push this 0
 call Segment.getX 1
-push this 2
+push this 3
 add
+pop local 0
 push this 0
 call Segment.getY 1
-call Segment.new 2
-pop local 0
+pop local 1
 label IF_FALSE1
 push argument 1
 push constant 3
@@ -69,12 +88,12 @@ goto IF_FALSE2
 label IF_TRUE2
 push this 0
 call Segment.getX 1
+pop local 0
 push this 0
 call Segment.getY 1
-push this 2
+push this 3
 add
-call Segment.new 2
-pop local 0
+pop local 1
 label IF_FALSE2
 push argument 1
 push constant 4
@@ -84,43 +103,129 @@ goto IF_FALSE3
 label IF_TRUE3
 push this 0
 call Segment.getX 1
-push this 2
+push this 3
 sub
+pop local 0
 push this 0
 call Segment.getY 1
-call Segment.new 2
-pop local 0
+pop local 1
 label IF_FALSE3
-push this 0
+push this 2
 push local 0
-call Segment.setPrev 2
-pop temp 0
-push local 0
-pop this 0
-push pointer 0
-push this 0
-call Snake.draw 2
-pop temp 0
-push argument 2
-not
+push local 1
+call SnakeBoard.getBoardVal 3
+push constant 1
+eq
 if-goto IF_TRUE4
 goto IF_FALSE4
 label IF_TRUE4
 push pointer 0
+call Snake.gameOver 1
+pop temp 0
+label IF_FALSE4
+push local 0
+push local 1
+call Segment.new 2
+pop local 2
+push this 0
+push local 2
+call Segment.setPrev 2
+pop temp 0
+push local 2
+pop this 0
+push this 0
+push this 3
+call Segment.draw 2
+pop temp 0
+push this 2
+push local 0
+push local 1
+call SnakeBoard.getBoardVal 3
+push constant 2
+eq
+not
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push this 2
 push this 1
-call Snake.erase 2
+call Segment.getX 1
+push this 1
+call Segment.getY 1
+push constant 0
+call SnakeBoard.setBoardVal 4
+pop temp 0
+push this 1
+push this 3
+call Segment.erase 2
 pop temp 0
 push this 1
 call Segment.getPrev 1
-pop local 1
+pop local 3
 push this 1
 call Segment.dispose 1
 pop temp 0
-push local 1
+push local 3
 pop this 1
-label IF_FALSE4
+goto IF_END5
+label IF_FALSE5
+push constant 4
+call String.new 1
+push constant 121
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 2
+call SnakeBoard.makeApple 1
+pop temp 0
+label IF_END5
+push this 2
+push local 0
+push local 1
+push constant 1
+call SnakeBoard.setBoardVal 4
+pop temp 0
 push constant 100
 call Sys.wait 1
+pop temp 0
+push constant 0
+return
+function Snake.gameOver 0
+push argument 0
+pop pointer 0
+push constant 10
+push constant 22
+call Output.moveCursor 2
+pop temp 0
+push constant 9
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 118
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+call Sys.halt 0
 pop temp 0
 push constant 0
 return
@@ -144,71 +249,6 @@ pop temp 0
 label IF_FALSE0
 push pointer 0
 call Memory.deAlloc 1
-pop temp 0
-push constant 0
-return
-function Snake.draw 2
-push argument 0
-pop pointer 0
-push argument 1
-call Segment.getX 1
-pop local 0
-push argument 1
-call Segment.getY 1
-pop local 1
-push constant 0
-not
-call Screen.setColor 1
-pop temp 0
-push local 0
-push constant 1
-add
-push local 1
-push constant 1
-add
-push local 0
-push this 2
-add
-push constant 1
-sub
-push local 1
-push this 2
-add
-push constant 1
-sub
-call Screen.drawRectangle 4
-pop temp 0
-push constant 0
-return
-function Snake.erase 2
-push argument 0
-pop pointer 0
-push argument 1
-call Segment.getX 1
-pop local 0
-push argument 1
-call Segment.getY 1
-pop local 1
-push constant 0
-call Screen.setColor 1
-pop temp 0
-push local 0
-push constant 1
-add
-push local 1
-push constant 1
-add
-push local 0
-push this 2
-add
-push constant 1
-sub
-push local 1
-push this 2
-add
-push constant 1
-sub
-call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return

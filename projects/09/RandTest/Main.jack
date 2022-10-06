@@ -1,21 +1,29 @@
 class Main {
   function void main() {
-    var Random rand;
+    var Random rand1, rand2;
     var int i;
     var int j;
     var int cursor_col;
-    let rand = Random.new(17);
+    var int x;
+    var int y;
+    let rand1 = Random.new(17);
+    let rand2 = Random.new(29);
     let i = 0;
     let j = 0;
-    let cursor_col = 5;
-    while (i < 200) {
-      do Output.moveCursor(j, cursor_col);
-      do Output.printInt(rand.random());
-      do Sys.wait(50);
+    let cursor_col = 0;
+    while (i < 500) {
+      let x = rand1.randomRange(29);
+      let y = rand2.randomRange(29);
+      //do Output.moveCursor(j, cursor_col);
+      //do Output.printInt(x);
+      //do Output.printString(",");
+      //do Output.printInt(y);
+      do Screen.drawRectangle(x*8, y*8, (x*8)+8, (y*8)+8);
+      do Sys.wait(30);
       let i = i + 1;
       let j = j + 1;
       if (j = 23) {
-        let cursor_col = cursor_col + 5;
+        let cursor_col = cursor_col + 6;
         let j = 0;
       }
     }

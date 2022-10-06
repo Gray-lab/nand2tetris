@@ -1,0 +1,9 @@
+class Mod {
+  function int mod(int a, int b) {
+    /** Only defined for a > 0, b > 0*/
+    // for a/b, (a/b)*b + a%b = a
+    var int result;
+    let result = a - ((a / b ) * b);
+    return result;
+  }
+}

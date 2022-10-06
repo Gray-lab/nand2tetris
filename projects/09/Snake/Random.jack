@@ -4,7 +4,7 @@ class Random {
   field int seed;
 
   // implement as a Lehmer RNG
-  // this requires that the seed be coprime to m
+  // seed must be coprime to m to avoid poor behavior
   // take m = 1499, a = 19. This gives a cycle of 1498
 
   constructor Random new(int newSeed) {

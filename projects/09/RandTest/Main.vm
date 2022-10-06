@@ -1,50 +1,71 @@
-function Main.main 4
+function Main.main 7
 push constant 17
 call Random.new 1
 pop local 0
-push constant 0
+push constant 29
+call Random.new 1
 pop local 1
 push constant 0
 pop local 2
-push constant 5
+push constant 0
 pop local 3
+push constant 0
+pop local 4
 label WHILE_EXP0
-push local 1
-push constant 200
+push local 2
+push constant 500
 lt
 not
 if-goto WHILE_END0
-push local 2
-push local 3
-call Output.moveCursor 2
-pop temp 0
 push local 0
-call Random.random 1
-call Output.printInt 1
+push constant 29
+call Random.randomRange 2
+pop local 5
+push local 1
+push constant 29
+call Random.randomRange 2
+pop local 6
+push local 5
+push constant 8
+call Math.multiply 2
+push local 6
+push constant 8
+call Math.multiply 2
+push local 5
+push constant 8
+call Math.multiply 2
+push constant 8
+add
+push local 6
+push constant 8
+call Math.multiply 2
+push constant 8
+add
+call Screen.drawRectangle 4
 pop temp 0
-push constant 50
+push constant 30
 call Sys.wait 1
 pop temp 0
-push local 1
-push constant 1
-add
-pop local 1
 push local 2
 push constant 1
 add
 pop local 2
-push local 2
+push local 3
+push constant 1
+add
+pop local 3
+push local 3
 push constant 23
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push local 3
-push constant 5
+push local 4
+push constant 6
 add
-pop local 3
+pop local 4
 push constant 0
-pop local 2
+pop local 3
 label IF_FALSE0
 goto WHILE_EXP0
 label WHILE_END0

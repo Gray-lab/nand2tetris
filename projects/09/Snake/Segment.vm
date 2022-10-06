@@ -32,6 +32,59 @@ push argument 1
 pop this 2
 push constant 0
 return
+function Segment.draw 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push constant 1
+add
+push this 1
+push constant 1
+add
+push this 0
+push argument 1
+add
+push constant 1
+sub
+push this 1
+push argument 1
+add
+push constant 1
+sub
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Segment.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push constant 1
+add
+push this 1
+push constant 1
+add
+push this 0
+push argument 1
+add
+push constant 1
+sub
+push this 1
+push argument 1
+add
+push constant 1
+sub
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
 function Segment.dispose 0
 push argument 0
 pop pointer 0

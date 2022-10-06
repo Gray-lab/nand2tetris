@@ -18,42 +18,71 @@ To make intersection checks constant time, a hash table would have to be used.
 class Snake {
   field Segment head; // head of the snake, poiting to null
   field Segment tail; // tail of the snake, pointing to a Segment towards the head
+  field SnakeBoard board; // a board for the snake to live on
   field int gridSize; // size of a block of the snake
+
   
-  /** Constructs a new snake */
-  constructor Snake new(int Ly, int Lx, int gameGridSize) {
+  /** Constructs a new snake and a board for the snake*/
+  constructor Snake new(int height, int width, int hoffset, int woffset, int gameGridSize) {
     let gridSize = gameGridSize;
-    let head = Segment.new(Lx, Ly);
-    let tail = Segment.new(Lx - gridSize, Ly);
+    // spawn in a new board
+    let board = SnakeBoard.new(gridSize, height, width, hoffset, woffset);
+    // draw board
+    do board.setBoard();
+
+    // spawn in two new segments at the center of the array
+    let head = Segment.new(board.getX(594), board.getY(594));
+    let tail = Segment.new(board.getX(593), board.getY(593));
     // set prev pointer from tail to head
     do tail.setPrev(head);
     // draw both segments
-    do draw(head);
-    do draw(tail);
+    do head.draw(gridSize);
+    do tail.draw(gridSize);
+    do board.makeApple();
     return this;
   }
 
   method void step(int direction, boolean grow) {
-    // every time we step, we want to 
     // 1. add a new segment to the front and draw it
+    var int new_x, new_y;
     var Segment newSeg;
     var Segment tempSeg;
     var Segment next;
-    if (direction = 1) { let newSeg = Segment.new(head.getX(), head.getY() - gridSize); }
-    if (direction = 2) { let newSeg = Segment.new(head.getX() + gridSize, head.getY()); }
-    if (direction = 3) { let newSeg = Segment.new(head.getX(), head.getY() + gridSize); }
-    if (direction = 4) { let newSeg = Segment.new(head.getX() - gridSize, head.getY()); }
+    if (direction = 1) { let new_x = head.getX(); let new_y = head.getY() - gridSize; }
+    if (direction = 2) { let new_x = head.getX() + gridSize; let new_y = head.getY(); }
+    if (direction = 3) { let new_x = head.getX(); let new_y = head.getY() + gridSize; }
+    if (direction = 4) { let new_x = head.getX() - gridSize; let new_y = head.getY(); }
+    // 2. check for intersection and end game if detected
+    if (board.getBoardVal(new_x, new_y) = 1) {
+      do gameOver();
+    }
+    let newSeg = Segment.new(new_x, new_y);
     do head.setPrev(newSeg);
     let head = newSeg;
-    do draw(head);   
-    // 2. if not growing, delete the segment at the back and remove it
-    if (~grow) {
-      do erase(tail);
+    do head.draw(gridSize);   
+    // 2. if we eat an apple, the snake will grow, otherwise dispose the tail
+    if (~(board.getBoardVal(new_x, new_y) = 2)) {
+      do board.setBoardVal(tail.getX(), tail.getY(), 0);
+      do tail.erase(gridSize);
       let tempSeg = tail.getPrev();
       do tail.dispose();
       let tail = tempSeg;
+    } else {
+    // we got an apple! Reset the board value and make a new apple
+      // do Output.printString("yum!");
+      // this function needs to check that the board value is not 1 when an apple is being made
+      do board.makeApple();
     }
+    // set Board val to 1 at the end
+    do board.setBoardVal(new_x, new_y, 1);
     do Sys.wait(100);
+    return;
+  }
+
+  method void gameOver() {
+    do Output.moveCursor(10, 22);
+    do Output.printString("Game Over");
+    do Sys.halt();
     return;
   }
 
@@ -68,33 +97,5 @@ class Snake {
     return;
   }
 
-  /** draws the snake on the screen. We need to keep track of past positions
-  so that the elements of the snake follow the head */
-  method void draw(Segment segment) {
-    var int x;
-    var int y;
-    let x = segment.getX();
-    let y = segment.getY();
-    do Screen.setColor(true);
-    //do Output.printInt(x);
-    //do Output.printString(",");
-    //do Output.printInt(y);
-    //do Output.printString(",");
-    //do Output.printInt(gridSize);
-    //do Output.println();
-    //do Output.printString("About to draw rectangle");
-    do Screen.drawRectangle(x+1, y+1, x + gridSize-1, y + gridSize-1);
-    return;
-  }
-
-  method void erase(Segment segment) {
-    var int x;
-    var int y;
-    let x = segment.getX();
-    let y = segment.getY();
-    do Screen.setColor(false);
-    do Screen.drawRectangle(x+1, y+1, x + gridSize-1, y + gridSize-1);
-    return;
-  }
 }
   
