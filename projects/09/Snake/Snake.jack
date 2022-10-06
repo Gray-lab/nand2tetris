@@ -72,6 +72,7 @@ class Snake {
       // do Output.printString("yum!");
       // this function needs to check that the board value is not 1 when an apple is being made
       do board.makeApple();
+      do board.drawScore(1);
     }
     // set Board val to 1 at the end
     do board.setBoardVal(new_x, new_y, 1);

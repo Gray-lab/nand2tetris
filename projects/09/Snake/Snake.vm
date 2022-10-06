@@ -169,20 +169,12 @@ push local 3
 pop this 1
 goto IF_END5
 label IF_FALSE5
-push constant 4
-call String.new 1
-push constant 121
-call String.appendChar 2
-push constant 117
-call String.appendChar 2
-push constant 109
-call String.appendChar 2
-push constant 33
-call String.appendChar 2
-call Output.printString 1
-pop temp 0
 push this 2
 call SnakeBoard.makeApple 1
+pop temp 0
+push this 2
+push constant 1
+call SnakeBoard.drawScore 2
 pop temp 0
 label IF_END5
 push this 2

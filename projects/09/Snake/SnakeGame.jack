@@ -38,18 +38,9 @@ class SnakeGame {
     return;
   }
 
-  method void drawScore() {
-    do Output.moveCursor(score_row, score_column);
-    do Output.printString("Score:");
-    do Output.printInt(score);
-    return;
-  }
+
 
   method void run() {
-    // to implement:
-    // score
-    // eating apples
-    // dying at intersection
     var char key;
     var boolean exit;
     var boolean grow;
