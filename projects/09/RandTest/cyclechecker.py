@@ -16,9 +16,9 @@ def main():
 # a = 43
 # cycle = 250 items
 def plot_points(x_dim : int, y_dim : int) -> None:
-  a = 19
-  m = 1499
-  length = 50
+  a = 14
+  m = 455
+  length = 100
   xpoints1 = get_rand_list(a, m, 64, length, x_dim)
   ypoints1 = get_rand_list(a, m, 64, length, y_dim)
   xpoints3 = get_rand_list(a, m, 63, length, x_dim)

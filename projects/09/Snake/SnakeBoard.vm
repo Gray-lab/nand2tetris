@@ -39,10 +39,10 @@ pop this 3
 push this 3
 call Array.new 1
 pop this 0
-push constant 42
+push argument 5
 call Random.new 1
 pop this 11
-push constant 17
+push argument 5
 call Random.new 1
 pop this 12
 push constant 0

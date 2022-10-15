@@ -13,7 +13,7 @@ class SnakeBoard {
   field Random randy;
   field int score;
 
-  constructor SnakeBoard new(int gridSizeIn, int heightIn, int widthIn, int yoffset, int xoffset) {
+  constructor SnakeBoard new(int gridSizeIn, int heightIn, int widthIn, int yoffset, int xoffset, int rand) {
   
     let x_offset = xoffset;
     let y_offset = yoffset;
@@ -30,8 +30,8 @@ class SnakeBoard {
     let arraySize = cellsWidth * cellsHeight;
     let board = Array.new(arraySize);
 
-    let randx = Random.new(42);
-    let randy = Random.new(17);
+    let randx = Random.new(rand);
+    let randy = Random.new(rand);
 
     let score = 0;
     do drawScore(0);

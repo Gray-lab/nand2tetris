@@ -33,11 +33,9 @@ push this 4
 push this 5
 push this 6
 push this 2
-call Snake.new 5
+push argument 0
+call Snake.new 6
 pop this 0
-push pointer 0
-call SnakeGame.drawScore 1
-pop temp 0
 push pointer 0
 return
 function SnakeGame.dispose 0
@@ -48,34 +46,6 @@ call Snake.dispose 1
 pop temp 0
 push pointer 0
 call Memory.deAlloc 1
-pop temp 0
-push constant 0
-return
-function SnakeGame.drawScore 0
-push argument 0
-pop pointer 0
-push this 8
-push this 9
-call Output.moveCursor 2
-pop temp 0
-push constant 6
-call String.new 1
-push constant 83
-call String.appendChar 2
-push constant 99
-call String.appendChar 2
-push constant 111
-call String.appendChar 2
-push constant 114
-call String.appendChar 2
-push constant 101
-call String.appendChar 2
-push constant 58
-call String.appendChar 2
-call Output.printString 1
-pop temp 0
-push this 7
-call Output.printInt 1
 pop temp 0
 push constant 0
 return

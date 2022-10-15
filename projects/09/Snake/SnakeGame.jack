@@ -10,7 +10,7 @@ class SnakeGame {
   field int score;
   field int score_row, score_column;
 
-  constructor SnakeGame new() {
+  constructor SnakeGame new(int rand) {
     let gridSize = 8;
     // board is set to be 41 blocks wide and 29 blocks tall
     let height = 29 * gridSize;
@@ -26,9 +26,8 @@ class SnakeGame {
     let score_row = 20;
 
     // Snake is spawned in the center of the screen
-    let snake = Snake.new(height, width, h_offset, w_offset, gridSize);
+    let snake = Snake.new(height, width, h_offset, w_offset, gridSize, rand);
 
-    do drawScore();
     return this;
   }
 
@@ -37,8 +36,6 @@ class SnakeGame {
     do Memory.deAlloc(this);
     return;
   }
-
-
 
   method void run() {
     var char key;
@@ -62,7 +59,6 @@ class SnakeGame {
       if (key = 133) { let direction = 3; } // down arrow
       if (key = 130) { let direction = 4; } // left arrow
       // do Output.printInt(key);
-
 
       // while waiting for key to be released, continue growing in (new) direction
       while (~(key=0)) {

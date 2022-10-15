@@ -9,7 +9,8 @@ push argument 0
 push argument 1
 push argument 2
 push argument 3
-call SnakeBoard.new 5
+push argument 5
+call SnakeBoard.new 6
 pop this 2
 push this 2
 call SnakeBoard.setBoard 1

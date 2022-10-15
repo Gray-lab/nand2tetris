@@ -20,16 +20,13 @@ class Snake {
   field Segment tail; // tail of the snake, pointing to a Segment towards the head
   field SnakeBoard board; // a board for the snake to live on
   field int gridSize; // size of a block of the snake
-
-  
   /** Constructs a new snake and a board for the snake*/
-  constructor Snake new(int height, int width, int hoffset, int woffset, int gameGridSize) {
+  constructor Snake new(int height, int width, int hoffset, int woffset, int gameGridSize, int rand) {
     let gridSize = gameGridSize;
     // spawn in a new board
-    let board = SnakeBoard.new(gridSize, height, width, hoffset, woffset);
+    let board = SnakeBoard.new(gridSize, height, width, hoffset, woffset, rand);
     // draw board
     do board.setBoard();
-
     // spawn in two new segments at the center of the array
     let head = Segment.new(board.getX(594), board.getY(594));
     let tail = Segment.new(board.getX(593), board.getY(593));
@@ -38,16 +35,17 @@ class Snake {
     // draw both segments
     do head.draw(gridSize);
     do tail.draw(gridSize);
+    // create the apple
     do board.makeApple();
     return this;
   }
 
   method void step(int direction, boolean grow) {
-    // 1. add a new segment to the front and draw it
     var int new_x, new_y;
     var Segment newSeg;
     var Segment tempSeg;
     var Segment next;
+    // 1. get coordinates of new segment
     if (direction = 1) { let new_x = head.getX(); let new_y = head.getY() - gridSize; }
     if (direction = 2) { let new_x = head.getX() + gridSize; let new_y = head.getY(); }
     if (direction = 3) { let new_x = head.getX(); let new_y = head.getY() + gridSize; }
@@ -56,11 +54,12 @@ class Snake {
     if (board.getBoardVal(new_x, new_y) = 1) {
       do gameOver();
     }
+    // 3. add a new segment to the front and draw it
     let newSeg = Segment.new(new_x, new_y);
     do head.setPrev(newSeg);
     let head = newSeg;
     do head.draw(gridSize);   
-    // 2. if we eat an apple, the snake will grow, otherwise dispose the tail
+    // 4. if we eat an apple, the snake will grow, otherwise dispose the tail
     if (~(board.getBoardVal(new_x, new_y) = 2)) {
       do board.setBoardVal(tail.getX(), tail.getY(), 0);
       do tail.erase(gridSize);
