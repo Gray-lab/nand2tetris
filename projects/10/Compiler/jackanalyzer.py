@@ -16,22 +16,19 @@ def main():
   if len(sys.argv) > 2:
       print("Expected at most two argumnets argument but received more than one")
       sys.exit(EXIT_MESSAGE)
-
   
-  directory, filenames_in, filenames_out = get_files_and_dir(sys.argv[1]) 
+  in_filenames, out_filenames = get_files_and_dir(sys.argv[1]) 
 
-  for file_in, file_out in zip(filenames_in, filenames_out):
-    in_filename = os.path.join(directory, file_in)
-    out_filename = os.path.join(directory, file_out)
-    
-    # write tokens into an output file
+  for in_filename, out_filename in zip(in_filenames, out_filenames):
     with open(out_filename, "w") as out:
       tokenizer = jtk.Tokenizer(in_filename)
 
+      # write tokens into an output file
       out.write("<tokens>\n")
       for token in tokenizer.get_token():
         out.write(write_token_to_xml(token[0], token[1]))
       out.write("</tokens>\n")
+
 
 def write_token_to_xml(ident: str, token: str) -> str:
   # Replace XML markup symbols with alternatives
@@ -58,14 +55,17 @@ def get_files_and_dir(rel_path: str) -> Tuple[str, List[str], List[str]]:
       if len(filenames_in) == 0:
           print("No .jack files were found in the target directory")
           sys.exit(EXIT_MESSAGE)
-      # The output file when the arg is a directory is ./dirpath/.../topdirname/filename.vm
   else:
       print("Not a valid .jack file or directory path")
       sys.exit(EXIT_MESSAGE)
 
   filenames_out = [os.path.splitext(fname)[0] + "T.xml" for fname in filenames_in]
 
-  return directory, filenames_in, filenames_out
+  for file_in, file_out in zip(filenames_in, filenames_out):
+    in_filenames = os.path.join(directory, file_in)
+    out_filenames = os.path.join(directory, file_out)
+
+  return in_filenames, out_filenames
     
 
 if __name__ == '__main__':
