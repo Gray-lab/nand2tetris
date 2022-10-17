@@ -3,6 +3,7 @@ import re
 import string
 from typing import Generator, Iterator
 from collections import deque
+from xml.dom.minidom import Element
 
 KEYWORDS = set(['class', 'constructor', 'function', 'method', 'field', 'static', 
                'var', 'int', 'char', 'boolean', 'void', 'true', 'false', 'null',
@@ -21,12 +22,18 @@ IDENT_BODY = IDENT_START.union(DIGITS)
 # Block comment: /* ... */
 # API documentation comment (basically same as block comment): /** ... */
 
+class Token:
+  def __init__ (self, ident, value):
+    self.ident = ident
+    self.value = value
+
+
 class Tokenizer:
   def __init__ (self, in_file: str) -> None:
     self.text = self.strip_comments(in_file)
 
 
-  def strip_comments(self, filename: str) -> Iterator[str]:
+  def strip_comments(self, filename: str) -> deque[str]:
     """
     Removes line comments, empty rows, and newlines from each row, appending them to one another
     Returns a deque of individual characters
@@ -60,13 +67,13 @@ class Tokenizer:
       if consume_flag:
         ch = text.popleft()
       else:
-        consume_flag = True
+        consume_flag = True 
 
       if ch == " ":
         continue
 
       elif ch in SYMBOLS:
-        token = 'symbol', ch
+        token = Token('symbol', ch)
         yield token
 
       elif ch in DIGITS:
@@ -75,7 +82,7 @@ class Tokenizer:
           int_lit += ch
           ch = text.popleft()
         consume_flag = False
-        yield "integerConstant", int_lit
+        yield Token("integerConstant", int_lit)
 
       elif ch in IDENT_START:
         word = ""
@@ -84,9 +91,9 @@ class Tokenizer:
           ch = text.popleft()
         consume_flag = False
         if word in KEYWORDS:
-          yield "keyword", word
+          yield Token("keyword", word)
         else:
-          yield "identifier", word
+          yield Token("identifier", word)
 
       elif ch == '"':
         ch = text.popleft()
@@ -94,7 +101,7 @@ class Tokenizer:
         while ch != '"':
           string_lit += ch
           ch = text.popleft()
-        yield "stringConstant", string_lit
+        yield Token("stringConstant", string_lit)
       
       else:
         print("something broke with character", ch)

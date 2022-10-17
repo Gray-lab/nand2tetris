@@ -18,7 +18,6 @@ def main():
       sys.exit(EXIT_MESSAGE)
   
   in_filenames, out_filenames = get_files_and_dir(sys.argv[1]) 
-
   for in_filename, out_filename in zip(in_filenames, out_filenames):
     with open(out_filename, "w") as out:
       tokenizer = jtk.Tokenizer(in_filename)
@@ -26,7 +25,7 @@ def main():
       # write tokens into an output file
       out.write("<tokens>\n")
       for token in tokenizer.get_token():
-        out.write(write_token_to_xml(token[0], token[1]))
+        out.write(write_token_to_xml(token.ident, token.value))
       out.write("</tokens>\n")
 
 
@@ -61,9 +60,11 @@ def get_files_and_dir(rel_path: str) -> Tuple[str, List[str], List[str]]:
 
   filenames_out = [os.path.splitext(fname)[0] + "T.xml" for fname in filenames_in]
 
+  in_filenames = []
+  out_filenames = []
   for file_in, file_out in zip(filenames_in, filenames_out):
-    in_filenames = os.path.join(directory, file_in)
-    out_filenames = os.path.join(directory, file_out)
+    in_filenames.append(os.path.join(directory, file_in))
+    out_filenames.append(os.path.join(directory, file_out))
 
   return in_filenames, out_filenames
     
