@@ -5,7 +5,7 @@
 import os
 import sys
 from typing import Tuple, List
-import jacktokenizer as jtk
+import jack_tokenizer as jtk
 
 EXIT_MESSAGE = "Usage: python jackanalyzer.py optional<file.jack or directory>"
 
@@ -16,8 +16,8 @@ def main():
   if len(sys.argv) > 2:
       print("Expected at most two argumnets argument but received more than one")
       sys.exit(EXIT_MESSAGE)
-  
-  in_filenames, out_filenames = get_files_and_dir(sys.argv[1]) 
+
+  in_filenames, out_filenames = get_files_and_dir(sys.argv[1])
   for in_filename, out_filename in zip(in_filenames, out_filenames):
     with open(out_filename, "w") as out:
       tokenizer = jtk.Tokenizer(in_filename)
@@ -67,7 +67,7 @@ def get_files_and_dir(rel_path: str) -> Tuple[List[str], List[str]]:
     out_filenames.append(os.path.join(directory, file_out))
 
   return in_filenames, out_filenames
-    
+
 
 if __name__ == '__main__':
     main()
