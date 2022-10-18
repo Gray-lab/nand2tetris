@@ -1,9 +1,7 @@
-from itertools import chain
 import re
 import string
 from typing import Generator, Iterator
 from collections import deque
-from xml.dom.minidom import Element
 
 KEYWORDS = set(['class', 'constructor', 'function', 'method', 'field', 'static', 
                'var', 'int', 'char', 'boolean', 'void', 'true', 'false', 'null',
@@ -27,13 +25,18 @@ class Token:
     self.ident = ident
     self.value = value
 
+  def __eq__(self, other):
+    if isinstance(other, Token):
+      return self.value ==  other.value and self.ident == other.ident
+    return False
+
 
 class Tokenizer:
   def __init__ (self, in_file: str) -> None:
     self.text = self.strip_comments(in_file)
 
 
-  def strip_comments(self, filename: str) -> deque[str]:
+  def strip_comments(self, filename: str) -> deque:
     """
     Removes line comments, empty rows, and newlines from each row, appending them to one another
     Returns a deque of individual characters
@@ -61,7 +64,8 @@ class Tokenizer:
     while the text is not empty
     """
     text = self.text
-    consume_flag = True
+    consume_flag = False
+    ch = text.popleft()
     while text:
       # If looping from a keyword, identifier, or literal don't consume another character
       if consume_flag:

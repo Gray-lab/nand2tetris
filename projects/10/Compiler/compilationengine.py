@@ -1,5 +1,3 @@
-
-
 # Jack Grammar (^element indicates elements that need to be explicitly tagged in XML output)
 # =====================================================================================================================================================
 # Lexical elements (tokens from tokenizer)
@@ -40,8 +38,6 @@
 #   keywordConstant (kc):  'true' | 'false' | 'null' | 'this'
 # =====================================================================================================================================================
 
-
-
 # Step 1: parse every element except Expressions and array Statements 
 # Step 2: handle Expressions
 # Step 3: handle Array oriented statements (whileStatement)
@@ -49,7 +45,9 @@
 # Base case will be a terminal 
 # If non-terminal, keep recursing until a terminal is reached
 
-import jacktokenizer as jtk
+from lib2to3.pgen2 import token
+from jacktokenizer import Token, Tokenizer
+import sys
 
 KC = set(['true', 'false', 'null', 'this'])
 OP = set(['+', '-', '*', '/', '&', '|', '<', '>', '='])
@@ -60,10 +58,10 @@ class CompilationEngine:
   LL(2) parser. Frankly, we usually just need LL(1), but might as well make it LL(2) to deal with
   the few cases where we need that second token.
   """
-  def __init__ (self, start_token: str, in_file: str, out_file: str) -> None:
-    self.next_token1 = start_token;
-    self.next_token2 = self.next_token;
-    self.tokenizer = jtk.Tokenizer(in_file).get_token()
+  def __init__ (self, start_token, in_file: str, out_file: str) -> None:
+    self.nt1 = start_token;
+    self.nt2 = self.get_next_token;
+    self.token_gen = Tokenizer(in_file).get_token()
 
     with open(out_file, "w") as out:
       self.file = out
@@ -86,26 +84,52 @@ class CompilationEngine:
       value = '&amp;'
     self.file.write(f"<{ident}> {value} </{ident}>\n")
 
+
   def get_next_token(self) -> None:
     """
     Loads the next token. Mutates the class state.
     """
-    self.next_token1 = self.next_token2
-    if self.tokenizer.hasNext():
-      
+    self.nt1 = self.nt2
+    # pull the new token
+    # make sure we handle an exception if one might be raised by the token generator?
+    # could use try - except
+    try:
+      self.nt2 = next(self.token_gen)
+    except (StopIteration):
+      print("we triggered the exception")
+      sys.exit("done")
 
-
-  def process(self, token) -> None:
+    
+  def process(self, token_id, token_val=[]) -> None:
     """
     Process the current token. Raises a SyntaxError if token is not accepted.
     """
-    if self.next_token == token:
-      self.write_token_to_xml(token)
+    is_valid = False
+    if token_id == 'keyword':
+      if token_id == self.nt1.ident:
+        for val in token_val:
+          if 
+      
+
+    # elif token_id == 'identifier':
+    #   pass
+
+    else:
+      if token_id == self.nt1.ident:
+        if not token_val:
+          is_valid = True
+        else:
+          for val in token_val:
+            if val == self.nt1.value:
+              is_valid = True
+              break
+
+    if is_valid:
+      self.write_token_to_xml(self.nt1)
       self.get_next_token()
     else:
-      self.file.write(f"Syntax error when parsing <{token.ident}> {token.value} </{token.ident}>\n")
-      raise SyntaxError(f"Syntax error when parsing <{token.ident}> {token.value} </{token.ident}>")
-
+      self.file.write(f"Syntax error when parsing <{self.nt1.ident}> {self.nt1.value} </{self.nt1.ident}>\n")
+      raise SyntaxError(f"Syntax error when parsing <{self.nt1.ident}> {self.nt1.value} </{self.nt1.ident}>")
 
 
   def compileClass(self):
@@ -115,14 +139,31 @@ class CompilationEngine:
     compileClass will always be the first function called. Since Jack requires that
     every file is a class, the class declaration is the root of the parse tree
     """
-    if self.next_token.value != 'class':
-      raise SyntaxError("File must begin with a class declaration") 
-    else:
+    self.file.write(f"<class>\n")
+    self.process("keyword", ["class"])
+    self.process("identifier")
+    self.process("symbol", ["{"])
+    while self.nt1.value in ["static", "field"]:
+      self.compileClassVarDec()
+    while self.nt1.value in ["constructor", "function", "method"]:
+      self.compileSubroutine()
+    self.process("symbol", ["}"])
+    self.file.write(f"</class>\n")
 
   def compileClassVarDec(self):
-    raise NotImplementedError
+    """
+    ^classVarDec (CVD):('static'|'field') type varName(',' varName)* ';'
+    """
+    self.file.write(f"<classVarDec>\n")
+    self.process("keyword, ")
+    self.process("keyword", ["int", "char", "boolean"])
+
+    self.file.write(f"</classVarDec>\n")
 
   def compileSubroutine(self):
+    """
+    ^subroutineDec (SD):('constructor'|'function'|'method') ('void'|type) subroutineName '('parameterList')' subroutineBody
+    """
     raise NotImplementedError
 
   def compileParameterList(self):

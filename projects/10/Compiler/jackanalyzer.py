@@ -42,7 +42,7 @@ def write_token_to_xml(ident: str, token: str) -> str:
   return f"\t<{ident}> {token} </{ident}>\n"
 
 
-def get_files_and_dir(rel_path: str) -> Tuple[str, List[str], List[str]]:
+def get_files_and_dir(rel_path: str) -> Tuple[List[str], List[str]]:
   if os.path.isfile(rel_path) and ".jack" in rel_path:
       # If the argument is a file, we just make a list of one filename
       directory, fname = os.path.split(rel_path)
