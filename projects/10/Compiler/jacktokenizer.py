@@ -3,10 +3,10 @@ import string
 from typing import Generator, Iterator
 from collections import deque
 
-KEYWORDS = set(['class', 'constructor', 'function', 'method', 'field', 'static', 
+KEYWORDS = set(['class', 'constructor', 'function', 'method', 'field', 'static',
                'var', 'int', 'char', 'boolean', 'void', 'true', 'false', 'null',
                'this', 'let', 'do', 'if', 'else', 'while', 'return'])
-SYMBOLS = set(['{', '}', '(', ')', '[', ']', '.', ',', ';', '+', 
+SYMBOLS = set(['{', '}', '(', ')', '[', ']', '.', ',', ';', '+',
               '-', '*', '/', '&', '|', '<', '>', '=', '~'])
 DIGITS = set(list(string.digits))
 IDENT_START = set(list(string.ascii_letters)).union(set(['-']))
@@ -15,7 +15,7 @@ IDENT_BODY = IDENT_START.union(DIGITS)
 # Integers: Only token that begins with a digit. In the range 0 ... 32767
 # String constant: any sequence of characters except /n and " enclosed in ""
 # Identifier: any sequence of letters, digits and _ not starting with a digit
-# Comments and whitespace are ignored. 
+# Comments and whitespace are ignored.
 # Line comment: //
 # Block comment: /* ... */
 # API documentation comment (basically same as block comment): /** ... */
@@ -43,9 +43,9 @@ class Tokenizer:
     """
     with open(filename) as file:
       # Remove line comments and white space
-      valid_rows = (row.partition("//")[0].strip() for row in file) 
+      valid_rows = (row.partition("//")[0].strip() for row in file)
       # Remove empty rows
-      valid_rows = (row for row in valid_rows if row) 
+      valid_rows = (row for row in valid_rows if row)
       source=""
       for row in valid_rows:
         # Remove newline and append row
@@ -60,7 +60,7 @@ class Tokenizer:
 
   def get_token(self):
     """
-    Generator which yields tokens of the form (type, token) 
+    Generator which yields tokens of the form (type, token)
     while the text is not empty
     """
     text = self.text
@@ -71,7 +71,7 @@ class Tokenizer:
       if consume_flag:
         ch = text.popleft()
       else:
-        consume_flag = True 
+        consume_flag = True
 
       if ch == " ":
         continue
@@ -106,6 +106,6 @@ class Tokenizer:
           string_lit += ch
           ch = text.popleft()
         yield Token("stringConstant", string_lit)
-      
+
       else:
         print("something broke with character", ch)

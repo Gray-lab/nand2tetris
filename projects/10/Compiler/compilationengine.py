@@ -24,9 +24,9 @@
 #   statement (S):         letStatement | ifStatement | whileStatement | doStatement | returnStatement    **handle in compileStatements
 #  ^letStatement (LS):     'let' varName ('['expression']')? '=' expression ';'
 #  ^ifStatement (IS):      'if' '('expression')' '{'statements'}'('else' '{'statements'}')?
-#  ^whileStatement (WS):   'while' '('expression')' '{'statements'}' 
+#  ^whileStatement (WS):   'while' '('expression')' '{'statements'}'
 #  ^returnStatement (RS):  'return' expression? ';'
-#  ^doStatement (DS):      'do' subroutineCall ';'                                                        **recommended to parse this as 'do' expression ';' 
+#  ^doStatement (DS):      'do' subroutineCall ';'                                                        **recommended to parse this as 'do' expression ';'
 # -----------------------------------------------------------------------------------------------------------------------------------------------------
 # Expressions
 #  ^expression (E):        term (op term)*
@@ -38,11 +38,11 @@
 #   keywordConstant (kc):  'true' | 'false' | 'null' | 'this'
 # =====================================================================================================================================================
 
-# Step 1: parse every element except Expressions and array Statements 
+# Step 1: parse every element except Expressions and array Statements
 # Step 2: handle Expressions
 # Step 3: handle Array oriented statements (whileStatement)
 
-# Base case will be a terminal 
+# Base case will be a terminal
 # If non-terminal, keep recursing until a terminal is reached
 
 from lib2to3.pgen2 import token
@@ -99,7 +99,7 @@ class CompilationEngine:
       print("we triggered the exception")
       sys.exit("done")
 
-    
+
   def process(self, token_id, token_val=[]) -> None:
     """
     Process the current token. Raises a SyntaxError if token is not accepted.
@@ -108,8 +108,8 @@ class CompilationEngine:
     if token_id == 'keyword':
       if token_id == self.nt1.ident:
         for val in token_val:
-          if 
-      
+          if
+
 
     # elif token_id == 'identifier':
     #   pass
@@ -168,7 +168,7 @@ class CompilationEngine:
 
   def compileParameterList(self):
     raise NotImplementedError
-  
+
   def compileSubroutineBody(self):
     raise NotImplementedError
 
@@ -198,7 +198,7 @@ class CompilationEngine:
 
   def compileTerm(self):
     # requires two term lookahead if the current token is an identifier
-    # second term resoves the identifier into a 
+    # second term resoves the identifier into a
     # variable (second term = '.')
     # array element (second term = '[')
     # or a subroutineCall (second temr = '(')
