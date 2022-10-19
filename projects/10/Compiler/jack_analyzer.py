@@ -25,11 +25,11 @@ def main():
       # write tokens into an output file
       out.write("<tokens>\n")
       for token in tokenizer.get_token():
-        out.write(write_token_to_xml(token.ident, token.value))
+        out.write(write_token_to_xml(token.type, token.value))
       out.write("</tokens>\n")
 
 
-def write_token_to_xml(ident: str, token: str) -> str:
+def write_token_to_xml(type: str, token: str) -> str:
   # Replace XML markup symbols with alternatives
   if token == '<':
     token = '&lt;'

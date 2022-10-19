@@ -6,8 +6,7 @@
 # Base case will be a terminal
 # If non-terminal, keep recursing until a terminal is reached
 
-from lib2to3.pgen2 import token
-from jacktokenizer import Token, Tokenizer
+from jack_tokenizer import Token, Tokenizer
 import sys
 
 KC = set(['true', 'false', 'null', 'this'])
@@ -20,8 +19,8 @@ class CompilationEngine:
   the few cases where we need that second token.
   """
   def __init__ (self, start_token, in_file: str, out_file: str) -> None:
-    self.nt1 = start_token;
-    self.nt2 = self.get_next_token;
+    self.current_token = start_token;
+    self.next_token = self.get_next_token;
     self.token_gen = Tokenizer(in_file).get_token()
 
     with open(out_file, "w") as out:
@@ -34,7 +33,7 @@ class CompilationEngine:
     """
     # Replace XML markup symbols with alternatives
     value = token.value
-    ident = token.ident
+    type = token.type
     if value == '<':
       value = '&lt;'
     if value == '>':
@@ -43,19 +42,19 @@ class CompilationEngine:
       value = '&quot;'
     if value == '&':
       value = '&amp;'
-    self.file.write(f"<{ident}> {value} </{ident}>\n")
+    self.file.write(f"<{type}> {value} </{type}>\n")
 
 
   def get_next_token(self) -> None:
     """
     Loads the next token. Mutates the class state.
     """
-    self.nt1 = self.nt2
+    self.current_token = self.next_token
     # pull the new token
     # make sure we handle an exception if one might be raised by the token generator?
     # could use try - except
     try:
-      self.nt2 = next(self.token_gen)
+      self.next_token = next(self.token_gen)
     except (StopIteration):
       print("we triggered the exception")
       sys.exit("done")
@@ -67,7 +66,7 @@ class CompilationEngine:
     """
     is_valid = False
     if token_id == 'keyword':
-      if token_id == self.nt1.ident:
+      if token_id == self.current_token.type:
         for val in token_val:
           if
 
@@ -76,21 +75,21 @@ class CompilationEngine:
     #   pass
 
     else:
-      if token_id == self.nt1.ident:
+      if token_id == self.current_token.type:
         if not token_val:
           is_valid = True
         else:
           for val in token_val:
-            if val == self.nt1.value:
+            if val == self.current_token.value:
               is_valid = True
               break
 
     if is_valid:
-      self.write_token_to_xml(self.nt1)
+      self.write_token_to_xml(self.current_token)
       self.get_next_token()
     else:
-      self.file.write(f"Syntax error when parsing <{self.nt1.ident}> {self.nt1.value} </{self.nt1.ident}>\n")
-      raise SyntaxError(f"Syntax error when parsing <{self.nt1.ident}> {self.nt1.value} </{self.nt1.ident}>")
+      self.file.write(f"Syntax error when parsing <{self.current_token.type}> {self.current_token.value} </{self.current_token.type}>\n")
+      raise SyntaxError(f"Syntax error when parsing <{self.current_token.type}> {self.current_token.value} </{self.current_token.type}>")
 
 
   def compileClass(self):
@@ -104,9 +103,9 @@ class CompilationEngine:
     self.process("keyword", ["class"])
     self.process("identifier")
     self.process("symbol", ["{"])
-    while self.nt1.value in ["static", "field"]:
+    while self.current_token.value in ["static", "field"]:
       self.compileClassVarDec()
-    while self.nt1.value in ["constructor", "function", "method"]:
+    while self.current_token.value in ["constructor", "function", "method"]:
       self.compileSubroutine()
     self.process("symbol", ["}"])
     self.file.write(f"</class>\n")

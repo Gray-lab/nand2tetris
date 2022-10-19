@@ -9,8 +9,8 @@ KEYWORDS = set(['class', 'constructor', 'function', 'method', 'field', 'static',
 SYMBOLS = set(['{', '}', '(', ')', '[', ']', '.', ',', ';', '+',
               '-', '*', '/', '&', '|', '<', '>', '=', '~'])
 DIGITS = set(list(string.digits))
-IDENT_START = set(list(string.ascii_letters)).union(set(['-']))
-IDENT_BODY = IDENT_START.union(DIGITS)
+IDENTIFIER_START = set(list(string.ascii_letters)).union(set(['-']))
+IDENTIFIER_BODY = IDENTIFIER_START.union(DIGITS)
 
 # Integers: Only token that begins with a digit. In the range 0 ... 32767
 # String constant: any sequence of characters except /n and " enclosed in ""
@@ -21,13 +21,13 @@ IDENT_BODY = IDENT_START.union(DIGITS)
 # API documentation comment (basically same as block comment): /** ... */
 
 class Token:
-  def __init__ (self, ident, value):
-    self.ident = ident
+  def __init__ (self, type, value):
+    self.type = type
     self.value = value
 
   def __eq__(self, other):
     if isinstance(other, Token):
-      return self.value ==  other.value and self.ident == other.ident
+      return self.value ==  other.value and self.type == other.type
     return False
 
 
@@ -88,9 +88,9 @@ class Tokenizer:
         consume_flag = False
         yield Token("integerConstant", int_lit)
 
-      elif ch in IDENT_START:
+      elif ch in IDENTIFIER_START:
         word = ""
-        while ch in IDENT_BODY:
+        while ch in IDENTIFIER_BODY:
           word += ch
           ch = text.popleft()
         consume_flag = False
