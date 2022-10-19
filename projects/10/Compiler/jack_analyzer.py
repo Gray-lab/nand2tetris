@@ -25,21 +25,23 @@ def main():
       # write tokens into an output file
       out.write("<tokens>\n")
       for token in tokenizer.get_token():
-        out.write(write_token_to_xml(token.type, token.value))
+        out.write(write_token_to_xml(token))
       out.write("</tokens>\n")
 
 
-def write_token_to_xml(type: str, token: str) -> str:
+def write_token_to_xml(token) -> str:
   # Replace XML markup symbols with alternatives
-  if token == '<':
-    token = '&lt;'
-  if token == '>':
-    token = '&gt;'
-  if token == '"':
-    token = '&quot;'
-  if token == '&':
-    token = '&amp;'
-  return f"\t<{ident}> {token} </{ident}>\n"
+  value = token.value
+  type = token.type
+  if value == '<':
+    value = '&lt;'
+  if value == '>':
+    value = '&gt;'
+  if value == '"':
+    value = '&quot;'
+  if value == '&':
+    value = '&amp;'
+  return f"\t<{type}> {value} </{type}>\n"
 
 
 def get_files_and_dir(rel_path: str) -> Tuple[List[str], List[str]]:
