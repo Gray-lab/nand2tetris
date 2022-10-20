@@ -26,12 +26,12 @@
 #  ^ifStatement (IS):      'if' '('expression')' '{'statements'}'('else' '{'statements'}')?
 #  ^whileStatement (WS):   'while' '('expression')' '{'statements'}'
 #  ^returnStatement (RS):  'return' expression? ';'
-#  ^doStatement (DS):      'do' subroutineCall ';'                                                        **recommended to parse this as 'do' expression ';'
+#  ^doStatement (DS):      'do' subroutineCall ';'
 # -----------------------------------------------------------------------------------------------------------------------------------------------------
 # Expressions
 #  ^expression (E):        term (op term)*
 #  ^term (TR):             integerConstant|stringConstant|keywordConstant|varName|varName'['expression']'|'('expression')'|(unaryOp term)|subroutineCall
-#   subroutineCall (SC):   subroutineName'('expressionList')'|(className|varName)'.'subroutineName'('expressionList')'    **handle in compileTerm
+#  ^subroutineCall (SC):   subroutineName'('expressionList')'|(className|varName)'.'subroutineName'('expressionList')'
 #  ^expressionList (EL):   (expression(',' expression)*)?
 #   op (op):               '+' | '-' | '*' | '/' | '&' | '|' | '<' | '>' | '='
 #   unaryOp (uop):          '-' | '~'
