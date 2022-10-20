@@ -50,9 +50,7 @@ class CompilationEngine:
     Loads the next token. Mutates the class state.
     """
     self.current_token = self.next_token
-    # pull the new token
-    # make sure we handle an exception if one might be raised by the token generator?
-    # could use try - except
+    # Grab the new token
     try:
       self.next_token = next(self.token_gen)
     except (StopIteration):
@@ -60,29 +58,20 @@ class CompilationEngine:
       sys.exit("done")
 
 
-  def process(self, token_id, token_val=[]) -> None:
+  def process(self, token_type, token_val=[]) -> None:
     """
     Process the current token. Raises a SyntaxError if token is not accepted.
     """
     is_valid = False
-    if token_id == 'keyword':
-      if token_id == self.current_token.type:
+    # check that token type is correct
+    if token_type == self.current_token.type:
+      if not token_val:
+        is_valid = True
+      else:
+        # check that current token value matches one of the valid values
         for val in token_val:
-          if
-
-
-    # elif token_id == 'identifier':
-    #   pass
-
-    else:
-      if token_id == self.current_token.type:
-        if not token_val:
-          is_valid = True
-        else:
-          for val in token_val:
-            if val == self.current_token.value:
-              is_valid = True
-              break
+          if val == self.current_token.value:
+            is_valid = True
 
     if is_valid:
       self.write_token_to_xml(self.current_token)
@@ -90,6 +79,14 @@ class CompilationEngine:
     else:
       self.file.write(f"Syntax error when parsing <{self.current_token.type}> {self.current_token.value} </{self.current_token.type}>\n")
       raise SyntaxError(f"Syntax error when parsing <{self.current_token.type}> {self.current_token.value} </{self.current_token.type}>")
+
+
+  def compileType(self):
+    """
+    type (TY): int' | 'char' | 'boolean' className
+    """
+    self.process("keyword", ["int", "char", "boolean"])
+    self.process("identifier", [])
 
 
   def compileClass(self):
@@ -101,7 +98,7 @@ class CompilationEngine:
     """
     self.file.write(f"<class>\n")
     self.process("keyword", ["class"])
-    self.process("identifier")
+    self.process("identifier", [])
     self.process("symbol", ["{"])
     while self.current_token.value in ["static", "field"]:
       self.compileClassVarDec()
@@ -109,48 +106,107 @@ class CompilationEngine:
       self.compileSubroutine()
     self.process("symbol", ["}"])
     self.file.write(f"</class>\n")
+    print("end compileClass")
+    
 
   def compileClassVarDec(self):
     """
-    ^classVarDec (CVD):('static'|'field') type varName(',' varName)* ';'
+    classVarDec (CVD):('static'|'field') type varName(',' varName)* ';'
     """
     self.file.write(f"<classVarDec>\n")
-    self.process("keyword, ")
-    self.process("keyword", ["int", "char", "boolean"])
-
+    # If we are here, we know that the next keyword should be either 'static' or 'field'
+    self.process("keyword", ["static", "field"])
+    self.compileType()
     self.file.write(f"</classVarDec>\n")
+    while self.current_token.value != ";":
+      self.process("symbol", ",")
+      self.process("identifier", [])
+    self.process("symbol", ";")
+    self.file.write(f"</classVarDec>\n")
+    print("end compileClassVarDec")
 
   def compileSubroutine(self):
     """
-    ^subroutineDec (SD):('constructor'|'function'|'method') ('void'|type) subroutineName '('parameterList')' subroutineBody
+    subroutineDec (SD):('constructor'|'function'|'method') ('void'|type) subroutineName '('parameterList')' subroutineBody
+    """
+    self.file.write(f"<subroutineDec>\n")
+    # If we are here, we know that the next keyword should be either "constructor" or "function" or "method"
+    self.process("keyword", ["constructor", "function", "method"])
+    self.process("keyword", ["void", "type"])
+    self.process("identifier", [])
+    self.process("symbol", "(")
+    self.compileParameterList()
+    self.process("symbol", ")")
+    self.compileSubroutineBody()
+    self.file.write(f"</subroutineDec>\n")
+
+
+  def compileParameterList(self):
+    """
+    parameterList (PL): ((type varName)) (',' type varName)*)?
+    """
+    self.file.write(f"<parameterList>\n")
+    # End of parameter list is defined by a close paren
+    while self.current_token.value != ')':
+      self.compileType()
+      self.process("symbol", ",")
+      self.process("identifier", [])
+    self.file.write(f"</parameterList>\n")
+
+
+  def compileSubroutineBody(self):
+    """
+    subroutineBody (SB):'{'varDec* statements'}'
+    """
+    self.file.write(f"<subroutineBody>\n")
+    self.process("symbol", "{")
+    # Each variable declaration begins with "var". Intervening tokens will be consumed by compileVarDec
+    while self.current_token.value == "var":
+      self.compileVarDec()
+    self.compileStatements()
+    self.file.write(f"</subroutineBody>\n")
+
+  def compileVarDec(self):
+    """
+    varDec (VD):'var' type varName(',' varName)* ';'
     """
     raise NotImplementedError
 
-  def compileParameterList(self):
-    raise NotImplementedError
-
-  def compileSubroutineBody(self):
-    raise NotImplementedError
-
-  def compileVarDec(self):
-    raise NotImplementedError
-
   def compileStatements(self):
+    """
+    statements (SS): statement*
+    statement (S): letStatement | ifStatement | whileStatement | doStatement | returnStatement
+    """
     raise NotImplementedError
 
   def compileLet(self):
+    """
+    letStatement (LS): 'let' varName ('['expression']')? '=' expression ';'
+    """
     raise NotImplementedError
 
   def compileIf(self):
+    """
+    ifStatement (IS): 'if' '('expression')' '{'statements'}'('else' '{'statements'}')?
+    """
     raise NotImplementedError
 
   def compileWhile(self):
+    """
+    whileStatement (WS): 'while' '('expression')' '{'statements'}'
+    """
     raise NotImplementedError
 
   def compileDo(self):
+    """
+    doStatement (DS): 'do' subroutineCall ';'
+    """
     raise NotImplementedError
 
   def compileReturn(self):
+    """
+    returnStatement (RS): 'return' expression? ';'
+    """
     raise NotImplementedError
 
   def compileExpression(self):
@@ -164,7 +220,8 @@ class CompilationEngine:
     # or a subroutineCall (second temr = '(')
     raise NotImplementedError
 
-def compileExpressionList(self) -> int:
-  """
-  Returns count of expressions
-  """
+  def compileExpressionList(self) -> int:
+    """
+    Returns count of expressions
+    """
+    raise NotImplementedError
