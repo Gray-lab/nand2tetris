@@ -81,7 +81,7 @@ class CompilationEngine:
       self.write_token_to_xml(self.current_token)
       self.get_next_token()
     else:
-      raise SyntaxError(f"  Syntax error. \n\
+      raise SyntaxError(f"\n\
       expected: <{token_type}> {token_val} </{token_type}>\n\
       received: <{self.current_token.type}> {self.current_token.value} </{self.current_token.type}>")
 
@@ -297,13 +297,16 @@ class CompilationEngine:
     """
     self.file.write(f"<expression>\n")
     self.compileTerm()
+    while self.current_token.value in OP:
+      self.process("symbol", OP)
+      self.compileTerm()
     self.file.write(f"</expression>\n")
 
 
   def compileTerm(self):
     """
-    term (TR): integerConstant|stringConstant|keywordConstant|varName|varName'
-               ['expression']'|'('expression')'|(unaryOp term)|subroutineCall
+    term (TR): integerConstant|stringConstant|keywordConstant|varName|varName
+               '['expression']'|'('expression')'|(unaryOp term)|subroutineCall
     """
     # requires two term lookahead if the current token is an identifier
     # second term resoves the identifier into a
@@ -311,11 +314,49 @@ class CompilationEngine:
     # array element (second term = '[')
     # or a subroutineCall (second temr = '(')
     self.file.write(f"<term>\n")
-    # This is temporary for partial testing before implementing expressions
-    if self.current_token.type == "identifier":
-      self.process("identifier", [])
+
+    if self.current_token.type == "integerConstant":
+      self.process("integerConstant", [])
+
+    elif self.current_token.type == "stringConstant":
+      self.process("stringConstant", [])
+
     elif self.current_token.value in KC:
       self.process("keyword", KC)
+
+    elif self.current_token.value in UOP:
+      self.process("symbol", UOP)
+      self.compileTerm()
+
+    elif self.current_token.value == "(":
+      self.process("symbol", ["("])
+      self.compileExpression()
+      self.process("symbol", [")"])
+    
+    # the next 4 cases require LL(2)
+    elif self.current_token.type == "identifier":
+      if self.next_token.value == "[":
+        #varname '['expression']'
+        self.process("identifier", [])
+        self.process("symbol", ["["])
+        self.compileExpression()
+        self.process("symbol", ["]"])
+      elif self.next_token.value in ["(", "."]:
+        # subroutineCall
+        self.compileSubroutineCall()
+      else:
+        # varname
+        self.process("identifier", [])
+
+    else:
+      print("Something broke in compileTerm main branch")
+      self.file.write("Something broke in compileTerm main branch")
+
+    # This is temporary for partial testing before implementing expressions
+    # if self.current_token.type == "identifier":
+    #   self.process("identifier", [])
+    # elif self.current_token.value in KC:
+    #   self.process("keyword", KC)
     self.file.write(f"</term>\n")
     
 
@@ -329,12 +370,15 @@ class CompilationEngine:
       self.process("symbol", ["("])
       self.compileExpressionList()
       self.process("symbol", [")"])
-    else:
+    elif self.current_token.value == ".":
       self.process("symbol", ["."])
       self.process("identifier", [])
       self.process("symbol", ["("])
       self.compileExpressionList()
       self.process("symbol", [")"])
+    else:
+      print("Something broke in compileSubroutineCall")
+      self.file.write("Something broke in compileSubroutineCall")
 
 
   def compileExpressionList(self) -> int:
