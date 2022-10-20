@@ -5,6 +5,7 @@
 import os
 import sys
 from typing import Tuple, List
+from compilation_engine import CompilationEngine
 import jack_tokenizer as jtk
 
 EXIT_MESSAGE = "Usage: python jackanalyzer.py optional<file.jack or directory>"
@@ -19,14 +20,16 @@ def main():
 
   in_filenames, out_filenames = get_files_and_dir(sys.argv[1])
   for in_filename, out_filename in zip(in_filenames, out_filenames):
-    with open(out_filename, "w") as out:
-      tokenizer = jtk.Tokenizer(in_filename)
+    CompilationEngine(in_filename, out_filename)
+    # first call to compile class should trigged whole compilation
+    # with open(out_filename, "w") as out:
+    #   tokenizer = jtk.Tokenizer(in_filename)
 
-      # write tokens into an output file
-      out.write("<tokens>\n")
-      for token in tokenizer.get_token():
-        out.write(write_token_to_xml(token))
-      out.write("</tokens>\n")
+    #   # write tokens into an output file
+    #   out.write("<tokens>\n")
+    #   for token in tokenizer.get_token():
+    #     out.write(write_token_to_xml(token))
+    #   out.write("</tokens>\n")
 
 
 def write_token_to_xml(token) -> str:
@@ -60,7 +63,7 @@ def get_files_and_dir(rel_path: str) -> Tuple[List[str], List[str]]:
       print("Not a valid .jack file or directory path")
       sys.exit(EXIT_MESSAGE)
 
-  filenames_out = [os.path.splitext(fname)[0] + "T.xml" for fname in filenames_in]
+  filenames_out = [os.path.splitext(fname)[0] + ".xml" for fname in filenames_in]
 
   in_filenames = []
   out_filenames = []

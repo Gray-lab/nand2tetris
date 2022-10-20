@@ -6,7 +6,7 @@
 # Base case will be a terminal
 # If non-terminal, keep recursing until a terminal is reached
 
-from jack_tokenizer import Token, Tokenizer
+from jack_tokenizer import Tokenizer
 import sys
 
 KC = set(['true', 'false', 'null', 'this'])
@@ -18,13 +18,17 @@ class CompilationEngine:
   LL(2) parser. Frankly, we usually just need LL(1), but might as well make it LL(2) to deal with
   the few cases where we need that second token.
   """
-  def __init__ (self, start_token, in_file: str, out_file: str) -> None:
-    self.current_token = start_token;
-    self.next_token = self.get_next_token;
+  def __init__ (self, in_file: str, out_file: str) -> None:
     self.token_gen = Tokenizer(in_file).get_token()
+    self.current_token = None;
+    self.next_token = None;
+    # Load the first two tokens
+    self.get_next_token()
+    self.get_next_token()
 
     with open(out_file, "w") as out:
       self.file = out
+      self.compileClass()
 
   def write_token_to_xml(self, token) -> None:
     """
@@ -54,8 +58,8 @@ class CompilationEngine:
     try:
       self.next_token = next(self.token_gen)
     except (StopIteration):
-      print("we triggered the exception")
-      sys.exit("done")
+      # if we run out of tokens we have reached the end of the file and compileClass will wrap up and return
+      pass
 
 
   def process(self, token_type, token_val=[]) -> None:
@@ -77,16 +81,19 @@ class CompilationEngine:
       self.write_token_to_xml(self.current_token)
       self.get_next_token()
     else:
-      self.file.write(f"Syntax error when parsing <{self.current_token.type}> {self.current_token.value} </{self.current_token.type}>\n")
-      raise SyntaxError(f"Syntax error when parsing <{self.current_token.type}> {self.current_token.value} </{self.current_token.type}>")
+      raise SyntaxError(f"  Syntax error. \n\
+      expected: <{token_type}> {token_val} </{token_type}>\n\
+      received: <{self.current_token.type}> {self.current_token.value} </{self.current_token.type}>")
 
 
   def compileType(self):
     """
-    type (TY): int' | 'char' | 'boolean' className
+    type (TY): int' | 'char' | 'boolean' | className
     """
-    self.process("keyword", ["int", "char", "boolean"])
-    self.process("identifier", [])
+    if self.current_token.type == 'keyword':
+      self.process("keyword", ["int", "char", "boolean"])
+    else:
+      self.process("identifier", [])
 
 
   def compileClass(self):
@@ -106,7 +113,7 @@ class CompilationEngine:
       self.compileSubroutine()
     self.process("symbol", ["}"])
     self.file.write(f"</class>\n")
-    print("end compileClass")
+    print("Finished!")
     
 
   def compileClassVarDec(self):
@@ -117,13 +124,13 @@ class CompilationEngine:
     # If we are here, we know that the next keyword should be either 'static' or 'field'
     self.process("keyword", ["static", "field"])
     self.compileType()
-    self.file.write(f"</classVarDec>\n")
+    self.process("identifier", [])
     while self.current_token.value != ";":
-      self.process("symbol", ",")
+      self.process("symbol", [","])
       self.process("identifier", [])
-    self.process("symbol", ";")
+    self.process("symbol", [";"])
     self.file.write(f"</classVarDec>\n")
-    print("end compileClassVarDec")
+
 
   def compileSubroutine(self):
     """
@@ -132,11 +139,14 @@ class CompilationEngine:
     self.file.write(f"<subroutineDec>\n")
     # If we are here, we know that the next keyword should be either "constructor" or "function" or "method"
     self.process("keyword", ["constructor", "function", "method"])
-    self.process("keyword", ["void", "type"])
+    if self.current_token.value == 'void':
+      self.process("keyword", ["void"])
+    else:
+      self.compileType()
     self.process("identifier", [])
-    self.process("symbol", "(")
+    self.process("symbol", ["("])
     self.compileParameterList()
-    self.process("symbol", ")")
+    self.process("symbol", [")"])
     self.compileSubroutineBody()
     self.file.write(f"</subroutineDec>\n")
 
@@ -147,10 +157,13 @@ class CompilationEngine:
     """
     self.file.write(f"<parameterList>\n")
     # End of parameter list is defined by a close paren
-    while self.current_token.value != ')':
+    if self.current_token.value != ')':
       self.compileType()
-      self.process("symbol", ",")
       self.process("identifier", [])
+      while self.current_token.value != ')':
+        self.process("symbol", [","])
+        self.compileType()
+        self.process("identifier", [])
     self.file.write(f"</parameterList>\n")
 
 
@@ -159,69 +172,181 @@ class CompilationEngine:
     subroutineBody (SB):'{'varDec* statements'}'
     """
     self.file.write(f"<subroutineBody>\n")
-    self.process("symbol", "{")
+    self.process("symbol", ["{"])
     # Each variable declaration begins with "var". Intervening tokens will be consumed by compileVarDec
     while self.current_token.value == "var":
       self.compileVarDec()
     self.compileStatements()
+    self.process("symbol", ["}"])
     self.file.write(f"</subroutineBody>\n")
+
 
   def compileVarDec(self):
     """
     varDec (VD):'var' type varName(',' varName)* ';'
     """
-    raise NotImplementedError
+    self.file.write(f"<varDec>\n")
+    self.process("keyword", ["var"])
+    self.compileType()
+    self.process("identifier", [])
+    while self.current_token.value != ";":
+      self.process("symbol", [","])
+      self.process("identifier", [])
+    self.process("symbol", ";")
+    self.file.write(f"</varDec>\n")
+    
 
   def compileStatements(self):
     """
     statements (SS): statement*
     statement (S): letStatement | ifStatement | whileStatement | doStatement | returnStatement
     """
-    raise NotImplementedError
+    self.file.write(f"<statements>\n")
+    while self.current_token.value in ["let", "if", "while", "do", "return"]:
+      if self.current_token.value == "let":
+        self.compileLet()
+      if self.current_token.value == "if":
+        self.compileIf()
+      if self.current_token.value == "while":
+        self.compileWhile()
+      if self.current_token.value == "do":
+        self.compileDo()
+      if self.current_token.value == "return":
+        self.compileReturn()
+    self.file.write(f"</statements>\n")
+
 
   def compileLet(self):
     """
     letStatement (LS): 'let' varName ('['expression']')? '=' expression ';'
     """
-    raise NotImplementedError
+    self.file.write(f"<letStatement>\n")
+    self.process("keyword", ["let"])
+    self.process("identifier", [])
+    if self.current_token.value == "[":
+      self.process("symbol", ["["])
+      self.compileExpression()
+      self.process("symbol", ["]"])
+    self.process("symbol", ["="])
+    self.compileExpression()
+    self.process("symbol", [";"])
+    self.file.write(f"</letStatement>\n")
+    
 
   def compileIf(self):
     """
     ifStatement (IS): 'if' '('expression')' '{'statements'}'('else' '{'statements'}')?
     """
-    raise NotImplementedError
+    self.file.write(f"<ifStatement>\n")
+    self.process("keyword", ["if"])
+    self.process("symbol", ["("])
+    self.compileExpression()
+    self.process("symbol", [")"])
+    self.process("symbol", ["{"])
+    self.compileStatements()
+    self.process("symbol", ["}"])
+    if self.current_token.value == "else":
+      self.process("keyword", ["else"])
+      self.process("symbol", ["{"])
+      self.compileStatements()
+      self.process("symbol", ["}"])
+    self.file.write(f"</ifStatement>\n")
+    
 
   def compileWhile(self):
     """
     whileStatement (WS): 'while' '('expression')' '{'statements'}'
     """
-    raise NotImplementedError
+    self.file.write(f"<whileStatement>\n")
+    self.process("keyword", ["while"])
+    self.process("symbol", ["("])
+    self.compileExpression()
+    self.process("symbol", [")"])
+    self.process("symbol", ["{"])
+    self.compileStatements()
+    self.process("symbol", ["}"])
+    self.file.write(f"</whileStatement>\n")
+
 
   def compileDo(self):
     """
     doStatement (DS): 'do' subroutineCall ';'
     """
-    raise NotImplementedError
+    self.file.write(f"<doStatement>\n")
+    self.process("keyword", ["do"])
+    self.compileSubroutineCall()
+    self.process("symbol", [";"])
+    self.file.write(f"</doStatement>\n")
+
 
   def compileReturn(self):
     """
     returnStatement (RS): 'return' expression? ';'
     """
-    raise NotImplementedError
+    self.file.write(f"<returnStatement>\n")
+    self.process("keyword", ["return"])
+    if self.current_token.value != ";":
+      self.compileExpression()
+    self.process("symbol", [";"])
+    self.file.write(f"</returnStatement>\n")
+
 
   def compileExpression(self):
-    raise NotImplementedError
+    """
+    expression (E): term (op term)*
+    """
+    self.file.write(f"<expression>\n")
+    self.compileTerm()
+    self.file.write(f"</expression>\n")
+
 
   def compileTerm(self):
+    """
+    term (TR): integerConstant|stringConstant|keywordConstant|varName|varName'
+               ['expression']'|'('expression')'|(unaryOp term)|subroutineCall
+    """
     # requires two term lookahead if the current token is an identifier
     # second term resoves the identifier into a
     # variable (second term = '.')
     # array element (second term = '[')
     # or a subroutineCall (second temr = '(')
-    raise NotImplementedError
+    self.file.write(f"<term>\n")
+    # This is temporary for partial testing before implementing expressions
+    if self.current_token.type == "identifier":
+      self.process("identifier", [])
+    elif self.current_token.value in KC:
+      self.process("keyword", KC)
+    self.file.write(f"</term>\n")
+    
+
+  def compileSubroutineCall(self):
+    """
+    subroutineCall (SC): subroutineName'('expressionList')'|
+                         (className|varName)'.'subroutineName'('expressionList')'
+    """
+    self.process("identifier", [])
+    if self.current_token.value == "(":
+      self.process("symbol", ["("])
+      self.compileExpressionList()
+      self.process("symbol", [")"])
+    else:
+      self.process("symbol", ["."])
+      self.process("identifier", [])
+      self.process("symbol", ["("])
+      self.compileExpressionList()
+      self.process("symbol", [")"])
+
 
   def compileExpressionList(self) -> int:
     """
+    expressionList (EL): (expression(',' expression)*)?
     Returns count of expressions
     """
-    raise NotImplementedError
+    self.file.write(f"<expressionList>\n")
+        # End of parameter list is defined by a close paren
+    if self.current_token.value != ')':
+      self.compileExpression()
+      while self.current_token.value != ')':
+        self.process("symbol", [","])
+        self.compileExpression()
+    self.file.write(f"</expressionList>\n")

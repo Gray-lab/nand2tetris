@@ -5,7 +5,6 @@
 <classVarDec>
 <keyword> static </keyword>
 <keyword> boolean </keyword>
-</classVarDec>
 <identifier> test </identifier>
 <symbol> ; </symbol>
 </classVarDec>
@@ -64,6 +63,51 @@
 <symbol> ; </symbol>
 </returnStatement>
 </statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> function </keyword>
+<keyword> void </keyword>
+<identifier> more </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<varDec>
+<keyword> var </keyword>
+<keyword> boolean </keyword>
+<identifier> b </identifier>
+<symbol> ; </symbol>
+</varDec>
+<statements>
+<ifStatement>
+<keyword> if </keyword>
+<symbol> ( </symbol>
+<expression>
+<term>
+<identifier> b </identifier>
+</term>
+</expression>
+<symbol> ) </symbol>
+<symbol> { </symbol>
+<statements>
+</statements>
+<symbol> } </symbol>
+<keyword> else </keyword>
+<symbol> { </symbol>
+<statements>
+</statements>
+<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
 </subroutineBody>
 </subroutineDec>
 <symbol> } </symbol>

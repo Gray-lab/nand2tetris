@@ -10,7 +10,7 @@
 # Program structure
 #  ^class (C):              'class' className '{' classVarDec* subroutineDec* '}'
 #  ^classVarDec (CVD):      ('static'|'field') type varName(',' varName)* ';'
-#   type (TY):               'int' | 'char' | 'boolean' className
+#   type (TY):               'int' | 'char' | 'boolean' | className
 #  ^subroutineDec (SD):     ('constructor'|'function'|'method') ('void'|type) subroutineName '('parameterList')' subroutineBody
 #  ^parameterList (PL):     ((type varName)) (',' type varName)*?
 #  ^subroutineBody (SB):    '{'varDec* statements'}'
