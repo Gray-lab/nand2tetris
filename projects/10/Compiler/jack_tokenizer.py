@@ -22,27 +22,25 @@ IDENTIFIER_BODY = IDENTIFIER_START.union(DIGITS)
 
 
 class Token:
-    def __init__(self, type, value):
-        self.type = type
+    def __init__(self, label, value):
+        self.label = label
         self.value = value
 
     def __eq__(self, other):
         if isinstance(other, Token):
-            return self.value == other.value and self.type == other.type
+            return self.value == other.value and self.label == other.label
         return False
 
     def __str__(self) -> str:
-        value = token.value
-        type = token.type
-        if value == '<':
-            value = '&lt;'
-        if value == '>':
-            value = '&gt;'
-        if value == '"':
-            value = '&quot;'
-        if value == '&':
-            value = '&amp;'
-        return f"\t<{type}> {value} </{type}>\n"
+        if self.value == '<':
+            self.value = '&lt;'
+        if self.value == '>':
+            self.value = '&gt;'
+        if self.value == '"':
+            self.value = '&quot;'
+        if self.value == '&':
+            self.value = '&amp;'
+        return f"\t<{self.label}> {self.value} </{self.label}>\n"
 
 
 class Tokenizer:
@@ -72,7 +70,7 @@ class Tokenizer:
 
     def get_token(self):
         """
-        Generator which yields tokens of the form (type, token)
+        Generator which yields tokens of the form (label, token)
         while the text is not empty
         """
         text = self.text

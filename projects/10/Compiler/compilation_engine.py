@@ -7,7 +7,6 @@
 # If non-terminal, keep recursing until a terminal is reached
 
 from jack_tokenizer import Tokenizer
-import sys
 
 KC = set(['true', 'false', 'null', 'this'])
 OP = set(['+', '-', '*', '/', '&', '|', '<', '>', '='])
@@ -32,24 +31,6 @@ class CompilationEngine:
             self.file = out
             self.compileClass()
 
-    def write_token_to_xml(self, token) -> None:
-        """
-        Replaces XML markup symbols with valid alternatives
-        and writes the token to the output file
-        """
-        # Replace XML markup symbols with alternatives
-        value = token.value
-        type = token.type
-        if value == '<':
-            value = '&lt;'
-        if value == '>':
-            value = '&gt;'
-        if value == '"':
-            value = '&quot;'
-        if value == '&':
-            value = '&amp;'
-        self.file.write(f"<{type}> {value} </{type}>\n")
-
     def get_next_token(self) -> None:
         """
         Loads the next token. Mutates the class state.
@@ -62,13 +43,13 @@ class CompilationEngine:
             # if we run out of tokens we have reached the end of the file and compileClass will wrap up and return
             pass
 
-    def process(self, token_type, token_val=[]) -> None:
+    def process(self, token_label, token_val=[]) -> None:
         """
         Process the current token. Raises a SyntaxError if token is not accepted.
         """
         is_valid = False
-        # check that token type is correct
-        if token_type == self.current_token.type:
+        # check that token label is correct
+        if token_label == self.current_token.label:
             if not token_val:
                 is_valid = True
             else:
@@ -78,18 +59,18 @@ class CompilationEngine:
                         is_valid = True
 
         if is_valid:
-            self.write_token_to_xml(self.current_token)
+            self.file.write(str(self.current_token))
             self.get_next_token()
         else:
             raise SyntaxError(f"\n\
-      expected: <{token_type}> {token_val} </{token_type}>\n\
-      received: <{self.current_token.type}> {self.current_token.value} </{self.current_token.type}>")
+      expected: <{token_label}> {token_val} </{token_label}>\n\
+      received: <{self.current_token.label}> {self.current_token.value} </{self.current_token.label}>")
 
     def compileType(self):
         """
         type (TY): int' | 'char' | 'boolean' | className
         """
-        if self.current_token.type == 'keyword':
+        if self.current_token.label == 'keyword':
             self.process("keyword", ["int", "char", "boolean"])
         else:
             self.process("identifier", [])
@@ -300,10 +281,10 @@ class CompilationEngine:
         # or a subroutineCall (second temr = '(')
         self.file.write(f"<term>\n")
 
-        if self.current_token.type == "integerConstant":
+        if self.current_token.label == "integerConstant":
             self.process("integerConstant", [])
 
-        elif self.current_token.type == "stringConstant":
+        elif self.current_token.label == "stringConstant":
             self.process("stringConstant", [])
 
         elif self.current_token.value in KC:
@@ -319,7 +300,7 @@ class CompilationEngine:
             self.process("symbol", [")"])
 
         # the next 4 cases require LL(2)
-        elif self.current_token.type == "identifier":
+        elif self.current_token.label == "identifier":
             if self.next_token.value == "[":
                 # varname '['expression']'
                 self.process("identifier", [])
@@ -338,7 +319,7 @@ class CompilationEngine:
             self.file.write("Something broke in compileTerm main branch")
 
         # This is temporary for partial testing before implementing expressions
-        # if self.current_token.type == "identifier":
+        # if self.current_token.label == "identifier":
         #   self.process("identifier", [])
         # elif self.current_token.value in KC:
         #   self.process("keyword", KC)

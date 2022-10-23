@@ -21,8 +21,10 @@ def main():
 
     in_filenames, out_filenames = get_files_and_dir(sys.argv[1])
     for in_filename, out_filename in zip(in_filenames, out_filenames):
+        ### For parsing ###
         CompilationEngine(in_filename, out_filename)
-        # first call to compile class should trigged whole compilation
+
+        ### For tokenizing
         # with open(out_filename, "w") as out:
         #   tokenizer = jtk.Tokenizer(in_filename)
 
