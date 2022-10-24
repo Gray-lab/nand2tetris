@@ -23,17 +23,22 @@ class CompilationEngine:
 
     def __init__(self, in_file: str, out_file: str) -> None:
         self.token_gen = Tokenizer(in_file).get_token_generator()
-        self.writer = VMwriter(out_file)
+        #self.writer = VMwriter(out_file)
         self.current_token = None
         self.next_token = None
-
+        
+        # Initialize the symbol tables
+        self.class_sym = SymbolTable()
+        self.sub_sym = SymbolTable()
 
         # Load the first two tokens
         self.get_next_token()
         self.get_next_token()
 
-        # Initialize compilation
-        self.compileClass()
+        with open(out_file, "w") as out:
+            self.file = out
+            # Initialize compilation
+            self.compileClass()
 
     def get_next_token(self) -> None:
         """
@@ -44,17 +49,78 @@ class CompilationEngine:
         try:
             self.next_token = next(self.token_gen)
         except (StopIteration):
-            # if we run out of tokens we have reached the end of the file and compileClass will wrap up and return
+            # if we run out of tokens we have reached the end of the file and 
+            # compileClass will wrap up and return
             pass
+
+    def write_identifier_token(self):
+        """
+        Writes an identifier token using the following XML format:
+        <identifier>
+            <name> name </name>
+            <type> type </type>
+            <kind> kind </kind>
+            <index> index </index>
+        </identifier>
+        """
+        table = None
+        var_name = self.current_token.value
+        if var_name in self.sub_sym:
+            table = self.sub_sym
+
+        elif var_name in self.class_sym:
+            table = self.class_sym
+        
+        else:
+            raise AttributeError("Symbol not found in symbol table")
+
+        var_type = table.type_of(var_name)
+        var_kind = table.kind_of(var_name)
+        var_index = table.index_of(var_name)
+
+        self.file.write("<identifier>\n"
+                        f"\t<name> {var_name} </name>\n"
+                        f"\t<type> {var_type} </type>\n"
+                        f"\t<kind> {var_kind} </kind>\n"
+                        f"\t<index> {var_index} </index>\n"
+                        "</identifier>\n"
+                        )
+
 
     def process(self, token_label, token_val=[]) -> None:
         """
         Process the current token. Raises a SyntaxError if token is not accepted.
         """
+        #===============================#
+        # Naming: 
+        # Xxx.jack is compiled to Xxx.vm
+        # subroutine yyy in Xxx.jack is compiled into function Xxx.yyy
+
+        #===============================#
+        # Identifiers need to contain the following data:
+        # name (value)
+        # category (field|static|var|arg|class|subroutine)
+        # index (only for field, static, var, arg variables - provided by symbol table)
+        # usage (is it being declared(appears in static/field/var) or used(jack expression))
+        # No need to track the class identifier, as it doesn't ever get called after the first time
+        
+        #===============================#
+        # Memory Mapping
+        # static vars: static 0, static 1,...
+        # field vars: this 0, this 1,...
+        # local vars: local 0, local 1, ...
+        # argument var declared in function or constructor (not method): argument 0, argument 1,...
+        # argument var declared in method: argument 1, argument 2,...   (arg 0 is the object?)
+        # To align the virtual segment 'this' with object passed by the caller 
+        # of a method, use VM commands: 'push argument 0', 'pop pointer 0'
+
+
         is_valid = False
         # check that token label is correct
+        print(f"<{self.current_token.label}> {self.current_token.value} </{self.current_token.label}>")
+        print(f"<{token_label}> {token_val} </{token_label}>")
         if token_label == self.current_token.label:
-            if not token_val:
+            if not token_val or token_val == ["_className_"]:
                 is_valid = True
             else:
                 # check that current token value matches one of the valid values
@@ -63,12 +129,15 @@ class CompilationEngine:
                         is_valid = True
 
         if is_valid:
-            self.file.write(str(self.current_token))
+            if self.current_token.label == "identifier" and token_val != ["_className_"]:
+                self.write_identifier_token()
+            else:
+                self.file.write(str(self.current_token))
             self.get_next_token()
         else:
             raise SyntaxError(f"\n\
-      expected: <{token_label}> {token_val} </{token_label}>\n\
-      received: <{self.current_token.label}> {self.current_token.value} </{self.current_token.label}>")
+                expected: <{token_label}> {token_val} </{token_label}>\n\
+                received: <{self.current_token.label}> {self.current_token.value} </{self.current_token.label}>")
 
     def compileType(self):
         """
@@ -88,6 +157,11 @@ class CompilationEngine:
         """
         self.file.write(f"<class>\n")
         self.process("keyword", ["class"])
+
+        #====Store Class name as symbol====#
+        var_name = self.current_token.value
+        self.class_sym.define(var_name, "class", "class")
+
         self.process("identifier", [])
         self.process("symbol", ["{"])
         while self.current_token.value in ["static", "field"]:
@@ -104,12 +178,27 @@ class CompilationEngine:
         """
         self.file.write(f"<classVarDec>\n")
         # If we are here, we know that the next keyword should be either 'static' or 'field'
+        #====Get kind of variable (static or field)====#
+        var_kind = self.current_token.value
         self.process("keyword", ["static", "field"])
+
+        #====Get type of variable====#
+        var_type = self.current_token.value
         self.compileType()
+
+        #====Add class variable to class symbol table====#
+        var_name = self.current_token.value
+        self.class_sym.define(var_name, var_type, var_kind)
         self.process("identifier", [])
+
         while self.current_token.value != ";":
             self.process("symbol", [","])
+
+            #====Add class variable to class symbol table====#
+            var_name = self.current_token.value
+            self.class_sym.define(var_name, var_type, var_kind)
             self.process("identifier", [])
+
         self.process("symbol", [";"])
         self.file.write(f"</classVarDec>\n")
 
@@ -118,12 +207,27 @@ class CompilationEngine:
         subroutineDec (SD):('constructor'|'function'|'method') ('void'|type) subroutineName '('parameterList')' subroutineBody
         """
         self.file.write(f"<subroutineDec>\n")
+
+        #====Get subroutine kind====#
+        var_kind = self.current_token.value
+
         # If we are here, we know that the next keyword should be either "constructor" or "function" or "method"
         self.process("keyword", ["constructor", "function", "method"])
+
+        #====Get subroutine type====#
+        var_type = self.current_token.value
+
         if self.current_token.value == 'void':
             self.process("keyword", ["void"])
         else:
             self.compileType()
+
+        #====Add subroutine variable to subroutine symbol table====#
+        var_name = self.current_token.value
+        # Reset table at subroutine declaration
+        self.sub_sym.reset()
+        self.class_sym.define(var_name, var_type, var_kind)
+        
         self.process("identifier", [])
         self.process("symbol", ["("])
         self.compileParameterList()
