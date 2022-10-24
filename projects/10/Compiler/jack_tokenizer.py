@@ -32,6 +32,10 @@ class Token:
         return False
 
     def __str__(self) -> str:
+        """
+        Represents Tokens in XML format as: <label> value </label>
+        Replaces invalid XML characters (<, >, ", &) with alteratives.
+        """
         if self.value == '<':
             self.value = '&lt;'
         if self.value == '>':
