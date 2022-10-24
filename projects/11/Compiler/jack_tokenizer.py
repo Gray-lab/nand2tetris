@@ -72,7 +72,7 @@ class Tokenizer:
                 clean_source.append(ch)
             return clean_source
 
-    def get_token(self):
+    def get_token_generator(self):
         """
         Generator which yields tokens of the form (label, token)
         while the text is not empty

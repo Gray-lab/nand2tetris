@@ -7,6 +7,8 @@
 # If non-terminal, keep recursing until a terminal is reached
 
 from jack_tokenizer import Tokenizer
+from vm_writer import VMwriter
+from symbol_table import SymbolTable
 
 KC = set(['true', 'false', 'null', 'this'])
 OP = set(['+', '-', '*', '/', '&', '|', '<', '>', '='])
@@ -20,16 +22,18 @@ class CompilationEngine:
     """
 
     def __init__(self, in_file: str, out_file: str) -> None:
-        self.token_gen = Tokenizer(in_file).get_token()
+        self.token_gen = Tokenizer(in_file).get_token_generator()
+        self.writer = VMwriter(out_file)
         self.current_token = None
         self.next_token = None
+
+
         # Load the first two tokens
         self.get_next_token()
         self.get_next_token()
 
-        with open(out_file, "w") as out:
-            self.file = out
-            self.compileClass()
+        # Initialize compilation
+        self.compileClass()
 
     def get_next_token(self) -> None:
         """
@@ -350,11 +354,16 @@ class CompilationEngine:
         expressionList (EL): (expression(',' expression)*)?
         Returns count of expressions
         """
+        expression_count = 0
         self.file.write(f"<expressionList>\n")
         # End of parameter list is defined by a close paren
         if self.current_token.value != ')':
             self.compileExpression()
+            expression_count += 1
             while self.current_token.value != ')':
                 self.process("symbol", [","])
                 self.compileExpression()
+                expression_count += 1
         self.file.write(f"</expressionList>\n")
+        return expression_count
+

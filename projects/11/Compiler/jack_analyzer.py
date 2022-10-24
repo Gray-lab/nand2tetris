@@ -30,7 +30,7 @@ def main():
 
         #   # write tokens into an output file
         #   out.write("<tokens>\n")
-        #   for token in tokenizer.get_token():
+        #   for token in tokenizer.get_token_generator():
         #     out.write(str(token))
         #   out.write("</tokens>\n")
 
