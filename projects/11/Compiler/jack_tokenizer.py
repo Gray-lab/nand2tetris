@@ -1,7 +1,8 @@
 import re
 import string
-from typing import Generator, Iterator
 from collections import deque
+
+from jack_token import Token
 
 KEYWORDS = set(['class', 'constructor', 'function', 'method', 'field', 'static',
                'var', 'int', 'char', 'boolean', 'void', 'true', 'false', 'null',
@@ -19,33 +20,6 @@ IDENTIFIER_BODY = IDENTIFIER_START.union(DIGITS)
 # Line comment: //
 # Block comment: /* ... */
 # API documentation comment (basically same as block comment): /** ... */
-
-
-class Token:
-    def __init__(self, label, value):
-        self.label = label
-        self.value = value
-
-    def __eq__(self, other):
-        if isinstance(other, Token):
-            return self.value == other.value and self.label == other.label
-        return False
-
-    def __str__(self) -> str:
-        """
-        Represents Tokens in XML format as: <label> value </label>
-        Replaces invalid XML characters (<, >, ", &) with alteratives.
-        """
-        if self.value == '<':
-            self.value = '&lt;'
-        if self.value == '>':
-            self.value = '&gt;'
-        if self.value == '"':
-            self.value = '&quot;'
-        if self.value == '&':
-            self.value = '&amp;'
-        return f"\t<{self.label}> {self.value} </{self.label}>\n"
-
 
 class Tokenizer:
     def __init__(self, in_file: str) -> None:
