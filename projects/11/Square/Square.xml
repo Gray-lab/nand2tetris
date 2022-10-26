@@ -1,0 +1,2135 @@
+<class>
+	<keyword> class </keyword>
+<identifier>
+	<name> None Square </name>
+	<type> None Not in symbol table </type>
+	<kind> None Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> class definition </category>
+	<usage> declared </usage>
+</identifier>	<symbol> { </symbol>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<name> x x </name>
+	<type> int None </type>
+	<kind> field None </kind>
+	<index> None </index>
+	<category> field </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<name> x y </name>
+	<type> int Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> field </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<name> size size </name>
+	<type> int None </type>
+	<kind> field None </kind>
+	<index> None </index>
+	<category> field </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<subroutineDec>
+	<keyword> constructor </keyword>
+<identifier>
+	<name> size Square </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier><identifier>
+	<name> size new </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+	<keyword> int </keyword>
+<identifier>
+	<name> size Ax </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<name> size Ay </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<name> size Asize </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier></parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> size x </name>
+	<type> Square None </type>
+	<kind> field None </kind>
+	<index> None </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> size Ax </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> size y </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> size Ay </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> size size </name>
+	<type> Square None </type>
+	<kind> field None </kind>
+	<index> None </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> size Asize </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> size draw </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+<expression>
+<term>
+	<keyword> this </keyword>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> this </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> &lt; </symbol>
+<term>
+	<integerConstant> 254 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> &amp; </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> &lt; </symbol>
+<term>
+	<integerConstant> 510 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> &gt; </symbol>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> &gt; </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> &lt; </symbol>
+<term>
+	<integerConstant> 254 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> &gt; </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> &lt; </symbol>
+<term>
+	<integerConstant> 510 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<name> this this </name>
+	<type> void None </type>
+	<kind> arg None </kind>
+	<index> None </index>
+	<category> method </category>
+	<usage> declared </usage>
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+	<symbol> } </symbol>
+</class>

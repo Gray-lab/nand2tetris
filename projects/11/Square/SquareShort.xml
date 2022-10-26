@@ -1,0 +1,190 @@
+<class>
+	<keyword> class </keyword>
+<identifier>
+	<name> None Square </name>
+	<type> None Not in symbol table </type>
+	<kind> None Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> class definition </category>
+	<usage> declared </usage>
+</identifier>	<symbol> { </symbol>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<name> x x </name>
+	<type> int int </type>
+	<kind> field field </kind>
+	<index> 0 </index>
+	<category> field </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<name> y y </name>
+	<type> int int </type>
+	<kind> field field </kind>
+	<index> 1 </index>
+	<category> field </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<name> size size </name>
+	<type> int int </type>
+	<kind> field field </kind>
+	<index> 2 </index>
+	<category> field </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<subroutineDec>
+	<keyword> constructor </keyword>
+<identifier>
+	<name> size Square </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier><identifier>
+	<name> size new </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+	<keyword> int </keyword>
+<identifier>
+	<name> size Ax </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<name> size Ay </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<name> size Asize </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier></parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> size x </name>
+	<type> Square int </type>
+	<kind> field field </kind>
+	<index> 0 </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> size Ax </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> size y </name>
+	<type> Square int </type>
+	<kind> field field </kind>
+	<index> 1 </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> size Ay </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<name> size size </name>
+	<type> Square int </type>
+	<kind> field field </kind>
+	<index> 2 </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<name> size Asize </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<name> size draw </name>
+	<type> Square Not in symbol table </type>
+	<kind> field Not in symbol table </kind>
+	<index> Not in symbol table </index>
+	<category> constructor </category>
+	<usage> declaration </usage>
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+<expression>
+<term>
+	<keyword> this </keyword>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+	<symbol> } </symbol>
+</class>
