@@ -7,13 +7,13 @@
 # If non-terminal, keep recursing until a terminal is reached
 
 from jack_tokenizer import Tokenizer
-from vm_writer import VMwriter
+from jack_token import Token
+import vm_writer
 from symbol_table import SymbolTable
 
 KC = set(['true', 'false', 'null', 'this'])
 OP = set(['+', '-', '*', '/', '&', '|', '<', '>', '='])
 UOP = set(['-', '~'])
-
 
 class CompilationEngine:
     """
@@ -34,6 +34,15 @@ class CompilationEngine:
         # Load the first two tokens
         self.get_next_token()
         self.get_next_token()
+
+        # Initialize symbol state variables
+        self.current_class = None
+        self.current_subroutine = None
+        self.symbol_name = None
+        self.symbol_type = None     # int | bool | char | className
+        self.symbol_kind = None     # static or field for class variables, var or arg for subroutine
+        self.symbol_category = None # field | static | var | arg | class | subroutine
+        self.symbol_usage = None    # declared (in var declaration) | used (in expression)
 
         with open(out_file, "w") as out:
             self.file = out
@@ -65,32 +74,49 @@ class CompilationEngine:
         """
         table = None
         var_name = self.current_token.value
+        print(f"name: {var_name}")
+        # method symbol name is 'this'
+        if self.symbol_category == "method":
+            var_name = self.symbol_name
+
         if var_name in self.sub_sym:
             table = self.sub_sym
+            print(table)
+            var_type = table.type_of(var_name)
+            var_kind = table.kind_of(var_name)
+            var_index = table.index_of(var_name)
+            print(f"type: {var_type}")
 
         elif var_name in self.class_sym:
             table = self.class_sym
+            print(table)
+            var_type = table.type_of(var_name)
+            var_kind = table.kind_of(var_name)
+            var_index = table.index_of(var_name)
+            print(f"type: {var_type}")
         
         else:
-            raise AttributeError("Symbol not found in symbol table")
+            var_type = "Not in symbol table"
+            var_kind = "Not in symbol table"
+            var_index = "Not in symbol table"
+        print(f"type: {var_type}")
+        
 
-        var_type = table.type_of(var_name)
-        var_kind = table.kind_of(var_name)
-        var_index = table.index_of(var_name)
-
-        self.file.write("<identifier>\n"
-                        f"\t<name> {var_name} </name>\n"
-                        f"\t<type> {var_type} </type>\n"
-                        f"\t<kind> {var_kind} </kind>\n"
+        ident_string = ("<identifier>\n"
+                        f"\t<name> {self.symbol_name} {var_name} </name>\n"
+                        f"\t<type> {self.symbol_type} {var_type} </type>\n"
+                        f"\t<kind> {self.symbol_kind} {var_kind} </kind>\n"
                         f"\t<index> {var_index} </index>\n"
-                        "</identifier>\n"
-                        )
-
+                        f"\t<category> {self.symbol_category} </category>\n"
+                        f"\t<usage> {self.symbol_usage} </usage>\n"
+                        "</identifier>")
+        print(ident_string)
+        self.file.write(ident_string)
 
     def process(self, token_label, token_val=[]) -> None:
         """
         Process the current token. Raises a SyntaxError if token is not accepted.
-        """
+        
         #===============================#
         # Naming: 
         # Xxx.jack is compiled to Xxx.vm
@@ -113,14 +139,14 @@ class CompilationEngine:
         # argument var declared in method: argument 1, argument 2,...   (arg 0 is the object?)
         # To align the virtual segment 'this' with object passed by the caller 
         # of a method, use VM commands: 'push argument 0', 'pop pointer 0'
-
+        """
 
         is_valid = False
         # check that token label is correct
         print(f"<{self.current_token.label}> {self.current_token.value} </{self.current_token.label}>")
-        print(f"<{token_label}> {token_val} </{token_label}>")
+        #print(f"<{token_label}> {token_val} </{token_label}>")
         if token_label == self.current_token.label:
-            if not token_val or token_val == ["_className_"]:
+            if not token_val:
                 is_valid = True
             else:
                 # check that current token value matches one of the valid values
@@ -129,7 +155,7 @@ class CompilationEngine:
                         is_valid = True
 
         if is_valid:
-            if self.current_token.label == "identifier" and token_val != ["_className_"]:
+            if self.current_token.label == "identifier":
                 self.write_identifier_token()
             else:
                 self.file.write(str(self.current_token))
@@ -141,7 +167,7 @@ class CompilationEngine:
 
     def compileType(self):
         """
-        type (TY): int' | 'char' | 'boolean' | className
+        type (TY): 'int' | 'char' | 'boolean' | className
         """
         if self.current_token.label == 'keyword':
             self.process("keyword", ["int", "char", "boolean"])
@@ -158,9 +184,10 @@ class CompilationEngine:
         self.file.write(f"<class>\n")
         self.process("keyword", ["class"])
 
-        #====Store Class name as symbol====#
-        var_name = self.current_token.value
-        self.class_sym.define(var_name, "class", "class")
+        #====Set class name====#
+        self.current_class = self.current_token.value
+        self.symbol_category = "class definition"
+        self.symbol_usage = "declared"
 
         self.process("identifier", [])
         self.process("symbol", ["{"])
@@ -179,24 +206,26 @@ class CompilationEngine:
         self.file.write(f"<classVarDec>\n")
         # If we are here, we know that the next keyword should be either 'static' or 'field'
         #====Get kind of variable (static or field)====#
-        var_kind = self.current_token.value
+        self.symbol_kind = self.current_token.value
+        self.symbol_category = self.current_token.value
+        self.symbol_usage = "declaration"
         self.process("keyword", ["static", "field"])
 
         #====Get type of variable====#
-        var_type = self.current_token.value
+        self.symbol_type = self.current_token.value
         self.compileType()
 
         #====Add class variable to class symbol table====#
-        var_name = self.current_token.value
-        self.class_sym.define(var_name, var_type, var_kind)
+        self.symbol_name = self.current_token.value
+        self.class_sym.define(self.symbol_name, self.symbol_type, self.symbol_kind)
         self.process("identifier", [])
 
         while self.current_token.value != ";":
             self.process("symbol", [","])
 
             #====Add class variable to class symbol table====#
-            var_name = self.current_token.value
-            self.class_sym.define(var_name, var_type, var_kind)
+            self.symbol_name = self.current_token.value
+            self.class_sym.define(self.symbol_name, self.symbol_type, self.symbol_kind)
             self.process("identifier", [])
 
         self.process("symbol", [";"])
@@ -207,26 +236,32 @@ class CompilationEngine:
         subroutineDec (SD):('constructor'|'function'|'method') ('void'|type) subroutineName '('parameterList')' subroutineBody
         """
         self.file.write(f"<subroutineDec>\n")
-
+        
         #====Get subroutine kind====#
-        var_kind = self.current_token.value
+        self.symbol_category = self.current_token.value
 
-        # If we are here, we know that the next keyword should be either "constructor" or "function" or "method"
         self.process("keyword", ["constructor", "function", "method"])
 
         #====Get subroutine type====#
-        var_type = self.current_token.value
+        # Will be either "void, int, char, boolean, or className"
+        self.symbol_type = self.current_token.value
 
         if self.current_token.value == 'void':
             self.process("keyword", ["void"])
         else:
             self.compileType()
 
-        #====Add subroutine variable to subroutine symbol table====#
-        var_name = self.current_token.value
-        # Reset table at subroutine declaration
+        #====Reset subroutine table====#
         self.sub_sym.reset()
-        self.class_sym.define(var_name, var_type, var_kind)
+        #====Set subroutine name====#
+        self.current_subroutine  = self.current_token.value
+        #====Add subroutine variable to subroutine symbol table if it is a method====#
+        if self.symbol_category == "method":
+            # Set kind to arg for method call so that 
+            self.symbol_name  = "this"
+            self.symbol_kind = "arg"
+            self.symbol_usage = "declared"
+            self.class_sym.define(self.symbol_name, self.symbol_type, self.symbol_kind)
         
         self.process("identifier", [])
         self.process("symbol", ["("])
@@ -423,7 +458,6 @@ class CompilationEngine:
                 self.process("identifier", [])
 
         else:
-            print("Something broke in compileTerm main branch")
             self.file.write("Something broke in compileTerm main branch")
 
         # This is temporary for partial testing before implementing expressions
@@ -438,6 +472,8 @@ class CompilationEngine:
         subroutineCall (SC): subroutineName'('expressionList')'|
                              (className|varName)'.'subroutineName'('expressionList')'
         """
+        # do 2 token lookead to decide whether we are calling a method or a function
+
         self.process("identifier", [])
         if self.current_token.value == "(":
             self.process("symbol", ["("])
@@ -450,7 +486,6 @@ class CompilationEngine:
             self.compileExpressionList()
             self.process("symbol", [")"])
         else:
-            print("Something broke in compileSubroutineCall")
             self.file.write("Something broke in compileSubroutineCall")
 
     def compileExpressionList(self) -> int:
