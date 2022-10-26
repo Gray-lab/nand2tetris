@@ -10,8 +10,7 @@ class SymbolTable:
         self.table = dict()
         self.var_counts = dict()
 
-    def __iter__ (self) -> Iterable:
-        yield from self.table.keys()
+    
 
     def reset(self) -> None:
         """
@@ -45,18 +44,24 @@ class SymbolTable:
         if var_name not in self.table:
             return None
         else:
-            self.table[var_name]["var_kind"]
+            return self.table[var_name]["var_kind"]
 
     def type_of(self, var_name: str) -> str:
         """
         Returns the type of the named variable, or None. 
         Can only be called if the variable exists in the table.
         """
-        self.table[var_name]["var_type"]
+        return self.table[var_name]["var_type"]
 
     def index_of(self, var_name: str) -> int:
         """
         Returns the index of the named variable. 
         Can only be called if the variable exists in the table.
         """
-        self.table[var_name]["var_index"]
+        return self.table[var_name]["var_index"]
+
+    def __iter__ (self) -> Iterable:
+            yield from self.table.keys()
+
+    def __str__(self) -> str:
+        return str(self.table)
