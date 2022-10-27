@@ -1,89 +1,89 @@
 <class>
 	<keyword> class </keyword>
 <identifier>
-	<name> None Square </name>
-	<type> None Not in symbol table </type>
-	<kind> None Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> class definition </category>
-	<usage> declared </usage>
+	<symbol name: None >	<table name: Square > 
+	<symbol type: None >	<table type: Not in symbol table >
+	<symbol kind: None >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: class definition >
+	<usage: declaration >
 </identifier>	<symbol> { </symbol>
 <classVarDec>
 	<keyword> field </keyword>
 	<keyword> int </keyword>
 <identifier>
-	<name> x x </name>
-	<type> int int </type>
-	<kind> field field </kind>
-	<index> 0 </index>
-	<category> field </category>
-	<usage> declaration </usage>
+	<symbol name: x >	<table name: x > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 0 >
+	<category: field >
+	<usage: declaration >
 </identifier>	<symbol> , </symbol>
 <identifier>
-	<name> y y </name>
-	<type> int int </type>
-	<kind> field field </kind>
-	<index> 1 </index>
-	<category> field </category>
-	<usage> declaration </usage>
+	<symbol name: y >	<table name: y > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 1 >
+	<category: field >
+	<usage: declaration >
 </identifier>	<symbol> ; </symbol>
 </classVarDec>
 <classVarDec>
 	<keyword> field </keyword>
 	<keyword> int </keyword>
 <identifier>
-	<name> size size </name>
-	<type> int int </type>
-	<kind> field field </kind>
-	<index> 2 </index>
-	<category> field </category>
-	<usage> declaration </usage>
+	<symbol name: size >	<table name: size > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 2 >
+	<category: field >
+	<usage: declaration >
 </identifier>	<symbol> ; </symbol>
 </classVarDec>
 <subroutineDec>
 	<keyword> constructor </keyword>
 <identifier>
-	<name> size Square </name>
-	<type> Square Not in symbol table </type>
-	<kind> field Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: size >	<table name: Square > 
+	<symbol type: Square >	<table type: Not in symbol table >
+	<symbol kind: this >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: constructor >
+	<usage: declaration >
 </identifier><identifier>
-	<name> size new </name>
-	<type> Square Not in symbol table </type>
-	<kind> field Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: size >	<table name: new > 
+	<symbol type: Square >	<table type: Not in symbol table >
+	<symbol kind: this >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: constructor >
+	<usage: declaration >
 </identifier>	<symbol> ( </symbol>
 <parameterList>
 	<keyword> int </keyword>
 <identifier>
-	<name> size Ax </name>
-	<type> Square Not in symbol table </type>
-	<kind> field Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Ax >	<table name: Ax > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: argument >
+	<usage: declaration >
 </identifier>	<symbol> , </symbol>
 	<keyword> int </keyword>
 <identifier>
-	<name> size Ay </name>
-	<type> Square Not in symbol table </type>
-	<kind> field Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Ay >	<table name: Ay > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 1 >
+	<category: argument >
+	<usage: declaration >
 </identifier>	<symbol> , </symbol>
 	<keyword> int </keyword>
 <identifier>
-	<name> size Asize </name>
-	<type> Square Not in symbol table </type>
-	<kind> field Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Asize >	<table name: Asize > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 2 >
+	<category: argument >
+	<usage: declaration >
 </identifier></parameterList>
 	<symbol> ) </symbol>
 <subroutineBody>
@@ -92,22 +92,22 @@
 <letStatement>
 	<keyword> let </keyword>
 <identifier>
-	<name> size x </name>
-	<type> Square int </type>
-	<kind> field field </kind>
-	<index> 0 </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Asize >	<table name: x > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 0 >
+	<category: argument >
+	<usage: declaration >
 </identifier>	<symbol> = </symbol>
 <expression>
 <term>
 <identifier>
-	<name> size Ax </name>
-	<type> Square Not in symbol table </type>
-	<kind> field Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Asize >	<table name: Ax > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: argument >
+	<usage: declaration >
 </identifier></term>
 </expression>
 	<symbol> ; </symbol>
@@ -115,22 +115,22 @@
 <letStatement>
 	<keyword> let </keyword>
 <identifier>
-	<name> size y </name>
-	<type> Square int </type>
-	<kind> field field </kind>
-	<index> 1 </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Asize >	<table name: y > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 1 >
+	<category: argument >
+	<usage: declaration >
 </identifier>	<symbol> = </symbol>
 <expression>
 <term>
 <identifier>
-	<name> size Ay </name>
-	<type> Square Not in symbol table </type>
-	<kind> field Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Asize >	<table name: Ay > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 1 >
+	<category: argument >
+	<usage: declaration >
 </identifier></term>
 </expression>
 	<symbol> ; </symbol>
@@ -138,22 +138,22 @@
 <letStatement>
 	<keyword> let </keyword>
 <identifier>
-	<name> size size </name>
-	<type> Square int </type>
-	<kind> field field </kind>
-	<index> 2 </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Asize >	<table name: size > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 2 >
+	<category: argument >
+	<usage: declaration >
 </identifier>	<symbol> = </symbol>
 <expression>
 <term>
 <identifier>
-	<name> size Asize </name>
-	<type> Square Not in symbol table </type>
-	<kind> field Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Asize >	<table name: Asize > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 2 >
+	<category: argument >
+	<usage: declaration >
 </identifier></term>
 </expression>
 	<symbol> ; </symbol>
@@ -161,12 +161,12 @@
 <doStatement>
 	<keyword> do </keyword>
 <identifier>
-	<name> size draw </name>
-	<type> Square Not in symbol table </type>
-	<kind> field Not in symbol table </kind>
-	<index> Not in symbol table </index>
-	<category> constructor </category>
-	<usage> declaration </usage>
+	<symbol name: Asize >	<table name: draw > 
+	<symbol type: int >	<table type: Not in symbol table >
+	<symbol kind: argument >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: argument >
+	<usage: declaration >
 </identifier>	<symbol> ( </symbol>
 <expressionList>
 </expressionList>

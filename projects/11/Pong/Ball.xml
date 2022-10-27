@@ -1,0 +1,3179 @@
+<class>
+	<keyword> class </keyword>
+<identifier>
+	<symbol name: None >	<table name: Ball > 
+	<symbol type: None >	<table type: Not in symbol table >
+	<symbol kind: None >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: class definition >
+	<usage: declaration >
+</identifier>	<symbol> { </symbol>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: x >	<table name: x > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 0 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: y >	<table name: y > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 1 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: lengthx >	<table name: lengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 2 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: lengthy >	<table name: lengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 3 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: d >	<table name: d > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 4 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: straightD >	<table name: straightD > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 5 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: diagonalD >	<table name: diagonalD > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 6 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> boolean </keyword>
+<identifier>
+	<symbol name: invert >	<table name: invert > 
+	<symbol type: boolean >	<table type: boolean >
+	<symbol kind: this >	<table kind: this >
+	<table index: 7 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: positivex >	<table name: positivex > 
+	<symbol type: boolean >	<table type: boolean >
+	<symbol kind: this >	<table kind: this >
+	<table index: 8 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: positivey >	<table name: positivey > 
+	<symbol type: boolean >	<table type: boolean >
+	<symbol kind: this >	<table kind: this >
+	<table index: 9 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: leftWall >	<table name: leftWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 10 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: rightWall >	<table name: rightWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 11 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: topWall >	<table name: topWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 12 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: bottomWall >	<table name: bottomWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 13 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<classVarDec>
+	<keyword> field </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: wall >	<table name: wall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: this >	<table kind: this >
+	<table index: 14 >
+	<category: field >
+	<usage: declaration >
+</identifier>	<symbol> ; </symbol>
+</classVarDec>
+<subroutineDec>
+	<keyword> constructor </keyword>
+<identifier>
+	<symbol name: wall >	<table name: Ball > 
+	<symbol type: Ball >	<table type: Not in symbol table >
+	<symbol kind: this >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: constructor >
+	<usage: declaration >
+</identifier><identifier>
+	<symbol name: wall >	<table name: new > 
+	<symbol type: Ball >	<table type: Not in symbol table >
+	<symbol kind: this >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: constructor >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: Ax >	<table name: Ax > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: Ay >	<table name: Ay > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 1 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: AleftWall >	<table name: AleftWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 2 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: ArightWall >	<table name: ArightWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 3 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: AtopWall >	<table name: AtopWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 4 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: AbottomWall >	<table name: AbottomWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 5 >
+	<category: argument >
+	<usage: declaration >
+</identifier></parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: AbottomWall >	<table name: x > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 0 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: AbottomWall >	<table name: Ax > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: argument >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: AbottomWall >	<table name: y > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 1 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: AbottomWall >	<table name: Ay > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 1 >
+	<category: argument >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: AbottomWall >	<table name: leftWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 10 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: AbottomWall >	<table name: AleftWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 2 >
+	<category: argument >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: AbottomWall >	<table name: rightWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 11 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: AbottomWall >	<table name: ArightWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 3 >
+	<category: argument >
+	<usage: declaration >
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 6 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: AbottomWall >	<table name: topWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 12 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: AbottomWall >	<table name: AtopWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 4 >
+	<category: argument >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: AbottomWall >	<table name: bottomWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 13 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: AbottomWall >	<table name: AbottomWall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 5 >
+	<category: argument >
+	<usage: declaration >
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 6 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: AbottomWall >	<table name: wall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: this >
+	<table index: 14 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 0 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: AbottomWall >	<table name: show > 
+	<symbol type: int >	<table type: Not in symbol table >
+	<symbol kind: argument >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+<expression>
+<term>
+	<keyword> this </keyword>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> this </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+	<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 5 </integerConstant>
+</term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 5 </integerConstant>
+</term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<returnStatement>
+	<keyword> return </keyword>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<returnStatement>
+	<keyword> return </keyword>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 5 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: destx >	<table name: destx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 1 >
+	<category: argument >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: desty >	<table name: desty > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 2 >
+	<category: argument >
+	<usage: declaration >
+</identifier></parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<varDec>
+	<keyword> var </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: dx >	<table name: dx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: dy >	<table name: dy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: temp >	<table name: temp > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> ; </symbol>
+</varDec>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: lengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: destx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: argument >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: x > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: lengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 3 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: desty > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: argument >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: y > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: dx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: Math > 
+	<symbol type: int >	<table type: Not in symbol table >
+	<symbol kind: local >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<symbol name: temp >	<table name: abs > 
+	<symbol type: int >	<table type: Not in symbol table >
+	<symbol kind: local >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: lengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: dy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: Math > 
+	<symbol type: int >	<table type: Not in symbol table >
+	<symbol kind: local >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> . </symbol>
+<identifier>
+	<symbol name: temp >	<table name: abs > 
+	<symbol type: int >	<table type: Not in symbol table >
+	<symbol kind: local >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: lengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 3 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: invert > 
+	<symbol type: int >	<table type: boolean >
+	<symbol kind: local >	<table kind: this >
+	<table index: 7 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: dx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: dy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: invert > 
+	<symbol type: int >	<table type: boolean >
+	<symbol kind: local >	<table kind: this >
+	<table index: 7 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: temp > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: dx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: dx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: dy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: dy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: temp > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: positivex > 
+	<symbol type: int >	<table type: boolean >
+	<symbol kind: local >	<table kind: this >
+	<table index: 8 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: y > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: desty > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: argument >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: positivey > 
+	<symbol type: int >	<table type: boolean >
+	<symbol kind: local >	<table kind: this >
+	<table index: 9 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: x > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: destx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: argument >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: positivex > 
+	<symbol type: int >	<table type: boolean >
+	<symbol kind: local >	<table kind: this >
+	<table index: 8 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: x > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: destx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: argument >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: positivey > 
+	<symbol type: int >	<table type: boolean >
+	<symbol kind: local >	<table kind: this >
+	<table index: 9 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: y > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: desty > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: argument >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: d > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 4 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+	<symbol> * </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: dy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> - </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: dx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: straightD > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 5 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+	<symbol> * </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: dy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: temp >	<table name: diagonalD > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 6 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+	<symbol> * </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: dy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+<identifier>
+	<symbol name: temp >	<table name: dx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<statements>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+	<integerConstant> 0 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ~ </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &gt; </symbol>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ~ </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ~ </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &gt; </symbol>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 3 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ~ </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+<expression>
+<term>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+	<keyword> method </keyword>
+	<keyword> void </keyword>
+<identifier>
+	<symbol name: this >	<table name: this > 
+	<symbol type: void >	<table type: void >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 0 >
+	<category: method >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<parameterList>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: bouncingDirection >	<table name: bouncingDirection > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: argument >	<table kind: argument >
+	<table index: 1 >
+	<category: argument >
+	<usage: declaration >
+</identifier></parameterList>
+	<symbol> ) </symbol>
+<subroutineBody>
+	<symbol> { </symbol>
+<varDec>
+	<keyword> var </keyword>
+	<keyword> int </keyword>
+<identifier>
+	<symbol name: newx >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: newy >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: divLengthx >	<table name: divLengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: divLengthy >	<table name: divLengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 3 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> , </symbol>
+<identifier>
+	<symbol name: factor >	<table name: factor > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 4 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> ; </symbol>
+</varDec>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: divLengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: lengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> / </symbol>
+<term>
+	<integerConstant> 10 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: divLengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 3 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: lengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 3 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> / </symbol>
+<term>
+	<integerConstant> 10 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: bouncingDirection > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: argument >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> = </symbol>
+<term>
+	<integerConstant> 0 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: factor > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 4 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 10 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ~ </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: lengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+	<integerConstant> 0 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> &amp; </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: bouncingDirection > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: argument >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> = </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> | </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: lengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> &lt; </symbol>
+<term>
+	<integerConstant> 0 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> &amp; </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: bouncingDirection > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: argument >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> = </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: factor > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 4 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 20 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: factor > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 4 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 5 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: wall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 14 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> = </symbol>
+<term>
+	<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 506 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: divLengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 3 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> * </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 50 </integerConstant>
+</term>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> / </symbol>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: divLengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: y > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> * </symbol>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: factor > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 4 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: wall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 14 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> = </symbol>
+<term>
+	<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 0 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: divLengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 3 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> * </symbol>
+<term>
+	<integerConstant> 50 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> / </symbol>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: divLengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: y > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> * </symbol>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: factor > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 4 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<ifStatement>
+	<keyword> if </keyword>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: wall > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 14 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> = </symbol>
+<term>
+	<integerConstant> 3 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 250 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: divLengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> * </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+	<symbol> - </symbol>
+<term>
+	<integerConstant> 25 </integerConstant>
+</term>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> / </symbol>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: divLengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 3 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: x > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> * </symbol>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: factor > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 4 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+	<keyword> else </keyword>
+	<symbol> { </symbol>
+<statements>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<integerConstant> 0 </integerConstant>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: divLengthx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 2 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> * </symbol>
+<term>
+	<integerConstant> 25 </integerConstant>
+</term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+	<symbol> / </symbol>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: divLengthy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 3 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+	<keyword> let </keyword>
+<identifier>
+	<symbol name: factor >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> = </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: x > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: this >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> + </symbol>
+<term>
+	<symbol> ( </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+	<symbol> * </symbol>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: factor > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 4 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> ) </symbol>
+</term>
+</expression>
+	<symbol> ; </symbol>
+</letStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+</statements>
+	<symbol> } </symbol>
+</ifStatement>
+<doStatement>
+	<keyword> do </keyword>
+<identifier>
+	<symbol name: factor >	<table name: setDestination > 
+	<symbol type: int >	<table type: Not in symbol table >
+	<symbol kind: local >	<table kind: Not in symbol table >
+	<table index: Not in symbol table >
+	<category: var >
+	<usage: declaration >
+</identifier>	<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: newx > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 0 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+	<symbol> , </symbol>
+<expression>
+<term>
+<identifier>
+	<symbol name: factor >	<table name: newy > 
+	<symbol type: int >	<table type: int >
+	<symbol kind: local >	<table kind: local >
+	<table index: 1 >
+	<category: var >
+	<usage: declaration >
+</identifier></term>
+</expression>
+</expressionList>
+	<symbol> ) </symbol>
+	<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+	<keyword> return </keyword>
+	<symbol> ; </symbol>
+</returnStatement>
+</statements>
+	<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+	<symbol> } </symbol>
+</class>
