@@ -10,15 +10,12 @@ class SymbolTable:
         self.table = dict()
         self.var_counts = dict()
 
-    
-
     def reset(self) -> None:
         """
         Resets the symbol table
         """
         self.table = dict()
         self.var_counts = dict()
-        print("symbol table reset")
 
     def define(self, var_name: str, var_type: str, var_kind: str) -> None:
         """
@@ -64,4 +61,8 @@ class SymbolTable:
             yield from self.table.keys()
 
     def __str__(self) -> str:
-        return str(self.table)
+        string = ""
+        for key in self.table.keys():
+            line = f"name:{key}, type:{self.type_of(key)}, kind:{self.kind_of(key)}, index:{self.index_of(key)}\n"
+            string += line
+        return string
