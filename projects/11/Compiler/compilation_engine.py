@@ -28,8 +28,8 @@ class CompilationEngine:
         self.next_token = None
         
         # Initialize the symbol tables
-        self.class_sym = SymbolTable()
-        self.sub_sym = SymbolTable()
+        self.class_table = SymbolTable()
+        self.subroutine_table = SymbolTable()
 
         # Load the first two tokens
         self.get_next_token()
@@ -48,6 +48,9 @@ class CompilationEngine:
             self.file = out
             # Initialize compilation
             self.compileClass()
+
+        print("Class symbol table:")
+        print(self.class_table)
 
     def get_next_token(self) -> None:
         """
@@ -74,43 +77,37 @@ class CompilationEngine:
         """
         table = None
         var_name = self.current_token.value
-        print(f"name: {var_name}")
         # method symbol name is 'this'
         if self.symbol_category == "method":
             var_name = self.symbol_name
 
-        if var_name in self.sub_sym:
-            table = self.sub_sym
-            print(table)
+        if var_name in self.subroutine_table:
+            table = self.subroutine_table
             var_type = table.type_of(var_name)
             var_kind = table.kind_of(var_name)
             var_index = table.index_of(var_name)
-            print(f"type: {var_type}")
 
-        elif var_name in self.class_sym:
-            table = self.class_sym
-            print(table)
+        elif var_name in self.class_table:
+            table = self.class_table
             var_type = table.type_of(var_name)
             var_kind = table.kind_of(var_name)
             var_index = table.index_of(var_name)
-            print(f"type: {var_type}")
         
         else:
             var_type = "Not in symbol table"
             var_kind = "Not in symbol table"
             var_index = "Not in symbol table"
-        print(f"type: {var_type}")
         
 
         ident_string = ("<identifier>\n"
-                        f"\t<name> {self.symbol_name} {var_name} </name>\n"
-                        f"\t<type> {self.symbol_type} {var_type} </type>\n"
-                        f"\t<kind> {self.symbol_kind} {var_kind} </kind>\n"
-                        f"\t<index> {var_index} </index>\n"
-                        f"\t<category> {self.symbol_category} </category>\n"
-                        f"\t<usage> {self.symbol_usage} </usage>\n"
+                        f"\t<symbol name: {self.symbol_name} >\t<table name: {var_name} > \n"
+                        f"\t<symbol type: {self.symbol_type} >\t<table type: {var_type} >\n"
+                        f"\t<symbol kind: {self.symbol_kind} >\t<table kind: {var_kind} >\n"
+                        f"\t<table index: {var_index} >\n"
+                        f"\t<category: {self.symbol_category} >\n"
+                        f"\t<usage: {self.symbol_usage} >\n"
                         "</identifier>")
-        print(ident_string)
+        #print(ident_string)
         self.file.write(ident_string)
 
     def process(self, token_label, token_val=[]) -> None:
@@ -143,7 +140,7 @@ class CompilationEngine:
 
         is_valid = False
         # check that token label is correct
-        print(f"<{self.current_token.label}> {self.current_token.value} </{self.current_token.label}>")
+        #print(f"<{self.current_token.label}> {self.current_token.value} </{self.current_token.label}>")
         #print(f"<{token_label}> {token_val} </{token_label}>")
         if token_label == self.current_token.label:
             if not token_val:
@@ -174,7 +171,7 @@ class CompilationEngine:
         else:
             self.process("identifier", [])
 
-    def compileClass(self):
+    def compileClass(self): #set class name
         """
         class:'class' className '{' classVarDec* subroutineDec* '}'
 
@@ -187,7 +184,7 @@ class CompilationEngine:
         #====Set class name====#
         self.current_class = self.current_token.value
         self.symbol_category = "class definition"
-        self.symbol_usage = "declared"
+        self.symbol_usage = "declaration"
 
         self.process("identifier", [])
         self.process("symbol", ["{"])
@@ -199,15 +196,20 @@ class CompilationEngine:
         self.file.write(f"</class>\n")
         print("Finished!")
 
-    def compileClassVarDec(self):
+    def compileClassVarDec(self): #declare static or field variables
         """
         classVarDec (CVD):('static'|'field') type varName(',' varName)* ';'
+
+        Class variable declarations
         """
         self.file.write(f"<classVarDec>\n")
-        # If we are here, we know that the next keyword should be either 'static' or 'field'
+        
         #====Get kind of variable (static or field)====#
-        self.symbol_kind = self.current_token.value
         self.symbol_category = self.current_token.value
+        if self.symbol_category == "static":
+            self.symbol_kind = "static"
+        if self.symbol_category == "field":
+            self.symbol_kind = "this"
         self.symbol_usage = "declaration"
         self.process("keyword", ["static", "field"])
 
@@ -217,7 +219,7 @@ class CompilationEngine:
 
         #====Add class variable to class symbol table====#
         self.symbol_name = self.current_token.value
-        self.class_sym.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+        self.class_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
         self.process("identifier", [])
 
         while self.current_token.value != ";":
@@ -225,17 +227,20 @@ class CompilationEngine:
 
             #====Add class variable to class symbol table====#
             self.symbol_name = self.current_token.value
-            self.class_sym.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+            self.class_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
             self.process("identifier", [])
 
         self.process("symbol", [";"])
         self.file.write(f"</classVarDec>\n")
 
-    def compileSubroutine(self):
+    def compileSubroutine(self): #set subroutine name, if method: this->arg0
         """
         subroutineDec (SD):('constructor'|'function'|'method') ('void'|type) subroutineName '('parameterList')' subroutineBody
         """
         self.file.write(f"<subroutineDec>\n")
+
+        #====Reset subroutine table====#
+        self.subroutine_table.reset()
         
         #====Get subroutine kind====#
         self.symbol_category = self.current_token.value
@@ -250,18 +255,16 @@ class CompilationEngine:
             self.process("keyword", ["void"])
         else:
             self.compileType()
-
-        #====Reset subroutine table====#
-        self.sub_sym.reset()
+        
         #====Set subroutine name====#
         self.current_subroutine  = self.current_token.value
         #====Add subroutine variable to subroutine symbol table if it is a method====#
         if self.symbol_category == "method":
             # Set kind to arg for method call so that 
             self.symbol_name  = "this"
-            self.symbol_kind = "arg"
-            self.symbol_usage = "declared"
-            self.class_sym.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+            self.symbol_kind = "argument"
+            self.symbol_usage = "declaration"
+            self.subroutine_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
         
         self.process("identifier", [])
         self.process("symbol", ["("])
@@ -269,23 +272,47 @@ class CompilationEngine:
         self.process("symbol", [")"])
         self.compileSubroutineBody()
         self.file.write(f"</subroutineDec>\n")
+        #=====Debugging print of subroutine table====#
+        print(f"Subroutine symbol table at subroutine:{self.current_class}.{self.current_subroutine}")
+        print(self.subroutine_table)
 
-    def compileParameterList(self):
+    def compileParameterList(self): #declare args
         """
         parameterList (PL): ((type varName)) (',' type varName)*)?
         """
         self.file.write(f"<parameterList>\n")
+
         # End of parameter list is defined by a close paren
         if self.current_token.value != ')':
+            #====Get symbol kind====#
+            self.symbol_kind = "argument"
+            self.symbol_category = "argument"
+            self.symbol_usage = "declaration"
+
+            #====Get symbol type====#
+            self.symbol_type = self.current_token.value
             self.compileType()
+
+            #====Get symbol name and add to subroutine table====#
+            self.symbol_name = self.current_token.value
+            self.subroutine_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
             self.process("identifier", [])
             while self.current_token.value != ')':
                 self.process("symbol", [","])
+
+                #====Get symbol type====#
+                self.symbol_type = self.current_token.value
                 self.compileType()
+
+                #====Get symbol name and add to subroutine table====#
+                self.symbol_name = self.current_token.value
+                self.subroutine_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+
                 self.process("identifier", [])
+
         self.file.write(f"</parameterList>\n")
 
-    def compileSubroutineBody(self):
+    def compileSubroutineBody(self): #no symbols
         """
         subroutineBody (SB):'{'varDec* statements'}'
         """
@@ -298,21 +325,38 @@ class CompilationEngine:
         self.process("symbol", ["}"])
         self.file.write(f"</subroutineBody>\n")
 
-    def compileVarDec(self):
+    def compileVarDec(self): #declare vars
         """
         varDec (VD):'var' type varName(',' varName)* ';'
         """
         self.file.write(f"<varDec>\n")
+        #====Get symbol kind====#
+        self.symbol_kind = "local"
+        self.symbol_category = "var"
+        self.symbol_usage = "declaration"
         self.process("keyword", ["var"])
+
+        #====Get symbol type====#
+        self.symbol_type = self.current_token.value
         self.compileType()
+
+        #====Get symbol name and add to subroutine table====#
+        self.symbol_name = self.current_token.value
+        self.subroutine_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+
         self.process("identifier", [])
         while self.current_token.value != ";":
             self.process("symbol", [","])
+
+            #====Get symbol name and add to subroutine table====#
+            self.symbol_name = self.current_token.value
+            self.subroutine_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+
             self.process("identifier", [])
         self.process("symbol", ";")
         self.file.write(f"</varDec>\n")
 
-    def compileStatements(self):
+    def compileStatements(self): #no symbols
         """
         statements (SS): statement*
         statement (S): letStatement | ifStatement | whileStatement | doStatement | returnStatement
@@ -331,7 +375,7 @@ class CompilationEngine:
                 self.compileReturn()
         self.file.write(f"</statements>\n")
 
-    def compileLet(self):
+    def compileLet(self): #call variables
         """
         letStatement (LS): 'let' varName ('['expression']')? '=' expression ';'
         """
@@ -347,7 +391,7 @@ class CompilationEngine:
         self.process("symbol", [";"])
         self.file.write(f"</letStatement>\n")
 
-    def compileIf(self):
+    def compileIf(self): #no symbols
         """
         ifStatement (IS): 'if' '('expression')' '{'statements'}'('else' '{'statements'}')?
         """
@@ -366,7 +410,7 @@ class CompilationEngine:
             self.process("symbol", ["}"])
         self.file.write(f"</ifStatement>\n")
 
-    def compileWhile(self):
+    def compileWhile(self): #no symbols
         """
         whileStatement (WS): 'while' '('expression')' '{'statements'}'
         """
@@ -380,7 +424,7 @@ class CompilationEngine:
         self.process("symbol", ["}"])
         self.file.write(f"</whileStatement>\n")
 
-    def compileDo(self):
+    def compileDo(self): #no symbols
         """
         doStatement (DS): 'do' subroutineCall ';'
         """
@@ -390,7 +434,7 @@ class CompilationEngine:
         self.process("symbol", [";"])
         self.file.write(f"</doStatement>\n")
 
-    def compileReturn(self):
+    def compileReturn(self): #no symbols
         """
         returnStatement (RS): 'return' expression? ';'
         """
@@ -401,7 +445,7 @@ class CompilationEngine:
         self.process("symbol", [";"])
         self.file.write(f"</returnStatement>\n")
 
-    def compileExpression(self):
+    def compileExpression(self): #no symbols
         """
         expression (E): term (op term)*
         """
@@ -412,7 +456,7 @@ class CompilationEngine:
             self.compileTerm()
         self.file.write(f"</expression>\n")
 
-    def compileTerm(self):
+    def compileTerm(self): #call variable
         """
         term (TR): integerConstant|stringConstant|keywordConstant|varName|varName
                    '['expression']'|'('expression')'|(unaryOp term)|subroutineCall
@@ -467,7 +511,7 @@ class CompilationEngine:
         #   self.process("keyword", KC)
         self.file.write(f"</term>\n")
 
-    def compileSubroutineCall(self):
+    def compileSubroutineCall(self): #call function or method
         """
         subroutineCall (SC): subroutineName'('expressionList')'|
                              (className|varName)'.'subroutineName'('expressionList')'
@@ -488,7 +532,7 @@ class CompilationEngine:
         else:
             self.file.write("Something broke in compileSubroutineCall")
 
-    def compileExpressionList(self) -> int:
+    def compileExpressionList(self) -> int: #no symbols
         """
         expressionList (EL): (expression(',' expression)*)?
         Returns count of expressions
