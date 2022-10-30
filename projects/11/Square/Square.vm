@@ -1,312 +1,306 @@
 function Square.new 0
-push constant 1
+push constant 1 //pass num_fields to Memory.alloc for allocation in heap
 call Memory.alloc 1
-pop pointer 0
-push argument 0
-pop this 0
-push argument 1
-pop this 1
-push argument 2
-pop this 2
+pop pointer 0 //Set 'this' to object base address
+push argument 0 //value of Ax
+pop this 0 //bind topmost stack value to x
+push argument 1 //value of Ay
+pop this 1 //bind topmost stack value to y
+push argument 2 //value of Asize
+pop this 2 //bind topmost stack value to size
 call Square.draw 0
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
+push pointer 0 //'this'
 return
-push pointer 0
-push pointer 0
-function Square.dispose 0
-push argument 0
-pop pointer 0
-push pointer 0
+push pointer 0 
+function Square.dispose 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push pointer 0 //'this'
 call Memory.deAlloc 1
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 return
-push constant 0
-function Square.draw 0
-push argument 0
-pop pointer 0
-push constant 1
-neg
+push constant 0 
+function Square.draw 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push constant 1 
+neg //'true'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 0
-push this 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 1 //value of y
+push this 0 //value of x
+push this 2 //value of size
 add
-push this 1
-push this 2
+push this 1 //value of y
+push this 2 //value of size
 add
 call Screen.drawRectangle 4
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 return
-push constant 0
-function Square.erase 0
-push argument 0
-pop pointer 0
-push constant 0
+push constant 0 
+function Square.erase 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push constant 0 //'null' or 'false'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 0
-push this 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 1 //value of y
+push this 0 //value of x
+push this 2 //value of size
 add
-push this 1
-push this 2
+push this 1 //value of y
+push this 2 //value of size
 add
 call Screen.drawRectangle 4
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 return
-push constant 0
-function Square.incSize 0
-push argument 0
-pop pointer 0
-push this 1
-push this 2
+push constant 0 
+function Square.incSize 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 1 //value of y
+push this 2 //value of size
 add
-push constant 254
+push constant 254 
 lt
-push this 0
-push this 2
+push this 0 //value of x
+push this 2 //value of size
 add
-push constant 510
+push constant 510 
 lt
 and
-//compiling if, before not
 not
 if-goto IF0
 call Square.erase 0
-pop temp 0
-push this 2
-push constant 2
+pop temp 0 //remove return value from stack after do statement
+push this 2 //value of size
+push constant 2 
 add
-pop this 2
+pop this 2 //bind topmost stack value to size
 call Square.draw 0
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF1
 label IF0
 label IF1
 return
-push constant 0
-function Square.decSize 0
-push argument 0
-pop pointer 0
-push this 2
-push constant 2
+push constant 0 
+function Square.decSize 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 2 //value of size
+push constant 2 
 gt
-//compiling if, before not
 not
 if-goto IF2
 call Square.erase 0
-pop temp 0
-push this 2
-push constant 2
+pop temp 0 //remove return value from stack after do statement
+push this 2 //value of size
+push constant 2 
 sub
-pop this 2
+pop this 2 //bind topmost stack value to size
 call Square.draw 0
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF3
 label IF2
 label IF3
 return
-push constant 0
-function Square.moveUp 0
-push argument 0
-pop pointer 0
-push this 1
-push constant 1
+push constant 0 
+function Square.moveUp 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 1 //value of y
+push constant 1 
 gt
-//compiling if, before not
 not
 if-goto IF4
-push constant 0
+push constant 0 //'null' or 'false'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 1 //value of y
+push this 2 //value of size
 add
-push constant 1
+push constant 1 
 sub
-push this 0
-push this 2
+push this 0 //value of x
+push this 2 //value of size
 add
-push this 1
-push this 2
+push this 1 //value of y
+push this 2 //value of size
 add
 call Screen.drawRectangle 4
-pop temp 0
-push this 1
-push constant 2
+pop temp 0 //remove return value from stack after do statement
+push this 1 //value of y
+push constant 2 
 sub
-pop this 1
-push constant 1
-neg
+pop this 1 //bind topmost stack value to y
+push constant 1 
+neg //'true'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 0
-push this 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 1 //value of y
+push this 0 //value of x
+push this 2 //value of size
 add
-push this 1
-push constant 1
+push this 1 //value of y
+push constant 1 
 add
 call Screen.drawRectangle 4
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF5
 label IF4
 label IF5
 return
-push constant 0
-function Square.moveDown 0
-push argument 0
-pop pointer 0
-push this 1
-push this 2
+push constant 0 
+function Square.moveDown 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 1 //value of y
+push this 2 //value of size
 add
-push constant 254
+push constant 254 
 lt
-//compiling if, before not
 not
 if-goto IF6
-push constant 0
+push constant 0 //'null' or 'false'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 0
-push this 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 1 //value of y
+push this 0 //value of x
+push this 2 //value of size
 add
-push this 1
-push constant 1
+push this 1 //value of y
+push constant 1 
 add
 call Screen.drawRectangle 4
-pop temp 0
-push this 1
-push constant 2
+pop temp 0 //remove return value from stack after do statement
+push this 1 //value of y
+push constant 2 
 add
-pop this 1
-push constant 1
-neg
+pop this 1 //bind topmost stack value to y
+push constant 1 
+neg //'true'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 1 //value of y
+push this 2 //value of size
 add
-push constant 1
+push constant 1 
 sub
-push this 0
-push this 2
+push this 0 //value of x
+push this 2 //value of size
 add
-push this 1
-push this 2
+push this 1 //value of y
+push this 2 //value of size
 add
 call Screen.drawRectangle 4
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF7
 label IF6
 label IF7
 return
-push constant 0
-function Square.moveLeft 0
-push argument 0
-pop pointer 0
-push this 0
-push constant 1
+push constant 0 
+function Square.moveLeft 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 0 //value of x
+push constant 1 
 gt
-//compiling if, before not
 not
 if-goto IF8
-push constant 0
+push constant 0 //'null' or 'false'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 2 //value of size
 add
-push constant 1
+push constant 1 
 sub
-push this 1
-push this 0
-push this 2
+push this 1 //value of y
+push this 0 //value of x
+push this 2 //value of size
 add
-push this 1
-push this 2
+push this 1 //value of y
+push this 2 //value of size
 add
 call Screen.drawRectangle 4
-pop temp 0
-push this 0
-push constant 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push constant 2 
 sub
-pop this 0
-push constant 1
-neg
+pop this 0 //bind topmost stack value to x
+push constant 1 
+neg //'true'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 0
-push constant 1
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 1 //value of y
+push this 0 //value of x
+push constant 1 
 add
-push this 1
-push this 2
+push this 1 //value of y
+push this 2 //value of size
 add
 call Screen.drawRectangle 4
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF9
 label IF8
 label IF9
 return
-push constant 0
-function Square.moveRight 0
-push argument 0
-pop pointer 0
-push this 0
-push this 2
+push constant 0 
+function Square.moveRight 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 0 //value of x
+push this 2 //value of size
 add
-push constant 510
+push constant 510 
 lt
-//compiling if, before not
 not
 if-goto IF10
-push constant 0
+push constant 0 //'null' or 'false'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 0
-push constant 1
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 1 //value of y
+push this 0 //value of x
+push constant 1 
 add
-push this 1
-push this 2
+push this 1 //value of y
+push this 2 //value of size
 add
 call Screen.drawRectangle 4
-pop temp 0
-push this 0
-push constant 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push constant 2 
 add
-pop this 0
-push constant 1
-neg
+pop this 0 //bind topmost stack value to x
+push constant 1 
+neg //'true'
 call Screen.setColor 1
-pop temp 0
-push this 0
-push this 2
+pop temp 0 //remove return value from stack after do statement
+push this 0 //value of x
+push this 2 //value of size
 add
-push constant 1
+push constant 1 
 sub
-push this 1
-push this 0
-push this 2
+push this 1 //value of y
+push this 0 //value of x
+push this 2 //value of size
 add
-push this 1
-push this 2
+push this 1 //value of y
+push this 2 //value of size
 add
 call Screen.drawRectangle 4
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF11
 label IF10
 label IF11
 return
-push constant 0
+push constant 0 

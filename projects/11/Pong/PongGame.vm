@@ -1,0 +1,320 @@
+function PongGame.new 0
+push constant 1 //pass num_fields to Memory.alloc for allocation in heap
+call Memory.alloc 1
+pop pointer 0 //Set 'this' to object base address
+call Screen.clearScreen 0
+pop temp 0 //remove return value from stack after do statement
+push constant 50 
+pop this 6 //bind topmost stack value to batWidth
+push constant 230 
+push constant 229 
+push this 6 //value of batWidth
+push constant 7 
+call Bat.new 4
+pop this 0 //bind topmost stack value to bat
+push constant 253 
+push constant 222 
+push constant 0 
+push constant 511 
+push constant 0 
+push constant 229 
+call Ball.new 6
+pop this 1 //bind topmost stack value to ball
+push constant 400 
+push constant 0 
+push this 1 //pointer to ball
+call ball.setDestination 3
+pop temp 0 //remove return value from stack after do statement
+push constant 0 
+push constant 238 
+push constant 511 
+push constant 240 
+call Screen.drawRectangle 4
+pop temp 0 //remove return value from stack after do statement
+push constant 22 
+push constant 0 
+call Output.moveCursor 2
+pop temp 0 //remove return value from stack after do statement
+push constant 8 
+call String.new 1
+push constant 83 
+call String.appendChar 2
+push constant 99 
+call String.appendChar 2
+push constant 111 
+call String.appendChar 2
+push constant 114 
+call String.appendChar 2
+push constant 101 
+call String.appendChar 2
+push constant 58 
+call String.appendChar 2
+push constant 32 
+call String.appendChar 2
+push constant 48 
+call String.appendChar 2
+call Output.printString 1
+pop temp 0 //remove return value from stack after do statement
+push constant 0 //'null' or 'false'
+pop this 3 //bind topmost stack value to exit
+push constant 0 
+pop this 4 //bind topmost stack value to score
+push constant 0 
+pop this 2 //bind topmost stack value to wall
+push constant 0 
+pop this 5 //bind topmost stack value to lastWall
+push pointer 0 //'this'
+return
+push pointer 0 
+function PongGame.dispose 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 0 //pointer to bat
+call bat.dispose 1
+pop temp 0 //remove return value from stack after do statement
+push this 1 //pointer to ball
+call ball.dispose 1
+pop temp 0 //remove return value from stack after do statement
+push pointer 0 //'this'
+call Memory.deAlloc 1
+pop temp 0 //remove return value from stack after do statement
+return
+push constant 0 
+function PongGame.newInstance 0
+call PongGame.new 0
+pop static 0 //bind topmost stack value to instance
+return
+push constant 0 
+function PongGame.getInstance 0
+push static 0 //value of instance
+return
+function PongGame.run 2
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+label WHILE0
+push this 3 //value of exit
+not
+not
+if-goto WHILE1
+label WHILE2
+push local 0 //value of key
+push constant 0 
+eq
+push this 3 //value of exit
+not
+and
+not
+if-goto WHILE3
+call Keyboard.keyPressed 0
+pop local 0 //bind topmost stack value to key
+push this 0 //pointer to bat
+call bat.move 1
+pop temp 0 //remove return value from stack after do statement
+call PongGame.moveBall 0
+pop temp 0 //remove return value from stack after do statement
+push constant 50 
+call Sys.wait 1
+pop temp 0 //remove return value from stack after do statement
+goto WHILE2
+label WHILE3
+push local 0 //value of key
+push constant 130 
+eq
+not
+if-goto IF0
+push constant 1 
+push this 0 //pointer to bat
+call bat.setDirection 2
+pop temp 0 //remove return value from stack after do statement
+goto IF1
+label IF0
+push local 0 //value of key
+push constant 132 
+eq
+not
+if-goto IF2
+push constant 2 
+push this 0 //pointer to bat
+call bat.setDirection 2
+pop temp 0 //remove return value from stack after do statement
+goto IF3
+label IF2
+push local 0 //value of key
+push constant 140 
+eq
+not
+if-goto IF4
+push constant 1 
+neg //'true'
+pop this 3 //bind topmost stack value to exit
+goto IF5
+label IF4
+label IF5
+label IF3
+label IF1
+label WHILE4
+push local 0 //value of key
+push constant 0 
+eq
+not
+push this 3 //value of exit
+not
+and
+not
+if-goto WHILE5
+call Keyboard.keyPressed 0
+pop local 0 //bind topmost stack value to key
+push this 0 //pointer to bat
+call bat.move 1
+pop temp 0 //remove return value from stack after do statement
+call PongGame.moveBall 0
+pop temp 0 //remove return value from stack after do statement
+push constant 50 
+call Sys.wait 1
+pop temp 0 //remove return value from stack after do statement
+goto WHILE4
+label WHILE5
+goto WHILE0
+label WHILE1
+push this 3 //value of exit
+not
+if-goto IF6
+push constant 10 
+push constant 27 
+call Output.moveCursor 2
+pop temp 0 //remove return value from stack after do statement
+push constant 9 
+call String.new 1
+push constant 71 
+call String.appendChar 2
+push constant 97 
+call String.appendChar 2
+push constant 109 
+call String.appendChar 2
+push constant 101 
+call String.appendChar 2
+push constant 32 
+call String.appendChar 2
+push constant 79 
+call String.appendChar 2
+push constant 118 
+call String.appendChar 2
+push constant 101 
+call String.appendChar 2
+push constant 114 
+call String.appendChar 2
+call Output.printString 1
+pop temp 0 //remove return value from stack after do statement
+goto IF7
+label IF6
+label IF7
+return
+push constant 0 
+function PongGame.moveBall 6
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 1 //pointer to ball
+call ball.move 1
+pop this 2 //bind topmost stack value to wall
+push this 2 //value of wall
+push constant 0 
+gt
+push this 2 //value of wall
+push this 5 //value of lastWall
+eq
+not
+and
+not
+if-goto IF8
+push this 2 //value of wall
+pop this 5 //bind topmost stack value to lastWall
+push constant 0 
+pop local 0 //bind topmost stack value to bouncingDirection
+push this 0 //pointer to bat
+call bat.getLeft 1
+pop local 1 //bind topmost stack value to batLeft
+push this 0 //pointer to bat
+call bat.getRight 1
+pop local 2 //bind topmost stack value to batRight
+push this 1 //pointer to ball
+call ball.getLeft 1
+pop local 3 //bind topmost stack value to ballLeft
+push this 1 //pointer to ball
+call ball.getRight 1
+pop local 4 //bind topmost stack value to ballRight
+push this 2 //value of wall
+push constant 4 
+eq
+not
+if-goto IF10
+push local 1 //value of batLeft
+push local 4 //value of ballRight
+gt
+push local 2 //value of batRight
+push local 3 //value of ballLeft
+lt
+or
+pop this 3 //bind topmost stack value to exit
+push this 3 //value of exit
+not
+not
+if-goto IF12
+push local 4 //value of ballRight
+push local 1 //value of batLeft
+push constant 10 
+add
+lt
+not
+if-goto IF14
+push constant 1 
+neg
+pop local 0 //bind topmost stack value to bouncingDirection
+goto IF15
+label IF14
+push local 3 //value of ballLeft
+push local 2 //value of batRight
+push constant 10 
+sub
+gt
+not
+if-goto IF16
+push constant 1 
+pop local 0 //bind topmost stack value to bouncingDirection
+goto IF17
+label IF16
+label IF17
+label IF15
+push this 6 //value of batWidth
+push constant 2 
+sub
+pop this 6 //bind topmost stack value to batWidth
+push this 6 //value of batWidth
+push this 0 //pointer to bat
+call bat.setWidth 2
+pop temp 0 //remove return value from stack after do statement
+push this 4 //value of score
+push constant 1 
+add
+pop this 4 //bind topmost stack value to score
+push constant 22 
+push constant 7 
+call Output.moveCursor 2
+pop temp 0 //remove return value from stack after do statement
+push this 4 //value of score
+call Output.printInt 1
+pop temp 0 //remove return value from stack after do statement
+goto IF13
+label IF12
+label IF13
+goto IF11
+label IF10
+label IF11
+push local 0 //value of bouncingDirection
+push this 1 //pointer to ball
+call ball.bounce 2
+pop temp 0 //remove return value from stack after do statement
+goto IF9
+label IF8
+label IF9
+return
+push constant 0 

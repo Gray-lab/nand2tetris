@@ -43,14 +43,17 @@ class Main {
     	while (loop) {
     	    let position = position + 1;
     	    let mask = Main.nextMask(mask);
-    	
+            //do Output.printInt(mask);
     	    if (~(position > 16)) {
-    	
     	        if (~((value & mask) = 0)) {
     	            do Memory.poke(8000 + position, 1);
+                    //do Output.printString("at pos 1");
+                    do Output.println();
        	        }
     	        else {
     	            do Memory.poke(8000 + position, 0);
+                    //do Output.printString("at pos 0");
+                    do Output.println();
       	        }    
     	    }
     	    else {
@@ -62,10 +65,13 @@ class Main {
  
     /** Returns the next mask (the mask that should follow the given mask). */
     function int nextMask(int mask) {
+        
     	if (mask = 0) {
+            //do Output.printString("here");
     	    return 1;
     	}
     	else {
+        //do Output.printString("in else");
 	    return mask * 2;
     	}
     }

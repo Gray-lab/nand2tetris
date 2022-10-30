@@ -11,11 +11,15 @@ BINARY_OP_DICT = {  "*": "call Math.multiply 2\n",
 UNARY_OP_DICT = {   "~": "not\n",
                     "-": "neg\n",}
 
-def push(segment: str, value: int) -> str:
-    return f"push {segment} {value}\n"
+def push(segment: str, value: int, comment: str ="") -> str:
+    if comment:
+        comment = "//" + comment
+    return f"push {segment} {value} {comment}\n"
 
-def pop(segment: str, value: int) -> str:
-    return f"pop {segment} {value}\n"
+def pop(segment: str, value: int, comment: str ="") -> str:
+    if comment:
+        comment = "//" + comment
+    return f"pop {segment} {value} {comment}\n"
 
 def binary_arithmetic(operation: str) -> str:
     if operation in BINARY_OP_DICT:

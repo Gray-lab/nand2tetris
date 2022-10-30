@@ -1,193 +1,189 @@
 function SquareGame.new 0
-push constant 1
+push constant 1 //pass num_fields to Memory.alloc for allocation in heap
 call Memory.alloc 1
-pop pointer 0
-push constant 0
-push constant 0
-push constant 30
+pop pointer 0 //Set 'this' to object base address
+push constant 0 
+push constant 0 
+push constant 30 
 call Square.new 3
-pop this 0
-push constant 0
-pop this 1
+pop this 0 //bind topmost stack value to square
+push constant 0 
+pop this 1 //bind topmost stack value to direction
+push pointer 0 //'this'
 return
-push pointer 0
-push pointer 0
-function SquareGame.dispose 0
-push argument 0
-pop pointer 0
+push pointer 0 
+function SquareGame.dispose 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 0 //pointer to square
 call square.dispose 1
-pop temp 0
-push pointer 0
+pop temp 0 //remove return value from stack after do statement
+push pointer 0 //'this'
 call Memory.deAlloc 1
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 return
-push constant 0
-function SquareGame.moveSquare 0
-push argument 0
-pop pointer 0
-push this 1
-push constant 1
+push constant 0 
+function SquareGame.moveSquare 1
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push this 1 //value of direction
+push constant 1 
 eq
-//compiling if, before not
 not
 if-goto IF0
+push this 0 //pointer to square
 call square.moveUp 1
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF1
 label IF0
 label IF1
-push this 1
-push constant 2
+push this 1 //value of direction
+push constant 2 
 eq
-//compiling if, before not
 not
 if-goto IF2
+push this 0 //pointer to square
 call square.moveDown 1
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF3
 label IF2
 label IF3
-push this 1
-push constant 3
+push this 1 //value of direction
+push constant 3 
 eq
-//compiling if, before not
 not
 if-goto IF4
+push this 0 //pointer to square
 call square.moveLeft 1
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF5
 label IF4
 label IF5
-push this 1
-push constant 4
+push this 1 //value of direction
+push constant 4 
 eq
-//compiling if, before not
 not
 if-goto IF6
+push this 0 //pointer to square
 call square.moveRight 1
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF7
 label IF6
 label IF7
-push constant 5
+push constant 5 
 call Sys.wait 1
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 return
-push constant 0
-function SquareGame.run 2
-push argument 0
-pop pointer 0
-push constant 0
-pop local 1
+push constant 0 
+function SquareGame.run 3
+push argument 0 //arg 0 holds the pointer to the object
+pop pointer 0 
+push constant 0 //'null' or 'false'
+pop local 1 //bind topmost stack value to exit
 label WHILE0
-push local 1
+push local 1 //value of exit
 not
 not
 if-goto WHILE1
 label WHILE2
-push local 0
-push constant 0
+push local 0 //value of key
+push constant 0 
 eq
 not
 if-goto WHILE3
 call Keyboard.keyPressed 0
-pop local 0
+pop local 0 //bind topmost stack value to key
 call SquareGame.moveSquare 0
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto WHILE2
 label WHILE3
-push local 0
-push constant 81
+push local 0 //value of key
+push constant 81 
 eq
-//compiling if, before not
 not
 if-goto IF8
-push constant 1
-neg
-pop local 1
+push constant 1 
+neg //'true'
+pop local 1 //bind topmost stack value to exit
 goto IF9
 label IF8
 label IF9
-push local 0
-push constant 90
+push local 0 //value of key
+push constant 90 
 eq
-//compiling if, before not
 not
 if-goto IF10
+push this 0 //pointer to square
 call square.decSize 1
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF11
 label IF10
 label IF11
-push local 0
-push constant 88
+push local 0 //value of key
+push constant 88 
 eq
-//compiling if, before not
 not
 if-goto IF12
+push this 0 //pointer to square
 call square.incSize 1
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto IF13
 label IF12
 label IF13
-push local 0
-push constant 131
+push local 0 //value of key
+push constant 131 
 eq
-//compiling if, before not
 not
 if-goto IF14
-push constant 1
-pop this 1
+push constant 1 
+pop this 1 //bind topmost stack value to direction
 goto IF15
 label IF14
 label IF15
-push local 0
-push constant 133
+push local 0 //value of key
+push constant 133 
 eq
-//compiling if, before not
 not
 if-goto IF16
-push constant 2
-pop this 1
+push constant 2 
+pop this 1 //bind topmost stack value to direction
 goto IF17
 label IF16
 label IF17
-push local 0
-push constant 130
+push local 0 //value of key
+push constant 130 
 eq
-//compiling if, before not
 not
 if-goto IF18
-push constant 3
-pop this 1
+push constant 3 
+pop this 1 //bind topmost stack value to direction
 goto IF19
 label IF18
 label IF19
-push local 0
-push constant 132
+push local 0 //value of key
+push constant 132 
 eq
-//compiling if, before not
 not
 if-goto IF20
-push constant 4
-pop this 1
+push constant 4 
+pop this 1 //bind topmost stack value to direction
 goto IF21
 label IF20
 label IF21
 label WHILE4
-push local 0
-push constant 0
+push local 0 //value of key
+push constant 0 
 eq
 not
 not
 if-goto WHILE5
 call Keyboard.keyPressed 0
-pop local 0
+pop local 0 //bind topmost stack value to key
 call SquareGame.moveSquare 0
-pop temp 0
+pop temp 0 //remove return value from stack after do statement
 goto WHILE4
 label WHILE5
 goto WHILE0
 label WHILE1
 return
-push constant 0
+push constant 0 

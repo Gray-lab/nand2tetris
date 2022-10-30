@@ -45,7 +45,6 @@ class CompilationEngine:
         self.symbol_type = None     # int | bool | char | className
         self.symbol_kind = None     # static or field for class variables, var or arg for subroutine
         self.symbol_category = None # field | static | var | arg | class | subroutine
-        self.symbol_usage = None    # declared (in var declaration) | used (in expression)
         self.if_label_counter = 0
         self.while_label_counter = 0
         self.num_fields = 0
@@ -54,9 +53,7 @@ class CompilationEngine:
             self.file = out
             # Initialize compilation
             self.compile_class()
-
-        # print("Class symbol table:")
-        # print(self.class_table)
+    
 
     def get_next_token(self) -> None:
         """
@@ -183,7 +180,6 @@ class CompilationEngine:
         compileClass will always be the first function called. Since Jack requires that
         every file is a class, the class declaration is the root of the parse tree
         """
-        # self.file.write(f"<class>\n")
         self.process("keyword", ["class"])
 
         #====Set class name====#
@@ -195,12 +191,17 @@ class CompilationEngine:
         self.process("symbol", ["{"])
         while self.current_token.value in ["static", "field"]:
             self.compile_class_var_dec()
+
+        #=====Debugging print of class table====#
+        print("Class symbol table:")
+        print(self.class_table)
+
         while self.current_token.value in ["constructor", "function", "method"]:
             self.compile_subroutine()
         self.process("symbol", ["}"])
-        # self.file.write(f"</class>\n")
-        print("Finished!")
 
+        print("Finished!")
+        
     def compile_class_var_dec(self): #declare static or field variables
         """
         classVarDec (CVD):('static'|'field') type varName(',' varName)* ';'
@@ -212,8 +213,7 @@ class CompilationEngine:
             self.symbol_kind = "static"
         if self.symbol_category == "field":
             self.num_fields += 1
-            self.symbol_kind = "this"
-        self.symbol_usage = "declaration"
+            self.symbol_kind = "this" 
         self.process("keyword", ["static", "field"])
 
         #====Get type of variable====#
@@ -239,9 +239,6 @@ class CompilationEngine:
         """
         subroutineDec (SD):('constructor'|'function'|'method') ('void'|type) subroutineName '('parameterList')' subroutineBody
         """
-        
-        # self.file.write(f"<subroutineDec>\n")
-
         #====Reset subroutine table====#
         self.subroutine_table.reset()
         
@@ -264,7 +261,6 @@ class CompilationEngine:
 
         #====Add method object to subroutine symbol table if it is a method====#
         if self.current_subroutine_kind == "method":
-            self.symbol_usage = "declaration"
             self.subroutine_table.define("this", self.current_subroutine_type, "argument")
         
         self.process("identifier", [])
@@ -272,23 +268,20 @@ class CompilationEngine:
         self.compile_parameter_list()
         self.process("symbol", [")"])
         self.compile_subroutine_body()
-        # self.file.write(f"</subroutineDec>\n")
+
         #=====Debugging print of subroutine table====#
         print(f"Subroutine symbol table at subroutine:{self.current_class}.{self.current_subroutine}")
         print(self.subroutine_table)
 
-    def compile_parameter_list(self): #declare args
+    def compile_parameter_list(self) -> int: #declare args
         """
         parameterList (PL): ((type varName)) (',' type varName)*)?
         """
-        # self.file.write(f"<parameterList>\n")
-
         # End of parameter list is defined by a close paren
         if self.current_token.value != ')':
             #====Get symbol kind====#
             self.symbol_kind = "argument"
             self.symbol_category = "argument"
-            self.symbol_usage = "declaration"
 
             #====Get symbol type====#
             self.symbol_type = self.current_token.value
@@ -297,6 +290,7 @@ class CompilationEngine:
             #====Get symbol name and add to subroutine table====#
             self.symbol_name = self.current_token.value
             self.subroutine_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+            
             self.process("identifier", [])
             while self.current_token.value != ')':
                 self.process("symbol", [","])
@@ -310,31 +304,30 @@ class CompilationEngine:
                 self.subroutine_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
 
                 self.process("identifier", [])
-        # self.file.write(f"</parameterList>\n")
 
     def compile_subroutine_body(self): #no symbols
         """
         subroutineBody (SB):'{'varDec* statements'}'
         """
-
         self.process("symbol", ["{"])
 
         num_vars = 0
         # Each variable declaration begins with "var". Intervening tokens will be consumed by compileVarDec
         while self.current_token.value == "var":
+            num_vars += self.compile_var_dec()
+            
+        if self.current_subroutine_kind == "method":
             num_vars += 1
-            self.compile_var_dec()
-        
+
         ### Start writing subroutine VM code ###
         self.file.write(vm_writer.function(f"{self.current_class}.{self.current_subroutine}", num_vars))
         if self.current_subroutine_kind == "method":
-            self.file.write(vm_writer.push("argument", 0))
+            self.file.write(vm_writer.push("argument", 0, comment="arg 0 holds the pointer to the object"))
             self.file.write(vm_writer.pop("pointer", 0))
         if self.current_subroutine_kind == "constructor":
-            self.file.write(vm_writer.push("constant", self.num_fields))
+            self.file.write(vm_writer.push("constant", self.num_fields, comment="pass num_fields to Memory.alloc for allocation in heap"))
             self.file.write("call Memory.alloc 1\n")
-            self.file.write(vm_writer.pop("pointer", 0))
-
+            self.file.write(vm_writer.pop("pointer", 0, comment="Set 'this' to object base address"))
             
         self.compile_statements()
         self.process("symbol", ["}"])
@@ -343,14 +336,13 @@ class CompilationEngine:
         if self.current_subroutine_kind == "constructor":
             self.file.write(vm_writer.push("pointer", 0))
 
-    def compile_var_dec(self): #declare vars
+    def compile_var_dec(self) -> int: 
         """
         varDec (VD):'var' type varName(',' varName)* ';'
         """
         #====Get symbol kind====#
         self.symbol_kind = "local"
         self.symbol_category = "var"
-        self.symbol_usage = "declaration"
         self.process("keyword", ["var"])
 
         #====Get symbol type====#
@@ -360,6 +352,7 @@ class CompilationEngine:
         #====Get symbol name and add to subroutine table====#
         self.symbol_name = self.current_token.value
         self.subroutine_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+        count = 1
 
         self.process("identifier", [])
         while self.current_token.value != ";":
@@ -368,9 +361,11 @@ class CompilationEngine:
             #====Get symbol name and add to subroutine table====#
             self.symbol_name = self.current_token.value
             self.subroutine_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+            count += 1
 
             self.process("identifier", [])
         self.process("symbol", ";")
+        return count
 
     def compile_statements(self): #no symbols
         """
@@ -393,7 +388,6 @@ class CompilationEngine:
         """
         letStatement (LS): 'let' varName ('['expression']')? '=' expression ';'
         """
-
         self.process("keyword", ["let"])
         variable = self.current_token.value
         table = self.get_symbol_table(variable)  
@@ -401,7 +395,7 @@ class CompilationEngine:
         if self.current_token.value == "[":       
             # Handle case of varName[expression] = expression;
             ### push arr ###                                                                           
-            self.file.write(vm_writer.push(table.kind_of(variable), table.index_of(variable)))
+            self.file.write(vm_writer.push(table.kind_of(variable), table.index_of(variable), comment=variable))
 
             self.process("symbol", ["["])
             self.compile_expression()
@@ -413,21 +407,21 @@ class CompilationEngine:
             self.compile_expression()
             self.process("symbol", [";"])
             # Pop expression which will be bound to arr[exp], saving it to temp 0
-            self.file.write(vm_writer.pop("temp", 0))
+            self.file.write(vm_writer.pop("temp", 0, comment="save expression result to temp location"))
 
             # Move value at temp 0 to mem address arr[exp]
-            self.file.write(vm_writer.pop("pointer", 1))
-            self.file.write(vm_writer.push("temp", 0))
-            self.file.write(vm_writer.pop("that", 0))
+            self.file.write(vm_writer.pop("pointer", 1, comment="set pointer to array+exp"))
+            self.file.write(vm_writer.push("temp", 0, comment="get stored value"))
+            self.file.write(vm_writer.pop("that", 0, comment="set array location to that value"))
         
         else:
             # Handle case of varName = expression;
             self.process("symbol", ["="])
             self.compile_expression()
             self.process("symbol", [";"])
-            self.file.write(vm_writer.pop(table.kind_of(variable), table.index_of(variable)))
+            self.file.write(vm_writer.pop(table.kind_of(variable), table.index_of(variable), comment=f"bind topmost stack value to {variable}"))
 
-    def compile_if(self): #no symbols
+    def compile_if(self): 
         """
         ifStatement (IS): 'if' '('expression')' '{'statements'}'('else' '{'statements'}')?
         """
@@ -441,7 +435,6 @@ class CompilationEngine:
         label2 = self.get_if_label()
         
         # Invert the value of the evaluated expression
-        self.file.write("//compiling if, before not\n")
         self.file.write("not\n")
         # If if expression was false, this if_goto will be triggered
         self.file.write(vm_writer.if_goto(label1))
@@ -465,7 +458,7 @@ class CompilationEngine:
         # Label for skipping else statement
         self.file.write(vm_writer.label(label2))
 
-    def compile_while(self): #no symbols
+    def compile_while(self): 
         """
         whileStatement (WS): 'while' '('expression')' '{'statements'}'
         """
@@ -490,7 +483,7 @@ class CompilationEngine:
         self.file.write(vm_writer.goto(label1))
         self.file.write(vm_writer.label(label2))
 
-    def compile_do(self): #no symbols
+    def compile_do(self): 
         """
         doStatement (DS): 'do' subroutineCall ';'
         """
@@ -499,18 +492,17 @@ class CompilationEngine:
         self.process("symbol", [";"])
 
         # When compiling do statements, the return value must be removed from the stack
-        self.file.write(vm_writer.pop("temp", "0"))
+        self.file.write(vm_writer.pop("temp", "0", comment="remove return value from stack after do statement"))
 
-    def compile_return(self): #no symbols
+    def compile_return(self): 
         """
         returnStatement (RS): 'return' expression? ';'
         """
-        self.file.write(vm_writer.return_statement())
-
         self.process("keyword", ["return"])
         if self.current_token.value != ";":
             self.compile_expression()
         self.process("symbol", [";"])
+        self.file.write(vm_writer.return_statement())
 
     def compile_expression(self): #no symbols
         """
@@ -521,9 +513,11 @@ class CompilationEngine:
             operator = self.current_token.value
             self.process("symbol", OP)
             self.compile_term()
+
+            # terms are compiled to vm code before operator is written
             self.file.write(vm_writer.binary_arithmetic(operator))
 
-    def compile_term(self): #call variable
+    def compile_term(self):
         """
         term (TR): integerConstant|stringConstant|keywordConstant|varName|varName
                    '['expression']'|'('expression')'|(unaryOp term)|subroutineCall
@@ -559,13 +553,13 @@ class CompilationEngine:
                 case "true":
                     # Push -1 to stack
                     self.file.write(vm_writer.push("constant", 1))
-                    self.file.write("neg\n")
+                    self.file.write("neg //'true'\n")
                 case "this":
                     # Push pointer 0 to stack
-                    self.file.write(vm_writer.push("pointer", 0))
+                    self.file.write(vm_writer.push("pointer", 0, comment="'this'"))
                 case other:
                     # null | false
-                    self.file.write(vm_writer.push("constant", 0))
+                    self.file.write(vm_writer.push("constant", 0, comment="'null' or 'false'"))
             self.process("keyword", KC)
 
         elif self.current_token.value in UOP:
@@ -588,7 +582,7 @@ class CompilationEngine:
                 ### push arr ###
                 arr = self.current_token.value
                 table = self.get_symbol_table(arr)                                                                               
-                self.file.write(vm_writer.push(table.kind_of(arr), table.index_of(arr)))
+                self.file.write(vm_writer.push(table.kind_of(arr), table.index_of(arr), comment=f"pointer to {arr}"))
 
                 self.process("identifier", [])
                 self.process("symbol", ["["])
@@ -599,7 +593,7 @@ class CompilationEngine:
                 # pop pointer 1
                 self.file.write(vm_writer.pop("pointer", 1))
                 # push that 0
-                self.file.write(vm_writer.push("that", 0))
+                self.file.write(vm_writer.push("that", 0, comment=f"value of {arr}[exp]"))
 
                 self.process("symbol", ["]"])
             
@@ -608,10 +602,10 @@ class CompilationEngine:
                 self.compile_subroutine_call()
 
             else:
-                ### push variable ###
-                arr = self.current_token.value
-                table = self.get_symbol_table(arr)                                                                               
-                self.file.write(vm_writer.push(table.kind_of(arr), table.index_of(arr)))
+                ### push variable to stack###
+                var = self.current_token.value
+                table = self.get_symbol_table(var)                                                                               
+                self.file.write(vm_writer.push(table.kind_of(var), table.index_of(var), comment=f"value of {var}"))
 
                 self.process("identifier", [])
 
@@ -641,6 +635,7 @@ class CompilationEngine:
             method_flag = False
             if module_name in self.subroutine_table or module_name in self.class_table:
                 method_flag = True
+                object_name = module_name
 
             self.process("identifier", [])
             self.process("symbol", ["."])
@@ -651,21 +646,22 @@ class CompilationEngine:
             if method_flag:
                 # If method, we add one argument for the object
                 num_args += 1
+                table = self.get_symbol_table(object_name )                                                                               
+                self.file.write(vm_writer.push(table.kind_of(object_name), table.index_of(object_name), comment=f"pointer to {object_name }"))
             
             self.process("symbol", [")"])
         else:
             self.file.write("Something broke in compileSubroutineCall")
 
-            
         self.file.write(vm_writer.call(f"{module_name}.{subroutine_name}", num_args))
 
-    def compile_expression_list(self) -> int: #no symbols
+    def compile_expression_list(self) -> int:
         """
         expressionList (EL): (expression(',' expression)*)?
         Returns count of expressions
         """
         expression_count = 0
-        # self.file.write(f"<expressionList>\n")
+
         # End of parameter list is defined by a close paren
         if self.current_token.value != ')':
             self.compile_expression()
@@ -674,7 +670,7 @@ class CompilationEngine:
                 self.process("symbol", [","])
                 self.compile_expression()
                 expression_count += 1
-        # self.file.write(f"</expressionList>\n")
+
         return expression_count
 
     def get_symbol_table(self, symbol: str) -> SymbolTable:
