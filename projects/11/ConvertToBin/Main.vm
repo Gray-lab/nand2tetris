@@ -1,0 +1,113 @@
+function Main.main 1
+push constant 8000
+push constant 42
+call Memory.poke 2
+pop temp 0
+push constant 8001
+push constant 16
+push constant 1
+neg
+call Main.fillMemory 3
+pop temp 0
+push constant 8000
+call Memory.peek 1
+pop local 0
+push local 0
+call Main.convert 1
+pop temp 0
+return
+push constant 0
+function Main.convert 2
+push constant 1
+neg
+pop local 2
+label WHILE0
+push local 2
+not
+if-goto WHILE1
+push local 1
+push constant 1
+add
+pop local 1
+push local 0
+call Main.nextMask 1
+pop local 0
+push local 1
+push constant 16
+gt
+not
+//compiling if, before not
+not
+if-goto IF0
+push argument 0
+push local 0
+and
+push constant 0
+eq
+not
+//compiling if, before not
+not
+if-goto IF2
+push constant 8000
+push local 1
+add
+push constant 1
+call Memory.poke 2
+pop temp 0
+goto IF3
+label IF2
+push constant 8000
+push local 1
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+label IF3
+goto IF1
+label IF0
+push constant 0
+pop local 2
+label IF1
+goto WHILE0
+label WHILE1
+return
+push constant 0
+function Main.nextMask 0
+push argument 0
+push constant 0
+eq
+//compiling if, before not
+not
+if-goto IF4
+return
+push constant 1
+goto IF5
+label IF4
+return
+push argument 0
+push constant 2
+call Math.multiply 2
+label IF5
+function Main.fillMemory 0
+label WHILE2
+push argument 1
+push constant 0
+gt
+not
+if-goto WHILE3
+push argument 0
+push argument 2
+call Memory.poke 2
+pop temp 0
+push argument 1
+push constant 1
+sub
+pop argument 1
+push argument 0
+push constant 1
+add
+pop argument 0
+goto WHILE2
+label WHILE3
+return
+push constant 0

@@ -21,19 +21,7 @@ def main():
 
     in_filenames, out_filenames = get_files_and_dir(sys.argv[1])
     for in_filename, out_filename in zip(in_filenames, out_filenames):
-        ### For parsing ###
         CompilationEngine(in_filename, out_filename)
-
-        ### For tokenizing
-        # with open(out_filename, "w") as out:
-        #   tokenizer = jtk.Tokenizer(in_filename)
-
-        #   # write tokens into an output file
-        #   out.write("<tokens>\n")
-        #   for token in tokenizer.get_token_generator():
-        #     out.write(str(token))
-        #   out.write("</tokens>\n")
-
 
 def get_files_and_dir(rel_path: str) -> Tuple[List[str], List[str]]:
     if os.path.isfile(rel_path) and ".jack" in rel_path:
@@ -53,7 +41,7 @@ def get_files_and_dir(rel_path: str) -> Tuple[List[str], List[str]]:
         sys.exit(EXIT_MESSAGE)
 
     filenames_out = [os.path.splitext(
-        fname)[0] + ".xml" for fname in filenames_in]
+        fname)[0] + ".vm" for fname in filenames_in]
 
     in_filenames = []
     out_filenames = []
