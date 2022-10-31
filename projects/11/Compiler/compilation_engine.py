@@ -186,6 +186,8 @@ class CompilationEngine:
         self.current_class = self.current_token.value
         self.symbol_category = "class definition"
         self.symbol_usage = "declaration"
+        #====Reset num_fields====#
+        self.num_fields = 0
 
         self.process("identifier", [])
         self.process("symbol", ["{"])
@@ -207,7 +209,6 @@ class CompilationEngine:
         classVarDec (CVD):('static'|'field') type varName(',' varName)* ';'
         """       
         #====Get kind of variable (static or field)====#
-        self.num_fields = 0
         self.symbol_category = self.current_token.value
         if self.symbol_category == "static":
             self.symbol_kind = "static"
@@ -231,6 +232,9 @@ class CompilationEngine:
             #====Add class variable to class symbol table====#
             self.symbol_name = self.current_token.value
             self.class_table.define(self.symbol_name, self.symbol_type, self.symbol_kind)
+
+            if self.symbol_category == "field":
+                self.num_fields += 1
             self.process("identifier", [])
 
         self.process("symbol", [";"])
@@ -316,8 +320,9 @@ class CompilationEngine:
         while self.current_token.value == "var":
             num_vars += self.compile_var_dec()
             
-        if self.current_subroutine_kind == "method":
-            num_vars += 1
+        # Extra argument is only passed in on the call!
+        # if self.current_subroutine_kind == "method":
+        #     num_vars += 1
 
         ### Start writing subroutine VM code ###
         self.file.write(vm_writer.function(f"{self.current_class}.{self.current_subroutine}", num_vars))
@@ -331,10 +336,6 @@ class CompilationEngine:
             
         self.compile_statements()
         self.process("symbol", ["}"])
-        if self.current_subroutine_kind in ["method", "function"] and self.current_subroutine_type == "void":
-            self.file.write(vm_writer.push("constant", 0))
-        if self.current_subroutine_kind == "constructor":
-            self.file.write(vm_writer.push("pointer", 0))
 
     def compile_var_dec(self) -> int: 
         """
@@ -431,8 +432,9 @@ class CompilationEngine:
         self.process("symbol", [")"])
         
         # Get labels
-        label1 = self.get_if_label()
-        label2 = self.get_if_label()
+        label_val = self.get_if_label()
+        label1 = f"IF_FALSE{label_val}"
+        label2 = f"IF_TRUE{label_val}"
         
         # Invert the value of the evaluated expression
         self.file.write("not\n")
@@ -502,6 +504,14 @@ class CompilationEngine:
         if self.current_token.value != ";":
             self.compile_expression()
         self.process("symbol", [";"])
+
+        
+        if self.current_subroutine_kind in ["method", "function"] and self.current_subroutine_type == "void":
+            self.file.write(vm_writer.push("constant", 0))
+
+        # Two lines below are not needed because returning "this" takes care of pushing pointer 0
+        # if self.current_subroutine_kind == "constructor":
+        #     self.file.write(vm_writer.push("pointer", 0))
         self.file.write(vm_writer.return_statement())
 
     def compile_expression(self): #no symbols
@@ -614,18 +624,29 @@ class CompilationEngine:
 
     def compile_subroutine_call(self): #call function or method
         """
-        subroutineCall (SC): subroutineName'('expressionList')'|
-                             (className|varName)'.'subroutineName'('expressionList')'
+        subroutineCall (SC): 
+        method: subroutineName'('expressionList')'|
+        method or constructor or function: (className|varName)'.'subroutineName'('expressionList')'
         """
-        # How do we know whether we are calling a function or a method?
-
+        
+        # This is also only a method
         if self.next_token.value == "(":
-            module_name = self.current_class
+            object_name = "this"
             subroutine_name = self.current_token.value
+            self.file.write(vm_writer.push("pointer", 0, comment="Push current object to stack for method call"))
+
             self.process("identifier", [])
             self.process("symbol", ["("])
             num_args = self.compile_expression_list()
             self.process("symbol", [")"])
+
+            # If method, we add one argument for the object
+            num_args += 1
+            # table = self.get_symbol_table(object_name) 
+            # Push current object to stack
+            # self.file.write(vm_writer.push(table.kind_of(object_name), table.index_of(object_name), comment=f"pointer to {object_name }"))
+            self.file.write(vm_writer.call(f"{self.current_class}.{subroutine_name}", num_args))
+
         elif self.next_token.value == ".":
 
             # We need to decide whether we are calling a method or a function/constructor
@@ -636,6 +657,11 @@ class CompilationEngine:
             if module_name in self.subroutine_table or module_name in self.class_table:
                 method_flag = True
                 object_name = module_name
+    
+            if method_flag:
+                # Push object pointer to stack 
+                table = self.get_symbol_table(object_name)   
+                self.file.write(vm_writer.push(table.kind_of(object_name), table.index_of(object_name), comment=f"pointer to {object_name} for method call"))
 
             self.process("identifier", [])
             self.process("symbol", ["."])
@@ -643,17 +669,18 @@ class CompilationEngine:
             self.process("identifier", [])
             self.process("symbol", ["("])
             num_args = self.compile_expression_list()
+            self.process("symbol", [")"])
+
             if method_flag:
                 # If method, we add one argument for the object
                 num_args += 1
-                table = self.get_symbol_table(object_name )                                                                               
-                self.file.write(vm_writer.push(table.kind_of(object_name), table.index_of(object_name), comment=f"pointer to {object_name }"))
-            
-            self.process("symbol", [")"])
+                # And we push the object to the stack                                                                        
+                self.file.write(vm_writer.call(f"{table.type_of(object_name)}.{subroutine_name}", num_args))
+            else:
+                self.file.write(vm_writer.call(f"{module_name}.{subroutine_name}", num_args))
+
         else:
             self.file.write("Something broke in compileSubroutineCall")
-
-        self.file.write(vm_writer.call(f"{module_name}.{subroutine_name}", num_args))
 
     def compile_expression_list(self) -> int:
         """

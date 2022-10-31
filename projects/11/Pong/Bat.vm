@@ -1,5 +1,5 @@
 function Bat.new 0
-push constant 1 //pass num_fields to Memory.alloc for allocation in heap
+push constant 5 //pass num_fields to Memory.alloc for allocation in heap
 call Memory.alloc 1
 pop pointer 0 //Set 'this' to object base address
 push argument 0 //value of Ax
@@ -12,41 +12,43 @@ push argument 3 //value of Aheight
 pop this 3 //bind topmost stack value to height
 push constant 2 
 pop this 4 //bind topmost stack value to direction
-call Bat.show 0
+push pointer 0 //Push current object to stack for method call
+call Bat.show 1
 pop temp 0 //remove return value from stack after do statement
 push pointer 0 //'this'
 return
-push pointer 0 
-function Bat.dispose 1
+function Bat.dispose 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push pointer 0 //'this'
 call Memory.deAlloc 1
 pop temp 0 //remove return value from stack after do statement
-return
 push constant 0 
-function Bat.show 1
+return
+function Bat.show 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push constant 1 
 neg //'true'
 call Screen.setColor 1
 pop temp 0 //remove return value from stack after do statement
-call Bat.draw 0
+push pointer 0 //Push current object to stack for method call
+call Bat.draw 1
 pop temp 0 //remove return value from stack after do statement
-return
 push constant 0 
-function Bat.hide 1
+return
+function Bat.hide 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push constant 0 //'null' or 'false'
 call Screen.setColor 1
 pop temp 0 //remove return value from stack after do statement
-call Bat.draw 0
+push pointer 0 //Push current object to stack for method call
+call Bat.draw 1
 pop temp 0 //remove return value from stack after do statement
-return
 push constant 0 
-function Bat.draw 1
+return
+function Bat.draw 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 0 //value of x
@@ -59,46 +61,48 @@ push this 3 //value of height
 add
 call Screen.drawRectangle 4
 pop temp 0 //remove return value from stack after do statement
-return
 push constant 0 
-function Bat.setDirection 1
+return
+function Bat.setDirection 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push argument 1 //value of Adirection
 pop this 4 //bind topmost stack value to direction
-return
 push constant 0 
-function Bat.getLeft 1
+return
+function Bat.getLeft 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 0 //value of x
 return
-function Bat.getRight 1
+function Bat.getRight 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 0 //value of x
 push this 2 //value of width
 add
 return
-function Bat.setWidth 1
+function Bat.setWidth 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
-call Bat.hide 0
+push pointer 0 //Push current object to stack for method call
+call Bat.hide 1
 pop temp 0 //remove return value from stack after do statement
 push argument 1 //value of Awidth
 pop this 2 //bind topmost stack value to width
-call Bat.show 0
+push pointer 0 //Push current object to stack for method call
+call Bat.show 1
 pop temp 0 //remove return value from stack after do statement
-return
 push constant 0 
-function Bat.move 1
+return
+function Bat.move 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 4 //value of direction
 push constant 1 
 eq
 not
-if-goto IF0
+if-goto IF_FALSEIF0
 push this 0 //value of x
 push constant 4 
 sub
@@ -107,12 +111,12 @@ push this 0 //value of x
 push constant 0 
 lt
 not
-if-goto IF2
+if-goto IF_FALSEIF1
 push constant 0 
 pop this 0 //bind topmost stack value to x
-goto IF3
-label IF2
-label IF3
+goto IF_TRUEIF1
+label IF_FALSEIF1
+label IF_TRUEIF1
 push constant 0 //'null' or 'false'
 call Screen.setColor 1
 pop temp 0 //remove return value from stack after do statement
@@ -146,8 +150,8 @@ push this 3 //value of height
 add
 call Screen.drawRectangle 4
 pop temp 0 //remove return value from stack after do statement
-goto IF1
-label IF0
+goto IF_TRUEIF0
+label IF_FALSEIF0
 push this 0 //value of x
 push constant 4 
 add
@@ -158,14 +162,14 @@ add
 push constant 511 
 gt
 not
-if-goto IF4
+if-goto IF_FALSEIF2
 push constant 511 
 push this 2 //value of width
 sub
 pop this 0 //bind topmost stack value to x
-goto IF5
-label IF4
-label IF5
+goto IF_TRUEIF2
+label IF_FALSEIF2
+label IF_TRUEIF2
 push constant 0 //'null' or 'false'
 call Screen.setColor 1
 pop temp 0 //remove return value from stack after do statement
@@ -199,6 +203,6 @@ push this 3 //value of height
 add
 call Screen.drawRectangle 4
 pop temp 0 //remove return value from stack after do statement
-label IF1
-return
+label IF_TRUEIF0
 push constant 0 
+return

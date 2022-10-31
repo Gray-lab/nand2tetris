@@ -1,5 +1,5 @@
 function Square.new 0
-push constant 1 //pass num_fields to Memory.alloc for allocation in heap
+push constant 3 //pass num_fields to Memory.alloc for allocation in heap
 call Memory.alloc 1
 pop pointer 0 //Set 'this' to object base address
 push argument 0 //value of Ax
@@ -8,20 +8,20 @@ push argument 1 //value of Ay
 pop this 1 //bind topmost stack value to y
 push argument 2 //value of Asize
 pop this 2 //bind topmost stack value to size
-call Square.draw 0
+push pointer 0 //Push current object to stack for method call
+call Square.draw 1
 pop temp 0 //remove return value from stack after do statement
 push pointer 0 //'this'
 return
-push pointer 0 
-function Square.dispose 1
+function Square.dispose 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push pointer 0 //'this'
 call Memory.deAlloc 1
 pop temp 0 //remove return value from stack after do statement
-return
 push constant 0 
-function Square.draw 1
+return
+function Square.draw 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push constant 1 
@@ -38,9 +38,9 @@ push this 2 //value of size
 add
 call Screen.drawRectangle 4
 pop temp 0 //remove return value from stack after do statement
-return
 push constant 0 
-function Square.erase 1
+return
+function Square.erase 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push constant 0 //'null' or 'false'
@@ -56,9 +56,9 @@ push this 2 //value of size
 add
 call Screen.drawRectangle 4
 pop temp 0 //remove return value from stack after do statement
-return
 push constant 0 
-function Square.incSize 1
+return
+function Square.incSize 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 1 //value of y
@@ -73,49 +73,53 @@ push constant 510
 lt
 and
 not
-if-goto IF0
-call Square.erase 0
+if-goto IF_FALSEIF0
+push pointer 0 //Push current object to stack for method call
+call Square.erase 1
 pop temp 0 //remove return value from stack after do statement
 push this 2 //value of size
 push constant 2 
 add
 pop this 2 //bind topmost stack value to size
-call Square.draw 0
+push pointer 0 //Push current object to stack for method call
+call Square.draw 1
 pop temp 0 //remove return value from stack after do statement
-goto IF1
-label IF0
-label IF1
-return
+goto IF_TRUEIF0
+label IF_FALSEIF0
+label IF_TRUEIF0
 push constant 0 
-function Square.decSize 1
+return
+function Square.decSize 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 2 //value of size
 push constant 2 
 gt
 not
-if-goto IF2
-call Square.erase 0
+if-goto IF_FALSEIF1
+push pointer 0 //Push current object to stack for method call
+call Square.erase 1
 pop temp 0 //remove return value from stack after do statement
 push this 2 //value of size
 push constant 2 
 sub
 pop this 2 //bind topmost stack value to size
-call Square.draw 0
+push pointer 0 //Push current object to stack for method call
+call Square.draw 1
 pop temp 0 //remove return value from stack after do statement
-goto IF3
-label IF2
-label IF3
-return
+goto IF_TRUEIF1
+label IF_FALSEIF1
+label IF_TRUEIF1
 push constant 0 
-function Square.moveUp 1
+return
+function Square.moveUp 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 1 //value of y
 push constant 1 
 gt
 not
-if-goto IF4
+if-goto IF_FALSEIF2
 push constant 0 //'null' or 'false'
 call Screen.setColor 1
 pop temp 0 //remove return value from stack after do statement
@@ -151,12 +155,12 @@ push constant 1
 add
 call Screen.drawRectangle 4
 pop temp 0 //remove return value from stack after do statement
-goto IF5
-label IF4
-label IF5
-return
+goto IF_TRUEIF2
+label IF_FALSEIF2
+label IF_TRUEIF2
 push constant 0 
-function Square.moveDown 1
+return
+function Square.moveDown 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 1 //value of y
@@ -165,7 +169,7 @@ add
 push constant 254 
 lt
 not
-if-goto IF6
+if-goto IF_FALSEIF3
 push constant 0 //'null' or 'false'
 call Screen.setColor 1
 pop temp 0 //remove return value from stack after do statement
@@ -201,19 +205,19 @@ push this 2 //value of size
 add
 call Screen.drawRectangle 4
 pop temp 0 //remove return value from stack after do statement
-goto IF7
-label IF6
-label IF7
-return
+goto IF_TRUEIF3
+label IF_FALSEIF3
+label IF_TRUEIF3
 push constant 0 
-function Square.moveLeft 1
+return
+function Square.moveLeft 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 0 //value of x
 push constant 1 
 gt
 not
-if-goto IF8
+if-goto IF_FALSEIF4
 push constant 0 //'null' or 'false'
 call Screen.setColor 1
 pop temp 0 //remove return value from stack after do statement
@@ -249,12 +253,12 @@ push this 2 //value of size
 add
 call Screen.drawRectangle 4
 pop temp 0 //remove return value from stack after do statement
-goto IF9
-label IF8
-label IF9
-return
+goto IF_TRUEIF4
+label IF_FALSEIF4
+label IF_TRUEIF4
 push constant 0 
-function Square.moveRight 1
+return
+function Square.moveRight 0
 push argument 0 //arg 0 holds the pointer to the object
 pop pointer 0 
 push this 0 //value of x
@@ -263,7 +267,7 @@ add
 push constant 510 
 lt
 not
-if-goto IF10
+if-goto IF_FALSEIF5
 push constant 0 //'null' or 'false'
 call Screen.setColor 1
 pop temp 0 //remove return value from stack after do statement
@@ -299,8 +303,8 @@ push this 2 //value of size
 add
 call Screen.drawRectangle 4
 pop temp 0 //remove return value from stack after do statement
-goto IF11
-label IF10
-label IF11
-return
+goto IF_TRUEIF5
+label IF_FALSEIF5
+label IF_TRUEIF5
 push constant 0 
+return
