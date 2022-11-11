@@ -1,6 +1,7 @@
 import re
 import string
-from collections import deque
+import queue
+from typing import Generator
 
 from jack_token import Token
 
@@ -21,79 +22,82 @@ IDENTIFIER_BODY = IDENTIFIER_START.union(DIGITS)
 # Block comment: /* ... */
 # API documentation comment (basically same as block comment): /** ... */
 
-class Tokenizer:
-    def __init__(self, in_file: str) -> None:
-        self.text = self.strip_comments(in_file)
+def tokenizer(filename) -> Generator:
+    """
+    Returns a generator which yields Tokens from the source code
+    """
+    cleaned_text = remove_comments_and_whitespace(filename)
+    return get_token_generator(cleaned_text)
 
-    def strip_comments(self, filename: str) -> deque:
-        """
-        Removes line comments, empty rows, and newlines from each row, appending them to one another
-        Returns a deque of individual characters
-        """
-        with open(filename) as file:
-            # Remove line comments and white space
-            valid_rows = (row.partition("//")[0].strip() for row in file)
-            # Remove empty rows
-            valid_rows = (row for row in valid_rows if row)
-            source = ""
-            for row in valid_rows:
-                # Remove newline and append row
-                source += row.strip('\n')
-            # Remove block comments from the source string
-            # Adapted from https://leetcode.com/problems/remove-comments/discuss/109195/1-liners
-            clean_source = deque()
-            for ch in filter(None, re.sub('/\*(.|\n)*?\*/', '', source)):
-                clean_source.append(ch)
-            return clean_source
+def remove_comments_and_whitespace(filename: str) -> queue:
+    """
+    Removes line comments, empty rows, and newlines from each row, appending them to one another
+    Returns a deque of individual characters
+    """
+    with open(filename) as file:
+        # Remove line comments and white space
+        valid_rows = (row.partition("//")[0].strip() for row in file)
+        # Remove empty rows
+        valid_rows = (row for row in valid_rows if row)
+        source = ""
+        for row in valid_rows:
+            # Remove newline and append row
+            source += row.strip('\n')
+        # Remove block comments from the source string
+        # Adapted from https://leetcode.com/problems/remove-comments/discuss/109195/1-liners
+        clean_source = queue.SimpleQueue()
+        for ch in filter(None, re.sub('/\*(.|\n)*?\*/', '', source)):
+            # Cleaned text is directly placed into a queue
+            clean_source.put(ch)
+        return clean_source
 
-    def get_token_generator(self):
-        """
-        Generator which yields tokens of the form (label, token)
-        while the text is not empty
-        """
-        text = self.text
-        consume_flag = False
-        ch = text.popleft()
-        while text:
-            # If looping from a keyword, identifier, or literal don't consume another character
-            if consume_flag:
-                ch = text.popleft()
+def get_token_generator(text: queue) -> Generator:
+    """
+    Generator which yields tokens of the form (label, token)
+    while the text is not empty
+    """
+    consume_flag = False
+    ch = text.get()
+    while not text.empty():
+        # If looping from a keyword, identifier, or literal don't consume another character
+        if consume_flag:
+            ch = text.get()
+        else:
+            consume_flag = True
+
+        if ch == " ":
+            continue
+
+        elif ch in SYMBOLS:
+            yield Token('symbol', ch)
+
+        elif ch in DIGITS:
+            int_lit = ""
+            while ch in DIGITS:
+                int_lit += ch
+                ch = text.get()
+            consume_flag = False
+            yield Token("integerConstant", int_lit)
+
+        elif ch in IDENTIFIER_START:
+            word = ""
+            while ch in IDENTIFIER_BODY:
+                word += ch
+                ch = text.get()
+            consume_flag = False
+            if word in KEYWORDS:
+                yield Token("keyword", word)
             else:
-                consume_flag = True
+                yield Token("identifier", word)
 
-            if ch == " ":
-                continue
+        elif ch == '"':
+            ch = text.get()
+            string_lit = ""
+            while ch != '"':
+                string_lit += ch
+                ch = text.get()
+            yield Token("stringConstant", string_lit)
 
-            elif ch in SYMBOLS:
-                token = Token('symbol', ch)
-                yield token
+        else:
+            print("something broke with character", ch)
 
-            elif ch in DIGITS:
-                int_lit = ""
-                while ch in DIGITS:
-                    int_lit += ch
-                    ch = text.popleft()
-                consume_flag = False
-                yield Token("integerConstant", int_lit)
-
-            elif ch in IDENTIFIER_START:
-                word = ""
-                while ch in IDENTIFIER_BODY:
-                    word += ch
-                    ch = text.popleft()
-                consume_flag = False
-                if word in KEYWORDS:
-                    yield Token("keyword", word)
-                else:
-                    yield Token("identifier", word)
-
-            elif ch == '"':
-                ch = text.popleft()
-                string_lit = ""
-                while ch != '"':
-                    string_lit += ch
-                    ch = text.popleft()
-                yield Token("stringConstant", string_lit)
-
-            else:
-                print("something broke with character", ch)

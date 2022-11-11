@@ -1,12 +1,7 @@
-# Construct a tokenizer on a file
-
-# Tokenizer should yield a tokenized line each time it is called
-
 import os
 import sys
 from typing import Tuple, List
 from compilation_engine import CompilationEngine
-import jack_tokenizer as jtk
 
 EXIT_MESSAGE = "Usage: python jackanalyzer.py optional<file.jack or directory>"
 
@@ -16,11 +11,14 @@ def main():
     if len(sys.argv) == 1:
         sys.argv[1] = os.getcwd()
     if len(sys.argv) > 2:
-        print("Expected at most two argumnets argument but received more than one")
+        print("Expected at most two arguments but received more than one")
         sys.exit(EXIT_MESSAGE)
 
     in_filenames, out_filenames = get_files_and_dir(sys.argv[1])
     for in_filename, out_filename in zip(in_filenames, out_filenames):
+        # Making the compilation engine runs and outputs the file
+
+        # It would be better to send the output back to this module to write it here
         CompilationEngine(in_filename, out_filename)
 
 def get_files_and_dir(rel_path: str) -> Tuple[List[str], List[str]]:

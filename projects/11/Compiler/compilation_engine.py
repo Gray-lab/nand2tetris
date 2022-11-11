@@ -6,9 +6,7 @@
 # Base case will be a terminal
 # If non-terminal, keep recursing until a terminal is reached
 
-import string
-from jack_tokenizer import Tokenizer
-from jack_token import Token
+from jack_tokenizer import tokenizer
 import vm_writer
 from symbol_table import SymbolTable
 
@@ -21,9 +19,8 @@ class CompilationEngine:
     LL(2) parser. Frankly, we usually just need LL(1), but might as well make it LL(2) to deal with
     the few cases where we need that second token.
     """
-
     def __init__(self, in_file: str, out_file: str) -> None:
-        self.token_gen = Tokenizer(in_file).get_token_generator()
+        self.token_gen = tokenizer(in_file)
         #self.writer = VMwriter(out_file)
         self.current_token = None
         self.next_token = None
@@ -53,7 +50,6 @@ class CompilationEngine:
             self.file = out
             # Initialize compilation
             self.compile_class()
-    
 
     def get_next_token(self) -> None:
         """
