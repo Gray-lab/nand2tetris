@@ -11,7 +11,7 @@ KEYWORDS = set(['class', 'constructor', 'function', 'method', 'field', 'static',
 SYMBOLS = set(['{', '}', '(', ')', '[', ']', '.', ',', ';', '+',
               '-', '*', '/', '&', '|', '<', '>', '=', '~'])
 DIGITS = set(list(string.digits))
-IDENTIFIER_START = set(list(string.ascii_letters)).union(set(['-']))
+IDENTIFIER_START = set(list(string.ascii_letters)).union(set(['_']))
 IDENTIFIER_BODY = IDENTIFIER_START.union(DIGITS)
 
 # Integers: Only token that begins with a digit. In the range 0 ... 32767
